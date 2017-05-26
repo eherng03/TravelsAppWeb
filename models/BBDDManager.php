@@ -15,7 +15,7 @@
 		}
 
 		function openConectionBBDD(){
-			
+			//TODO the conection
 		}
 	}
 ?>
