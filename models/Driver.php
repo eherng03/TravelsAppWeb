@@ -8,8 +8,8 @@
 		private $dni;
 		private $photo;
 		private $journeys;
-		private $scoreAverage;
-		private $coments;
+		private $averageScore;
+		private $comments; //Atributo en db???? otra tabla???
 
 		public function __construct($name, $email, $user, $password, $telephone, $dni, $photo){
 			$this->name = $name;
