@@ -1,10 +1,10 @@
 <?php
 	class BBDDManager{
 		private static $instance;
-		private static $connection;
+		private static $conexion;
 
 		private function __construct(){
-			$this->openConnectionBBDD();
+			$this->openConectionBBDD();
 		}
 
 		public static function getInstance(){
@@ -14,8 +14,8 @@
 			return self::$instance;
 		}
 
-		function openConnectionBBDD(){
-			//TODO the conection
+		function openConectionBBDD(){
+			
 		}
 	}
 ?>

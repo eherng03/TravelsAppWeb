@@ -28,7 +28,13 @@
 			array_push($drivers, $driver);
 		}
 
-		//TODO deleteUser
+		
+		public deletePassenger($passenger){
+			//TODO
+		}
 
+		public deleteDriver($passenger){
+			//TODO
+		}
 	}
 ?>
