@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Nos vamos de viaje</title>
+        <link rel="stylesheet" type="text/css" href="initWindowStyle.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script type='text/javascript' src='../logic/initWindowLogic.js'></script>
+    </head>
+    <body>
+        <header class = "Header">
+            <a class = "Header-logo">
+                <img src="">
+            </a>
+            Bienvenido a...
+
+        </header>
+
+        <main>
+            <div class="container">
+                
+                <ul class="session-buttons">
+                    <li>
+                        <a class = "login-button">Iniciar Sesión</a>
+                    </li>
+                    <li>
+                        <a class = "register-button">Registrarse</a>
+                    </li>
+                </ul>
+                <div class="login-container">
+                    <div class = "login">
+                        <h1>Inicio de sesión en la plataforma</h1>
+                        <form action="models/sessionControl.php" method="post">
+                            <ul>
+                                <li class = "radio-buttons">
+                                    <input type="radio" id="driver-radio-button" name="selecDriver">
+                                    <label for="driver-radio-button">Conductor</label>
+
+                                    <input type="radio" id="passenger-radio-button" name="selecPassenger" checked="checked">
+                                    <label for="passenger-radio-button">Pasajero</label>
+
+                                    <input type="radio" id="admin-radio-button" name="selecAdmin">
+                                    <label for="admin-radio-button">Administrador</label>
+                                </li>
+                                <li>
+                                    <input type="text" placeholder="Username" name="username" id="username" required/>
+                                </li>
+                                <li>
+                                    <input type="password" placeholder="Password" name="password" id="password" required/>
+                                </li>
+                                <li>
+                                    <input type="submit" value="Login" class="button" />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+                <div class="register-container">
+                    <!--REGISTRO-->
+                    <div class = "register">
+                        <h1>Register</h1>
+                        <p>
+                            Introduzca los datos solicitados a continuación.
+                        </p>
+                        <form>
+                            <ul>
+                                <li>
+                                    <input type="text" placeholder="Nombre" />
+                                </li>
+                                <li>
+                                    <input type="password" placeholder="Password" />
+                                </li>
+                                <li>
+                                    <input type="submit" value="Sign Up" class="button" />
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            <!--BUSQUEDA-->
+            <div class = "search">
+                <h1 class = "search-title">Encuentra el viaje que necesitas</h1>
+                <div class = "search-content">
+                    <p class = "text"> Introduce los datos del viaje que buscas </p>
+                    <form id = "search-form">
+                        <div class = "form-input-container">
+                            <img class="input-icon" src="https://d1ovtcjitiy70m.cloudfront.net/vi-1/images/homepage/2016/icon-circle.svg" alt="" aria-hidden="true" width="20" height="20"> 
+                            <input id = "form-name" type="text" name="form-name">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+    
+    </body>
