@@ -5,18 +5,16 @@
         <link rel="stylesheet" type="text/css" href="initWindowStyle.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script type='text/javascript' src='../logic/initWindowLogic.js'></script>
+
+        <script src='../resources/bootstrap/js/bootstrap.js'></script>
+        <link rel="stylesheet"  href="../resources/bootstrap/css/bootstrap.css">
+
     </head>
     <body>
-        <header class = "Header">
-            <a class = "Header-logo">
-                <img src="">
-            </a>
-            Bienvenido a...
-
+        <header class="nav-down">
         </header>
 
         <main>
-            <div class="container">
                 
                 <ul class="session-buttons">
                     <li>
@@ -27,33 +25,32 @@
                     </li>
                 </ul>
                 <div class="login-container">
-                    <div class = "login">
-                        <h1>Inicio de sesión en la plataforma</h1>
-                        <form action="models/sessionControl.php" method="post">
-                            <ul>
-                                <li class = "radio-buttons">
-                                    <input type="radio" id="driver-radio-button" name="selecDriver">
-                                    <label for="driver-radio-button">Conductor</label>
+                
 
-                                    <input type="radio" id="passenger-radio-button" name="selecPassenger" checked="checked">
-                                    <label for="passenger-radio-button">Pasajero</label>
+                    <form>
 
-                                    <input type="radio" id="admin-radio-button" name="selecAdmin">
-                                    <label for="admin-radio-button">Administrador</label>
-                                </li>
-                                <li>
-                                    <input type="text" placeholder="Username" name="username" id="username" required/>
-                                </li>
-                                <li>
-                                    <input type="password" placeholder="Password" name="password" id="password" required/>
-                                </li>
-                                <li>
-                                    <input type="submit" value="Login" class="button" />
-                                </li>
-                            </ul>
-                        </form>
-                    </div>
+                        <br>
+
+                        <h1 class="text-center">INICIAR SESIÓN</h1>
+
+                        <br>
+                        
+                        <input class="form-control" placeholder="Username"/>
+                        <input class="form-control" placeholder="Password"/>
+                        <button class="btn-default">LOG IN</button>
+                    </form>
+                              
                 </div>
+                    <!--<div class = "login">
+                        
+                            <p class="form-title">Inicio de sesión</p>
+                            <form class="login" action="models/sessionControl.php" method="post">
+                                <input type="text" placeholder="Username" name="username" id="username" required/>
+                                <input type="password" placeholder="Password" name="password" id="password" required/>
+                                <input type="submit" value="Login" class="btn btn-success btn-sm" />
+                            </form>
+                    </div>-->
+                
                 <div class="register-container">
                     <!--REGISTRO-->
                     <div class = "register">
@@ -63,14 +60,28 @@
                         </p>
                         <form>
                             <ul>
-                                <li>
-                                    <input type="text" placeholder="Nombre" />
+                                <li class = "radio-buttons">
+                                    <input type="radio" id="driver-radio-button" name="select">
+                                    <label for="driver-radio-button">Conductor</label>
+
+                                    <input type="radio" id="passenger-radio-button" name="select" checked="checked">
+                                    <label for="passenger-radio-button">Pasajero</label>
                                 </li>
                                 <li>
-                                    <input type="password" placeholder="Password" />
+                                    <input type="text" placeholder="Nombre" name="nameRegister" id="nameRegister" required/>
                                 </li>
                                 <li>
-                                    <input type="submit" value="Sign Up" class="button" />
+                                    <input type="text" placeholder="Username" name="usernameRegister" id="usernameRegister" required/>
+                                </li>
+
+                                <li>
+                                    <input type="password" placeholder="Password" name="passwordRegister" id="passwordRegister" required/>
+                                </li>
+                                <li>
+                                    <input type="text" placeholder="DNI" name="dniRegister" id="dniRegister" required/>
+                                </li>
+                                <li>
+                                    <input type="text" placeholder="email" name="emailRegister" id="emailRegister" required/>
                                 </li>
                             </ul>
                         </form>
