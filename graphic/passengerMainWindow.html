@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>Conductor</title>
+        <link rel="stylesheet" type="text/css" href="passengerMainWindowStyle.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script type='text/javascript' src='../logic/passengerMainWindowLogic.js'></script>
+    </head>
+    <body>
+        <header class = "Header">
+            <a class = "Header-logo">
+                <img src="">
+            </a>
+            Bienvenido pasajero
+
+        </header>
+        <<main>
+            <div class="container">
+                <ul class="select-buttons">
+                    <li>
+                        <a class = "journeys-button">Mis trayectos</a>
+                    </li>
+                </ul>
+                <div class="journeys-container">
+                    <div class = "journeys">
+                        <h1>Mis trayectos</h1>
+                       
+                    </div>
+                </div>
+            </div>
+            <!--BUSQUEDA-->
+            <div class = "search">
+                <h1 class = "search-title">Encuentra el viaje que necesitas</h1>
+                <div class = "search-content">
+                    <p class = "text"> Introduce los datos del viaje que buscas </p>
+                    <form id = "search-form">
+                        <div class = "form-input-container">
+                            <img class="input-icon" src="https://d1ovtcjitiy70m.cloudfront.net/vi-1/images/homepage/2016/icon-circle.svg" alt="" aria-hidden="true" width="20" height="20"> 
+                            <input id = "form-name" type="text" name="form-name">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </body>
