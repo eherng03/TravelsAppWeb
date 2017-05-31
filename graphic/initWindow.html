@@ -8,7 +8,8 @@
 
         <script src='../resources/bootstrap/js/bootstrap.js'></script>
         <link rel="stylesheet"  href="../resources/bootstrap/css/bootstrap.css">
-
+        <link rel="stylesheet"  href="../resources/bootstrap/css/custom.css">
+        <!--https://bootsnipp.com/-->
     </head>
     <body>
         <header class="nav-down">
@@ -24,48 +25,39 @@
                         <a class = "register-button">Registrarse</a>
                     </li>
                 </ul>
+                <!--LOGIN-->
                 <div class="login-container">
-                
-
-                    <form>
-
-                        <br>
-
+                    <form class="login" action="models/sessionControl.php" method="post">
                         <h1 class="text-center">INICIAR SESIÓN</h1>
-
-                        <br>
-                        
-                        <input class="form-control" placeholder="Username"/>
-                        <input class="form-control" placeholder="Password"/>
-                        <button class="btn-default">LOG IN</button>
-                    </form>
-                              
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Username" name="username" type= "text" id = "username" required/>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Password" name="password" type="password" id="password" required/>
+                        </div>
+                        <input class="btn" type="submit" value="Login">
+                    </form>       
                 </div>
-                    <!--<div class = "login">
-                        
-                            <p class="form-title">Inicio de sesión</p>
-                            <form class="login" action="models/sessionControl.php" method="post">
-                                <input type="text" placeholder="Username" name="username" id="username" required/>
-                                <input type="password" placeholder="Password" name="password" id="password" required/>
-                                <input type="submit" value="Login" class="btn btn-success btn-sm" />
-                            </form>
-                    </div>-->
-                
+                <!--REGISTRO-->
                 <div class="register-container">
-                    <!--REGISTRO-->
+                    
                     <div class = "register">
-                        <h1>Register</h1>
-                        <p>
+                        <h1>Registro</h1>
+                        <p class = "lead">
                             Introduzca los datos solicitados a continuación.
                         </p>
                         <form>
+                               
                             <ul>
-                                <li class = "radio-buttons">
-                                    <input type="radio" id="driver-radio-button" name="select">
-                                    <label for="driver-radio-button">Conductor</label>
-
-                                    <input type="radio" id="passenger-radio-button" name="select" checked="checked">
-                                    <label for="passenger-radio-button">Pasajero</label>
+                                <li id = "selectRol">
+                                    <!--DRIVER AND PASSENGER RADIO BUTTONS--> 
+                                    <label class="radio-inline">
+                                        <input type="radio" id = "driver-radio-button" name="optradio">Conductor
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" id = "passenger-radio-button" name="optradio" checked="checked">Pasajero
+                                    </label>
+                                    <br>
                                 </li>
                                 <li>
                                     <input type="text" placeholder="Nombre" name="nameRegister" id="nameRegister" required/>
@@ -83,6 +75,12 @@
                                 <li>
                                     <input type="text" placeholder="email" name="emailRegister" id="emailRegister" required/>
                                 </li>
+                                <li>
+                                    <input type="text" placeholder="Telefono" name="phoneRegister" id="phoneRegister" required/>
+                                </li>
+                                <li>
+                                    <input id="input-1" type="file" class="file">
+                                </li>
                             </ul>
                         </form>
                     </div>
@@ -91,13 +89,63 @@
             <div class = "search">
                 <h1 class = "search-title">Encuentra el viaje que necesitas</h1>
                 <div class = "search-content">
-                    <p class = "text"> Introduce los datos del viaje que buscas </p>
-                    <form id = "search-form">
-                        <div class = "form-input-container">
-                            <img class="input-icon" src="https://d1ovtcjitiy70m.cloudfront.net/vi-1/images/homepage/2016/icon-circle.svg" alt="" aria-hidden="true" width="20" height="20"> 
-                            <input id = "form-name" type="text" name="form-name">
+                    <div class="well-searchbox">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Keyword</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="Keyword">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Country</label>
+                            <div class="col-md-8">
+                                <select class="form-control" placeholder="Country">
+                                    <option value="">All</option>
+                                    <option value="">Country 1</option>
+                                    <option value="">Country 2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Province</label>
+                            <div class="col-md-8">
+                                <select class="form-control" placeholder="Province">
+                                    <option value="">All</option>
+                                    <option value="">Province 1</option>
+                                    <option value="">Province 2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">City</label>
+                            <div class="col-md-8">
+                                <select class="form-control" placeholder="City">
+                                    <option value="">All</option>
+                                    <option value="">City 1</option>
+                                    <option value="">City 2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Category</label>
+                            <div class="col-md-8">
+                                <select class="form-control" placeholder="Category">
+                                    <option value="">All</option>
+                                    <option value="">Category 1</option>
+                                    <option value="">Category 2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-4 col-sm-5">
+                            <button type="submit" class="btn btn-success">Search</button>
                         </div>
                     </form>
+                </div>
                 </div>
             </div>
 
