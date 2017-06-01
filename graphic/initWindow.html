@@ -82,9 +82,13 @@
                                     <input class="form-control" type="text" placeholder="Telefono" name="phoneRegister" id="phoneRegister" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" id="input-1" type="file" class="file" required>
+                                    <input type="file" name="userImage" accept="image/*"/>
+                                   <!--- <input class="form-control" id="input-1" type="file" class="file" name="userImage" required>-->
                                 </div>
-                                <input class="btn" type="submit" value="Verificar móvil" id = "verifyBtn">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" placeholder="Código de verificación" name="verifyText" id="verifyText" required/>
+                                </div>
+                                <input class="btn" type="button" value="Verificar móvil" id = "verifyBtn">
                                 <input class="btn" type="submit" value="Aceptar" id = "registerBtn">
                         </form>
                     </div>
