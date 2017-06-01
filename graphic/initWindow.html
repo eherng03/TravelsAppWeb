@@ -16,18 +16,20 @@
         </header>
 
         <main>
+                <div class="session-buttons">
+                    <ul class="list-inline">
+                        <li>
+                            <a class = "login-button">Iniciar Sesión</a>
+                        </li>
+                        <li>
+                            <a class = "register-button">Registrarse</a>
+                        </li>
+                    </ul> 
+                </div>
                 
-                <ul class="session-buttons">
-                    <li>
-                        <a class = "login-button">Iniciar Sesión</a>
-                    </li>
-                    <li>
-                        <a class = "register-button">Registrarse</a>
-                    </li>
-                </ul>
                 <!--LOGIN-->
                 <div class="login-container">
-                    <form class="login" action="models/sessionControl.php" method="post">
+                    <form class="login" action="../models/sessionControl.php" method="post">
                         <h1 class="text-center">INICIAR SESIÓN</h1>
                         <div class="form-group">
                             <input class="form-control" placeholder="Username" name="username" type= "text" id = "username" required/>
@@ -35,21 +37,20 @@
                         <div class="form-group">
                             <input class="form-control" placeholder="Password" name="password" type="password" id="password" required/>
                         </div>
-                        <input class="btn" type="submit" value="Login">
+
+                        <input class="btn btnEfect" type="submit" value="Login" id = "loginBtn">
                     </form>       
                 </div>
                 <!--REGISTRO-->
                 <div class="register-container">
                     
                     <div class = "register">
-                        <h1>Registro</h1>
+                        <h1>REGISTRO</h1>
                         <p class = "lead">
                             Introduzca los datos solicitados a continuación.
                         </p>
-                        <form>
-                               
-                            <ul>
-                                <li id = "selectRol">
+                        <form action="../models/registerControl.php" method="post">  
+                                <div id = "selectRol">
                                     <!--DRIVER AND PASSENGER RADIO BUTTONS--> 
                                     <label class="radio-inline">
                                         <input type="radio" id = "driver-radio-button" name="optradio">Conductor
@@ -58,30 +59,30 @@
                                         <input type="radio" id = "passenger-radio-button" name="optradio" checked="checked">Pasajero
                                     </label>
                                     <br>
-                                </li>
-                                <li>
-                                    <input type="text" placeholder="Nombre" name="nameRegister" id="nameRegister" required/>
-                                </li>
-                                <li>
-                                    <input type="text" placeholder="Username" name="usernameRegister" id="usernameRegister" required/>
-                                </li>
+                                </div>
+                                <div class="form-group">
+                                     <input class="form-control" type="text" placeholder="Nombre" name="nameRegister" id="nameRegister" required/>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" placeholder="Username" name="usernameRegister" id="usernameRegister" required/>
+                                </div>
 
-                                <li>
-                                    <input type="password" placeholder="Password" name="passwordRegister" id="passwordRegister" required/>
-                                </li>
-                                <li>
-                                    <input type="text" placeholder="DNI" name="dniRegister" id="dniRegister" required/>
-                                </li>
-                                <li>
-                                    <input type="text" placeholder="email" name="emailRegister" id="emailRegister" required/>
-                                </li>
-                                <li>
-                                    <input type="text" placeholder="Telefono" name="phoneRegister" id="phoneRegister" required/>
-                                </li>
-                                <li>
-                                    <input id="input-1" type="file" class="file">
-                                </li>
-                            </ul>
+                                <div class="form-group">
+                                    <input class="form-control" type="password" placeholder="Password" name="passwordRegister" id="passwordRegister" required/>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" placeholder="DNI" name="dniRegister" id="dniRegister" required/>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" placeholder="email" name="emailRegister" id="emailRegister" required/>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="text" placeholder="Telefono" name="phoneRegister" id="phoneRegister" required/>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="input-1" type="file" class="file" required>
+                                </div>
+                                <input class="btn" type="submit" value="Aceptar" id = "registerBtn">
                         </form>
                     </div>
                 </div>
@@ -91,59 +92,23 @@
                 <div class = "search-content">
                     <div class="well-searchbox">
                     <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Keyword</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="Keyword">
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Country</label>
-                            <div class="col-md-8">
-                                <select class="form-control" placeholder="Country">
-                                    <option value="">All</option>
-                                    <option value="">Country 1</option>
-                                    <option value="">Country 2</option>
-                                </select>
-                            </div>
-                        </div>
+                            <label>Origen</label>
+                            <select class="form-control" id="Origin">
+                                <option value="">Todos</option>
+                            </select>
+                     
+                            <label>Destino</label>
+                            <select class="form-control" id="Destiny">
+                                <option value="">Todos</option>
+                            </select>
 
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Province</label>
-                            <div class="col-md-8">
-                                <select class="form-control" placeholder="Province">
-                                    <option value="">All</option>
-                                    <option value="">Province 1</option>
-                                    <option value="">Province 2</option>
-                                </select>
-                            </div>
+                        <div class="input-group date">
+                            <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">City</label>
-                            <div class="col-md-8">
-                                <select class="form-control" placeholder="City">
-                                    <option value="">All</option>
-                                    <option value="">City 1</option>
-                                    <option value="">City 2</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Category</label>
-                            <div class="col-md-8">
-                                <select class="form-control" placeholder="Category">
-                                    <option value="">All</option>
-                                    <option value="">Category 1</option>
-                                    <option value="">Category 2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm-offset-4 col-sm-5">
-                            <button type="submit" class="btn btn-success">Search</button>
-                        </div>
+                        <!-- TODO AQUI VA LA FECHA -->
+                        <br>
+                        <input class="btn" type="submit" value="Buscar" id = "searchBtn">
                     </form>
                 </div>
                 </div>

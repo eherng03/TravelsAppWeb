@@ -25,33 +25,41 @@ body{
     margin: 0;
 }
 
+main{
+	margin-top: 20px;
+	display: block;
+	
+}
+
+h1{
+	margin: 8px;
+}
+
+
 .form-control{
     border-radius: 0px;
     margin-bottom: 10px;
 }
 
-.btn-default{
-    display: inline-block;
+.form-group{
+	text-align: center;
 }
 
 .session-buttons {
     background: #AED9F4;
-    height: 45px;
     margin: auto;
     padding: 0;
-    list-style-type: none;
-    position: relative;
     display: block;
     width: 50%;
     border: 2px solid #8A4040;
     border-radius: 15px;
-
+    min-width: 337px;
+    min-height: 52px;
 }
 
 .session-buttons li {
   float: left;
   width: 50%;
-  height: 100%;
   
 }
 
@@ -59,10 +67,12 @@ body{
   display: block;
   float: center;
   text-decoration: none;
-  color: white;
-  font-size: 20;
+  color: #8A4040;
+  font-size: 20px;
+  font-weight: bold;
   padding: 12px 22px 12px 22px;
   text-align: center;
+  cursor: pointer;
 }
 
 .login-container, .register-container {
@@ -76,11 +86,7 @@ body{
   border: 2px solid #8A4040;
 }
 
-main{
-	margin-top: 20px;
-	display: block;
-	
-}
+
 
 .search{
     background: #AED9F4;
@@ -90,20 +96,22 @@ main{
     display: block;
     width: 95%;
     border: 2px solid #8A4040;
+    min-width: 322px;
 }
 
 .search-title{
 	font-size: 20px;
     font-weight: bold;
-    margin: auto;
+    margin: 5px;
+    margin-top: 10px;
     text-align: center;
 }
 
 .search-content{
 	padding: 12px 22px 12px 22px;
     margin: auto;
-    text-align: center;
 }
+
 #search-form{
 	align-items: center;
 	position: relative;
@@ -123,40 +131,35 @@ main{
     margin: 0 auto;
 }
 
-.input-icon{
-	position: relative;
-	top: 14px;
-    left: 13px;
-    vertical-align: middle;
-    border: 0;
-    width: 20px;
-    height: 20px;
-    padding: 0 0 24px;
-    margin: 0;
+.form-group{
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
+#loginBtn, #registerBtn, #searchBtn{
+	font-weight: bold;
+	border: 2px solid #8A4040;
 
-h1{
-	margin: 8px;
 }
 
-.search-background img {
-    width: 100%;
-}
 .well-searchbox {
-  min-height: 20px;
-  min-width: 400px;
   padding: 19px;
-  z-index: 80;
-  background: rgba(0, 0, 0, 0.6);
+  background: #8A4040;
   margin-bottom: 20px;
   border: 1px solid #e3e3e3;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  min-height: 145px;
+  padding: 12px 22px 12px 22px;
+  align-items: center;
 }
 
 .well-searchbox label {
     color: #fff;
 }
+
+#selectRol{
+	margin: 10px;
+}
+
+
 
