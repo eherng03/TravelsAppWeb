@@ -21,10 +21,12 @@ $(document).ready(function($) {
 		}
 	});
 
-	$('#sandbox-container .input-group.date').datepicker({
-        format: "dd/mm/yyyy",
-        todayBtn: "linked",
-        language: "es"
-    });
+	$("#verifyBtn").click(function(){
+		$.get("../operations/verificationNumber.php", function(data) {
+			$('#verifyText').val(data);
+    	});
+	});
+
+	
 
 });
