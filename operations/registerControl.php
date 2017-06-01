@@ -16,7 +16,7 @@
 	$phone = $_POST['phoneRegister'];
 	
 	//Image
-	$target_dir = "../userImages/";
+	$target_dir = "../resources/userImages/";
 	$target_file = $target_dir.basename($_FILES['userImage']['name']);
 	$imageType = pathinfo($target_file, PATHINFO_EXTENSION);
 	move_uploaded_file($_FILES['userImage']['tmp_name'], $target_dir.$user.".".$imageType);
