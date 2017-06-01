@@ -136,7 +136,7 @@ h1{
     margin-bottom: 5px;
 }
 
-#loginBtn, #registerBtn, #searchBtn{
+#loginBtn, #registerBtn, #searchBtn, #verifyBtn{
 	font-weight: bold;
 	border: 2px solid #8A4040;
 
