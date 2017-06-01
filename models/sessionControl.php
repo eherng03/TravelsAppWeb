@@ -1,22 +1,14 @@
 <?php
-	require "BBDDManager.php"; //THIS IS GUT?
+	require "../dataBase/DBManager.php";
 	session_start();
-	
-	//Primero coger el conn del BBDDManager
-	$singleton = BBDDManager::getInstance();
+
+	$singleton = DBManager::getInstance();
 	$conn = $singleton->getConnection();
 	
 	$user = $_POST['username'];
 	$pass = $_POST['password'];
-	
-	if(isset($_POST['selecDriver']) && $_POST['selecDriver'] === "on"){
-		$userType = 1; 
-		$query = $conn->prepare("SELECT * FROM Drivers WHERE user = ?");
-	} else{
-		$userType = 0;
-		$query = $conn->prepare("SELECT * FROM Passengers WHERE user = ?");
-	}
 
+	$query = $conn->prepare("SELECT * FROM Users WHERE username = ?");
 	$query->bind_param("s", $user);
 	
 	$query->execute();
@@ -25,22 +17,28 @@
 	if($result->num_rows > 0){
 		$userData = $result->fetch_array();
 		
-		if($pass === $userData['password']){
+		if($pass === $userData['pass']){
+			$query->close();
+			
 			$_SESSION['username'] = $user;
 			$_SESSION['isLogged'] = true;
-			$_SESSION['userType'] = $userType;
+			$_SESSION['userType'] = $userData['rol'];
 			
-			print_r("Login correcto");
+			if($userData['rol'] === 0)
+				header("Location: ../graphic/passengerMainWindow.html"); 
+			else header("Location: ../graphic/driverMainWindow.html"); 
+			
 			//$_SESSION['start'] = time();
 			//$_SESSION['expire'] = $_SESSION['start'] + (5 * 60);
 		
 		} else {
 			print_r("Contraseña incorrecta.");
 		}
-	}else { //ESTO HAY QUE CAMBIARLO
-		header("Location: /TravelsAppWeb-iker/initWindow.html"); 
-		print_r("Usuario y/o contraseña incorrectos.");
+	}else {
+		$query->close();
+		print_r("Usuario y/o contraseña incorrectos. Redirigiendo a la pagina principal.");
+		sleep(2);
+		header("Location: ../graphic/initWindow.html"); 
+		
 	}
-	$query->close();
-	
 ?>
