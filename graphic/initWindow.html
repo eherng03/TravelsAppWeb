@@ -31,7 +31,7 @@
                 
                 <!--LOGIN-->
                 <div class="login-container">
-                    <form class="login" action="../models/sessionControl.php" method="post">
+                    <form class="login" action="../operations/sessionControl.php" method="post">
                         <h1 class="text-center">INICIAR SESIÓN</h1>
                         <div class="form-group">
                             <input class="form-control" placeholder="Username" name="username" type= "text" id = "username" required/>
@@ -51,7 +51,7 @@
                         <p class = "lead">
                             Introduzca los datos solicitados a continuación.
                         </p>
-                        <form action="../models/registerControl.php" method="post">  
+                        <form action="../operations/registerControl.php" method="post" enctype= "multipart/form-data">  
                                 <div id = "selectRol">
                                     <!--DRIVER AND PASSENGER RADIO BUTTONS--> 
                                     <label class="radio-inline">
