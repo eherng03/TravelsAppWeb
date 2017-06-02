@@ -3,7 +3,7 @@
 
 	$singleton = DBManager::getInstance();
 	$conn = $singleton->getConnection();
-	
+
 	$userType = 0;
 	if($_POST['optradio'] === "driver")
 		$userType = 1;
