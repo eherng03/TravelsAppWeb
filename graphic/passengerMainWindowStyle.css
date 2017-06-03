@@ -36,7 +36,7 @@ body{
   text-align: center;
 }
 
-.journeys-container{
+.journeys-container, .search-container{
   height: 240px;
   background: #AED9F4;
   display: block;
@@ -48,6 +48,19 @@ body{
   border-radius: 28px;
   border: 2px solid #8A4040;
 }
+
+/* .search-container{ */
+  /* height: 240px; */
+  /* background: #AED9F4; */
+  /* display: block; */
+  /* margin: 25px auto; */
+  /* width: 40%; */
+  /* position: relative; */
+  /* font-family: 'Roboto'; */
+  /* text-align: center; */
+  /* border-radius: 28px; */
+  /* border: 2px solid #8A4040; */
+/* } */
 
 main{
   margin-top: 20px;

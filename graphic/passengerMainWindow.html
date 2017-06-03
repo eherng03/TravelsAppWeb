@@ -1,10 +1,15 @@
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
-        <title>Conductor</title>
+        <title>Pasajero</title>
         <link rel="stylesheet" type="text/css" href="passengerMainWindowStyle.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script type='text/javascript' src='../logic/passengerMainWindowLogic.js'></script>
+		
+		<script src='../resources/bootstrap/js/bootstrap.js'></script>
+        <link rel="stylesheet"  href="../resources/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet"  href="../resources/bootstrap/css/custom.css">
+
     </head>
     <body>
         <header class = "Header">
@@ -13,31 +18,37 @@
             </a>
             Bienvenido pasajero
 
-        </header>
-        <<main>
+      </header>
+        <main>
             <div class="container">
-                <ul class="select-buttons">
-                    <li>
-                        <a class = "journeys-button">Mis trayectos</a>
-                    </li>
-                </ul>
-                <div class="journeys-container">
-                    <div class = "journeys">
-                        <h1>Mis trayectos</h1>
-                       
-                    </div>
-                </div>
+				
+				<nav class="lista">
+					<ul class="select-buttons">
+						<li><a class = "journeys-button">Mis trayectos</a></li>
+						<li><a class = "search-button">Busqueda</a></li>
+					</ul>
+				</nav>	
+			
             </div>
+			
+			 <!--TRAYECTOS-->
+			<div class="journeys-container">
+					<div class = "journeys">
+							<h1>Mis trayectos</h1>
+							
+					</div>
+				</div>
             <!--BUSQUEDA-->
-            <div class = "search">
+            <div class = "search-container">
                 <h1 class = "search-title">Encuentra el viaje que necesitas</h1>
                 <div class = "search-content">
                     <p class = "text"> Introduce los datos del viaje que buscas </p>
                     <form id = "search-form">
-                        <div class = "form-input-container">
-                            <img class="input-icon" src="https://d1ovtcjitiy70m.cloudfront.net/vi-1/images/homepage/2016/icon-circle.svg" alt="" aria-hidden="true" width="20" height="20"> 
-                            <input id = "form-name" type="text" name="form-name">
-                        </div>
+                       
+                            Desde:<input id = "form-name" type="text" name="form-name">
+							Hasta:<input id = "form-name" type="text" name="form-name">
+							
+							<input type="button" value="Realizar reserva">
                     </form>
                 </div>
             </div>

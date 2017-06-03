@@ -24,9 +24,9 @@ body{
 
 .select-buttons li {
   float: left;
-  width: 50%;
+  width: 33%;
   height: 100%;
-  
+  display: inline
 }
 
 .select-buttons a {
@@ -36,7 +36,7 @@ body{
   color: white;
   font-size: 20;
   padding: 12px 22px 12px 22px;
-  text-align: center;
+  text-align: center; 
 }
 
 .journeys-container{
@@ -47,7 +47,7 @@ body{
 	height: 340px;
 }
 
-.journeys-container, .score-container {
+.journeys-container, .score-container,.create-container {
   background: #AED9F4;
   display: block;
   margin: 25px auto;
