@@ -3,75 +3,96 @@
         <meta charset="utf-8">
         <title>Conductor</title>
         <link rel="stylesheet" type="text/css" href="driverMainWindowStyle.css">
+        <link rel="stylesheet" type="text/css" href="chat.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script type='text/javascript' src='../logic/driverMainWindowLogic.js'></script>
 		
 		
 		<script src='../resources/bootstrap/js/bootstrap.js'></script>
+		<!-- El js del chat en proceso-->
+        <script src='../resources/bootstrap/js/bootstrap-datepicker.js'></script>
+        <script src='../resources/bootstrap/locales/bootstrap-datepicker.es.min.js'></script>
+
         <link rel="stylesheet"  href="../resources/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet"  href="../resources/bootstrap/css/bootstrap-datepicker.css">
         <link rel="stylesheet"  href="../resources/bootstrap/css/custom.css">
 		
     </head>
     <body>
         <header class = "Header">
-            <a class = "Header-logo">
-                <img src="">
-            </a>
-            Bienvenido conductor
-
+            <nav class="navbar navbar-default navbar-fixed-top">
+  				<div class="container-fluid">
+			    <div class="navbar-header">
+			    <!-- Boton para cuando se hace la pantalla estrecha-->
+      				<button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#">Conductor</a>
+    			</div>
+			    <!-- nav links-->
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      	<ul class="nav navbar-nav">
+			        	<li class="active journeys-button"><a href="#">
+			        		Ver trayectos 
+			        	</a></li>
+			        	<li><a href="#" class = "create-button">
+			        		Crear trayecto
+			        	</a></li>
+			        	<li><a class = "score-button" href="#">
+			        		Mis valoraciones
+			        	</a></li>
+			      	</ul>
+			      	<!-- Chat. Si no hay mensajes no sale nada-->
+			      	<ul class="nav navbar-nav navbar-right">
+			        	<li class="dropdown" id="n_chats">
+			          	<ul class="dropdown-menu dropdown-cart" role="menu" id="chats"></ul>
+			        </li>
+			      </ul>
+			    </div>
+			  </div>
+			</nav>
         </header>
         <main>
-            <div class="container">
-				<nav class="lista">
-					<ul class="select-buttons">
-						<li><a class = "create-button">Crear trayecto</a></li>
-						
-						<li><a class = "journeys-button">Consultar/editar trayectos</a></li>
-						
-						<li><a class = "score-button">Mis valoraciones</a></li>
-						
-				
-					</ul>
-				</nav>	
-			 </div>	
 				<!--CREAR NUEVO TRAYECTO-->
 
 				<div class = "create-container">
-					<h1 class = "create-title">Datos del viaje</h1>
-					<div class = "create-content">
-						<p class = "text"> </p>
-						<form id = "create-form">
-						   
-								Desde:<input id = "form-name" type="text" name="form-name">
-								Hasta:<input id = "form-name" type="text" name="form-name">
-								Precio:<input id = "form-name" type="text" name="form-name">
-								Plazas:<input id = "form-name" type="text" name="form-name">
-								<input type="button" value="Crear">
-						</form>
-					</div>
+					<h1 class = "section-title">Datos del viaje</h1>
+	                <div class = "create-content">
+	                    <div class="well-content">
+	                    <form class="form-horizontal" role="form">
+
+	                            <label>Origen</label>
+	                            <input class="form-control" placeholder="Origen" name="origin" type="text" id="origin" required/>
+	                     
+	                            <label>Destino</label>
+	                            <input class="form-control" placeholder="Origen" name="origin" type="text" id="origin" required/>
+
+		                        <div class="input-group date"  data-provide = "datepicker" id = "datepicker">
+		                            <input type="text" class="form-control" placeholder="Fecha" name="date" id="date" required>
+		                            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+		                        </div>
+	                        <!-- TODO AQUI VA LA FECHA -->
+	                        <br>
+	                        <input class="btn" type="submit" value="Crear" id = "createBtn">
+	                    </form>
+	                </div>
+	                </div>
+            </div>
+
 				</div>
 				
 				<!--MIS TRAYECTOS-->
                 <div class="journeys-container">
-                    <div class = "journeys">
-                        <h1>Mis trayectos</h1>
-						
-						<p>Selecciona un trayecto para editarlo</p>
-						<select>
-						  <option value="1">Esto</option>
-						  <option value="2">es</option>
-						  <option value="3">una</option>
-						  <option value="4">prueba</option>
-						</select>
-                       
+                    <div class = "journeys-content">
+                        <h1 class = "section-title">Viajes</h1>
+						<div class = "journeys-content">
+							<p>Aqui salen todos los trayectos del conductor con lasplantilals</p>
+                       	</div>
                     </div>
                 </div>
 				
 				 <!--VALORACIONES-->
                 <div class="score-container">
               
-                    <div class = "scores">
-                        <h1>Mis valoraciones</h1>
+                    <div class = "scores-content">
+                        <h1 class = "section-title">Mis valoraciones</h1>
 							<div class = "average">
 								
 							</div>
