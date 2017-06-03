@@ -16,22 +16,27 @@
         <!--https://bootsnipp.com/-->
     </head>
     <body>
-        <header class="nav-down">
-        TravelsApp
+        <header class = "Header">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                <div class="navbar-header">
+                <!-- Boton para cuando se hace la pantalla estrecha-->
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#">TravelsApp</a>
+                </div>
+                <!-- nav links-->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active login-button"><a>Iniciar Sesión</a></li>
+                        <li class = "register-button"><a>Registrarse</a></li>
+                    </ul>
+                  </ul>
+                </div>
+              </div>
+            </nav>
         </header>
 
         <main>
-                <div class="session-buttons">
-                    <ul class="list-inline">
-                        <li>
-                            <a class = "login-button">Iniciar Sesión</a>
-                        </li>
-                        <li>
-                            <a class = "register-button">Registrarse</a>
-                        </li>
-                    </ul> 
-                </div>
-                
+               
                 <!--LOGIN-->
                 <div class="login-container">
                     <form class="login" action="../operations/sessionControl.php" method="post">

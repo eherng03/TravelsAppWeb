@@ -3,7 +3,6 @@
 
 
 header {
-    background-color: #AED9F4;
     font-size: 30px;
     font-weight: bold;
     height: 62px;
@@ -45,35 +44,6 @@ h1{
 	text-align: center;
 }
 
-.session-buttons {
-    background: #AED9F4;
-    margin: auto;
-    padding: 0;
-    display: block;
-    width: 50%;
-    border: 2px solid #8A4040;
-    border-radius: 15px;
-    min-width: 337px;
-    min-height: 52px;
-}
-
-.session-buttons li {
-  float: left;
-  width: 50%;
-  
-}
-
-.session-buttons a {
-  display: block;
-  float: center;
-  text-decoration: none;
-  color: #8A4040;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 12px 22px 12px 22px;
-  text-align: center;
-  cursor: pointer;
-}
 
 .login-container, .register-container {
   background: #AED9F4;
