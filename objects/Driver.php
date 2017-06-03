@@ -1,29 +1,29 @@
 <?php
 	class Driver{
-		private $name;
-		private $email;
-		private $user;
-		private $password;
-		private $telephone;
-		private $dni;
-		private $photo;
-		private $journeys;
-		private $numberJourneys;
-		private $scoreAverage;
-		private $coments;
+		public $name;
+		public $email;
+		public $user;
+		public $password;
+		public $telephone;
+		public $dni;
+		public $photo;
+		public $journeys;
+		public $numberJourneys;
+		public $scoreAverage;
+		public $coments;
 
-		public function __construct($name, $email, $user, $password, $telephone, $dni, $photo){
+		public function __construct($name, $email, $user, $telephone, $dni, $photo){
 			$this->name = $name;
 			$this->email = $email;
 			$this->user = $user;
-			$this->password = $password;
+			//$this->password = $password;
 			$this->telephone = $telephone;
 			$this->dni = $dni;
 			$this->photo = $photo;
-			$this->journeys = array();
-			$this->numberJourneys = 0;
-			$this->scoreAverage = 0;
-			$this->coments = array();
+			//$this->journeys = array();
+			//$this->numberJourneys = 0;
+			//$this->scoreAverage = 0;
+			//$this->coments = array();
 		}
 
 		//TODO here needed getters and setters
