@@ -27,6 +27,15 @@ $(document).ready(function($) {
     	});
 	});
 
+	$('.input-group').datepicker({
+	    format: "dd/mm/yyyy",
+	    todayBtn: "linked",
+	    language: "es",
+	    daysOfWeekHighlighted: "0,6",
+	    autoclose: true,
+	    todayHighlight: true
+	});
+
 	
 
 });
