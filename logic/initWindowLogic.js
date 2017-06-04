@@ -5,19 +5,19 @@ $(document).ready(function($) {
 
 	$(".login-button").click(function(event) {
 		if ($(".login-container").is(":hidden")){
-			$(".login-container").slideDown();
-			$(".register-container").slideUp();
+			$(".login-container").slideDown("fast");
+			$(".register-container").slideUp("fast");
 		}else{
-			$(".login-container").slideUp();
+			$(".login-container").slideUp("fast");
 		}
 	});
 
 	$(".register-button").click(function(event) {
 		if ($(".register-container").is(":hidden")){
-			$(".register-container").slideDown();
-			$(".login-container").slideUp();
+			$(".register-container").slideDown("fast");
+			$(".login-container").slideUp("fast");
 		}else{
-			$(".register-container").slideUp();
+			$(".register-container").slideUp("fast");
 		}
 	});
 
