@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Admin</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="../resources/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="../resources/bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="../logic/adminMainWindowLogic.js"></script>
+    <link rel="stylesheet" type="text/css" href="../resources/theme/css/adminMainWindow.css">
+  </head>
+  <body>
+    <header class="Header"><a class="Header-logo"><img src=""></a>            Bienvenido conductor</header>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-login">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-xs-6"><a class="active" id="conductores-link" href="#">Conductores</a></div>
+                  <div class="col-xs-6"><a id="usuarios-link" href="#">Usuarios</a></div>
+                </div>
+                <hr>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <form id="conductores">
+                      <table class="table table-bordered table-hover" id="tab_conductores">
+                        <thead>
+                          <tr>
+                            <th class="text-center"></th>
+                            <th class="text-center">name</th>
+                            <th class="text-center">email</th>
+                            <th class="text-center">username</th>
+                            <th class="text-center">telefono</th>
+                            <th class="text-center">dni</th>
+                            <th class="text-center">Foto</th>
+                            <th class="text-center">Comentarios</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </form>
+                    <form id="usuarios">
+                      <table class="table table-bordered table-hover" id="tab_usuarios">
+                        <thead>
+                          <tr>
+                            <th class="text-center"></th>
+                            <th class="text-center">name</th>
+                            <th class="text-center">email</th>
+                            <th class="text-center">username</th>
+                            <th class="text-center">telefono</th>
+                            <th class="text-center">dni</th>
+                            <th class="text-center">Foto</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
