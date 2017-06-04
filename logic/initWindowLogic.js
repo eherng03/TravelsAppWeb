@@ -23,7 +23,7 @@ $(document).ready(function($) {
 
 	$("#verifyBtn").click(function(){
 		$.get("../operations/verificationNumber.php", function(data) {
-			$('#verifyText').val(data);
+			$('#verifyText').val(JSON.parse(data));
     	});
 	});
 
