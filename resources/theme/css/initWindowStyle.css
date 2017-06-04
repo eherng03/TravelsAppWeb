@@ -1,0 +1,138 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100);
+@import url(http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css);
+
+
+header {
+    font-size: 30px;
+    font-weight: bold;
+    height: 62px;
+    line-height: 62px;
+    margin: 0 auto;
+    max-width: 1360px;
+    padding: 0 32px;
+    position: relative;
+    z-index: 220;
+}
+
+body{
+	font-family: 'Roboto' !important;
+	background-image: url('../../background.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+    padding: 0;
+    margin: 0;
+}
+
+main{
+	margin-top: 20px;
+	display: block;
+	
+}
+
+h1{
+	margin: 8px;
+}
+
+
+.form-control{
+    border-radius: 0px;
+    margin-bottom: 10px;
+}
+
+.form-group{
+	text-align: center;
+}
+
+.login-button, .register-button{
+  cursor: pointer;
+}
+
+.login-container, .register-container {
+  background: #AED9F4;
+  margin: 25px auto;
+  width: 50%;
+  position: relative;
+  font-family: 'Roboto';
+  text-align: center;
+  border-radius: 28px;
+  border: 2px solid #8A4040;
+}
+
+
+
+.search{
+    background: #AED9F4;
+    border-radius: 15px;
+    margin: 10px auto;
+    margin-top: 20px;
+    display: block;
+    width: 95%;
+    border: 2px solid #8A4040;
+    min-width: 322px;
+}
+
+.search-title{
+	font-size: 20px;
+    font-weight: bold;
+    margin: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.search-content{
+	padding: 12px 22px 12px 22px;
+    margin: auto;
+}
+
+#search-form{
+	align-items: center;
+	position: relative;
+}
+
+.form-input-container{
+	margin-right: 8px;
+    display: inline-block;
+    height: 48px;
+    padding: 0;
+}
+
+#form-name{
+	position: relative;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.form-group{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#loginBtn, #registerBtn, #searchBtn, #verifyBtn{
+	font-weight: bold;
+	border: 2px solid #8A4040;
+
+}
+
+.well-searchbox {
+  padding: 19px;
+  background: #8A4040;
+  margin-bottom: 20px;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  min-height: 145px;
+  padding: 12px 22px 12px 22px;
+  align-items: center;
+}
+
+.well-searchbox label {
+    color: #fff;
+}
+
+#selectRol{
+	margin: 10px;
+}
+
+
+
