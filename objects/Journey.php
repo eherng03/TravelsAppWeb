@@ -3,7 +3,7 @@
 	class Journey{ 
 		//private $tripID;??	Hay que saber a que viaje pertenece de alguna manera para obteer el conductor
 		private $source;
-		private $destinations;
+		private $destination;
 		private $initDate;
 		private $seatsNumber;
 		private $passengers;
@@ -11,7 +11,7 @@
 
 		public function __construct($source, $destinations, $initDate, $seatsNumber, $cost){
 			$this->source = $source;
-			$this->destinations = $destinations;
+			$this->destinations = $destination;
 			$this->initDate = $initDate;
 			$this->seatsNumber = $seatsNumber;
 			$this->passengers = array();
