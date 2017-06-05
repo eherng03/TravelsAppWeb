@@ -13,5 +13,15 @@
 			}
 			return self::$instance;
 		}
+
+		function getJourneys(){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+			$query = $connection->query("SELECT * FROM journeys");
+
+		    return $query;
+
+		}
 	}
 ?>
