@@ -2,13 +2,48 @@
 @import url(http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css);
 
 body{
-	font-family: 'Roboto';
-	background-image: url('../../background.jpg');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center;
+	font-family: 'Roboto' !important;
+  background-image: url('../../background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+    padding: 0;
+    margin: 0;
 }
 
+
+
+main{
+	margin-top: 20px;
+	display: block;
+	
+}
+
+header {
+    font-size: 20px;
+    font-weight: bold;
+    height: 62px;
+    line-height: 62px;
+    margin: 0 auto;
+    max-width: 1360px;
+    padding: 0 32px;
+    position: relative;
+    z-index: 220;
+}
+
+.navbar-brand {
+  padding: 0px;
+}
+
+.navbar-brand>img {
+  height: 100%;
+  width: auto;
+}
+
+.create-content, .journeys-content, .scores-content{
+    padding: 12px 22px 12px 22px;
+    margin: auto;
+}
 
 .journeys-button, .score-button, .create-button{
   cursor: pointer;
@@ -25,28 +60,6 @@ body{
     min-width: 322px;
 }
 
-main{
-	margin-top: 20px;
-	display: block;
-	
-}
-
-header {
-    font-weight: bold;
-    height: 62px;
-    line-height: 62px;
-    margin: 0 auto;
-    max-width: 1360px;
-    padding: 0 32px;
-    position: relative;
-    z-index: 220;
-}
-
-.create-content, .journeys-content, .scores-content{
-    padding: 12px 22px 12px 22px;
-    margin: auto;
-}
-
 .well-content {
   padding: 19px;
   background: #8A4040;
@@ -58,12 +71,14 @@ header {
   align-items: center;
 }
 
-.well-searchbox label {
+.well-content label {
     color: #fff;
 }
 
-.section-title{
-  font-size: 30px;
+
+.create-title{
+  font-size: 20px;
+    font-weight: bold;
     margin: 5px;
     margin-top: 10px;
     text-align: center;
@@ -75,3 +90,27 @@ header {
   position: relative;
 }
 
+.form-input-container{
+  margin-right: 8px;
+    display: inline-block;
+    height: 48px;
+    padding: 0;
+}
+
+#form-name{
+  position: relative;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.form-group{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.form-control{
+    border-radius: 0px;
+    margin-bottom: 10px;
+}

@@ -24,7 +24,14 @@ body{
     min-width: 322px;
 }
 
+.navbar-brand {
+  padding: 0px;
+}
 
+.navbar-brand>img {
+  height: 100%;
+  width: auto;
+}
 
 main{
   margin-top: 20px;

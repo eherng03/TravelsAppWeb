@@ -2,17 +2,7 @@
 @import url(http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css);
 
 
-header {
-    font-size: 30px;
-    font-weight: bold;
-    height: 62px;
-    line-height: 62px;
-    margin: 0 auto;
-    max-width: 1360px;
-    padding: 0 32px;
-    position: relative;
-    z-index: 220;
-}
+
 
 body{
 	font-family: 'Roboto' !important;
@@ -30,10 +20,30 @@ main{
 	
 }
 
+header {
+    font-size: 20px;
+    font-weight: bold;
+    height: 62px;
+    line-height: 62px;
+    margin: 0 auto;
+    max-width: 1360px;
+    padding: 0 32px;
+    position: relative;
+    z-index: 220;
+}
+
 h1{
 	margin: 8px;
 }
 
+.navbar-brand {
+  padding: 0px;
+}
+
+.navbar-brand>img {
+  height: 100%;
+  width: auto;
+}
 
 .form-control{
     border-radius: 0px;
