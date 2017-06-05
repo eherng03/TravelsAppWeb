@@ -6,7 +6,9 @@
         <link rel="stylesheet" type="text/css" href="../resources/theme/css/chat.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script type='text/javascript' src='../logic/driverMainWindowLogic.js'></script>
-		
+
+        <script src="../logic/chatLogic.js"></script>
+		 <link rel="stylesheet" type="text/css" href="../resources/theme/css/chat.css">
 		
 		<script src='../resources/bootstrap/js/bootstrap.js'></script>
 		<!-- El js del chat en proceso-->
@@ -111,4 +113,28 @@
                 </div>
            
         </main>
+
+        <!--chat estructura-->
+<aside class="tabbed_sidebar ng-scope chat_sidebar popup-box-on" id="sidebar_secondary">
+  <div class="popup-head">
+    <div class="popup-head-left pull-left"><a design="" and="" developmenta="" target="_blank" id="Foto"></a></div>
+    <div class="popup-head-right pull-right">
+      <div class="btn-group gurdeepoushan">
+        <button class="chat-header-button" id="actualizarChat" type="button" alt="Actualizar" title="Actualizar"><i class="glyphicon glyphicon-refresh"></i></button>
+        <button class="chat-header-button pull-right" id="removeClass" data-widget="remove" type="button" alt="Cerrar" title="Cerrar chat"><i class="glyphicon glyphicon-remove"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="chat_box_wrapper chat_box_small chat_box_active" id="chat" style="opacity: 1; display: block; transform: translateX(0px);">
+    <div class="chat_box touchscroll chat_box_colors_a" id="mensajes"></div>
+  </div>
+  <div class="chat_submit_box">
+    <div class="uk-input-group">
+      <div class="gurdeep-chat-box">
+        <input class="md-input" id="submit_message" type="text" placeholder="Escriba un mensaje..." name="submit_message">
+      </div><a class="btn btn-success btn-sm" id="enviarMensaje"><span class="glyphicon gglyphicon-comment"></span> Enviar</a>
+    </div>
+  </div>
+</aside>
+
     </body>
