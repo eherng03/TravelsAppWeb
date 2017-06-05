@@ -7,15 +7,15 @@
 		private $initDate;
 		private $seatsNumber;
 		private $passengers;
-		private $cost;
+		private $price;
 
-		public function __construct($source, $destinations, $initDate, $seatsNumber, $cost){
+		public function __construct($source, $destination, $initDate, $seatsNumber, $price){
 			$this->source = $source;
 			$this->destinations = $destination;
 			$this->initDate = $initDate;
 			$this->seatsNumber = $seatsNumber;
 			$this->passengers = array();
-			$this->cost = $cost;
+			$this->price = $price;
 		}
 
 		//TODO here needed getters and setters
