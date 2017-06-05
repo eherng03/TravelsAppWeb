@@ -84,7 +84,7 @@
                                 <div id = "selectRol">
                                     <!--DRIVER AND PASSENGER RADIO BUTTONS--> 
                                     <label class="radio-inline">
-                                        <input type="radio" id = "driver-radio-button" name="optradio">Conductor
+                                        <input type="radio" id = "driver-radio-button" value = "driver" name="optradio">Conductor
                                     </label>
                                     <label class="radio-inline">
                                         <input type="radio" id = "passenger-radio-button" name="optradio" checked="checked">Pasajero
