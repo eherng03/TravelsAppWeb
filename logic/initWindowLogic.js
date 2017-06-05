@@ -3,6 +3,11 @@ $(document).ready(function($) {
 	$(".login-container").hide();
 	$(".register-container").hide();
 
+	$("#iconButton").click(function(){
+		$(".register-container").slideUp("fast");
+		$(".login-container").slideUp("fast");
+	});
+
 	$(".login-button").click(function(event) {
 		if ($(".login-container").is(":hidden")){
 			$(".login-container").slideDown("fast");
@@ -23,7 +28,7 @@ $(document).ready(function($) {
 
 	$("#verifyBtn").click(function(){
 		$.get("../operations/verificationNumber.php", function(data) {
-			$('#verifyText').val(JSON.parse(data));
+			$('#verifyText').val(data);
     	});
 	});
 

@@ -36,4 +36,9 @@ $(document).ready(function($) {
 	    todayHighlight: true
 	});
 
+	$("#iconButton").click(function(){
+		$(".register-container").slideUp("fast");
+		$(".login-container").slideUp("fast");
+	});
+
 });
