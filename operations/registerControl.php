@@ -15,6 +15,11 @@
 	$email = $_POST['emailRegister'];
 	$phone = $_POST['phoneRegister'];
 	
+	if($user == "admin"){
+		header("Location: ../graphic/initWindow.php?register=admin");
+		exit();
+	}
+	
 	//Image
 	$target_dir = "../resources/userImages/";
 	$target_file = $target_dir.basename($_FILES['userImage']['name']);
@@ -28,13 +33,26 @@
 	
 	if($query->execute()){ 
 		$query->close();
-		print_r("Registro completo. Redirigiendo a la pagina principal.");
-		sleep(2);
-		header("Location: ../graphic/initWindow.html");
+		
+		session_start();
+		
+		$_SESSION['username'] = $user;
+		$_SESSION['isLogged'] = true;
+		$_SESSION['userType'] = $userType;
+		
+		if($userType == 0){
+			$query = $conn->query("INSERT INTO passengers(username) VALUES ('$user') ");
+			header("Location: ../graphic/passengerMainWindow.php");
+			exit();
+		}
+		else{
+			$query = $conn->query("INSERT INTO drivers(username, score) VALUES ('$user', '0') ");
+			header("Location: ../graphic/driverMainWindow.php");
+			exit();
+		}
 	} else {
 		$query->close();
-		print_r("Error en el registro. Redirigiendo a la pagina principal.");
-		sleep(2);
-		header("Location: ../graphic/initWindow.html");
+		header("Location: ../graphic/initWindow.php?register=no");
+		exit();
 	}
 ?>
