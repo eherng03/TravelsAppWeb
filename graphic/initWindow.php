@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="../resources/theme/css/initWindowStyle.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script type='text/javascript' src='../logic/initWindowLogic.js'></script>
+        <script type='text/javascript' src='../logic/searchLogic.js'></script>
 
         <script src='../resources/bootstrap/js/bootstrap.js'></script>
         <script src='../resources/bootstrap/js/bootstrap-datepicker.js'></script>
@@ -145,12 +146,11 @@
                         <br>
                         <input class="btn" type="submit" value="Buscar" id = "searchBtn">
                     </form>
-                    <div id = searchResult>
-                    </div>
                 </div>
                 </div>
             </div>
-
+            <div id = searchResult>
+            </div>
         </main>
     
     </body>
