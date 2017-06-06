@@ -331,3 +331,8 @@ ul.dropdown-cart li .item-right{
 ul.dropdown-cart li .item-right button{
     margin-top:14px;
 }
+
+#userPhoto{
+    width: 100px;
+    height: 100px;
+}

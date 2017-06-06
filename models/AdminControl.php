@@ -45,6 +45,17 @@
 
 		}
 
+		function getComments($driverUsername){
+
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+			$query = $connection->query("SELECT comment, passUsername FROM drivercomments WHERE driverUsername = '$driverUsername' ");
+			 return $query;
+
+
+		}
+
 
 	}
 	

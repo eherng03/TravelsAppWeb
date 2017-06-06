@@ -1,13 +1,163 @@
-var userLog = 2; //User log
-var arrayDatosPersona=[];
+var userLog = "abanod";
+var participantesInfo = [];
+var logInfo = [];
 
+/** Document ready **/
 $(document).ready( function() {
-	getMessages();
+	$("#sidebar_secondary").hide(); //Ocultamos el chat
+	getLogInfo();
+	getTrayectos();
+
 });
 
+function getLogInfo(){
+	var formData = {
+			'userLog'    : userLog,
+		};
+
+		$.ajax({
+			type        : 'GET', 
+			url         : '../operations/getLogInfo.php', //archivo que procesa los datos 
+			data        : formData, 
+			dataType    : 'json', 
+			encode          : true
+		}).done(function(data) {
+			logInfo.push(data);
+		});
+
+}
+function getTrayectos(){
+	/** Get trayectos del la persona logueada  **/
+
+		//Informacion que se manda
+		var formData = {
+			'userLog'    : userLog,
+		};
+
+		$.ajax({
+			type        : 'GET', 
+			url         : '../operations/getJourneys.php', //archivo que procesa los datos 
+			data        : formData, 
+			dataType    : 'json', 
+			encode          : true
+		}).done(function(data) {
+		var journey = (data.journeyID); //obtenemos los datos 
+		getParticipantes(journey);
+		});
+		
+}
+
+/** Funcion que devuelve los participantes **/
+function getParticipantes(journey) {
+		//console.log(journey);
+
+	/** Get paticipantes de Journey a la que pertenece el usuario 
+	logueado  **/
+	var arrayPasajeros=[];
+	var formData = {
+			'journey'    : journey,
+			'userLog'    : userLog,
+		};
+
+		$.ajax({
+			type        : 'GET', 
+			url         : '../operations/getPassengers.php', //archivo que procesa los datos 
+			data        : formData, 
+			dataType    : 'json', 
+			encode          : true
+		}).done(function(data) {
+			var passengers = (data); //obtenemos los datos 
+			//console.log(passengers);
+			passengers.forEach((passengers) => {
+				arrayPasajeros.push(passengers.username);
+
+			});
+		
+
+
+		var formData = {
+			'journey'    : journey,
+		};
+
+		$.ajax({
+			type        : 'GET', 
+			url         : '../operations/getTrip.php', //archivo que procesa los datos 
+			data        : formData, 
+			dataType    : 'json', 
+			encode          : true
+		}).done(function(data) {
+			var tripID = (data.tripID); //obtenemos los datos 
+			var formData = {
+				'tripID'    : tripID,
+			};
+
+			$.ajax({
+				type        : 'GET', 
+				url         : '../operations/getDriver.php', //archivo que procesa los datos 
+				data        : formData, 
+				dataType    : 'json', 
+				encode          : true
+			}).done(function(data) {
+				arrayPasajeros.push(data.driverUsername);
+
+				var html1 = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-comment"></span> '+arrayPasajeros.length +' Chats<span class="caret"></span></a>';
+				$(html1).appendTo("#n_chats");
+				getParticipantesInfo(arrayPasajeros);
+
+			});
+
+		});
+
+
+		});
+}
+
+
+
+/** Funcion que devuelve la informacion participantes **/
+function getParticipantesInfo(arrayPasajeros){
+	for (var i=0; i<arrayPasajeros.length; i++) {
+
+		var username = arrayPasajeros[i];
+
+		var formData = {
+			'username'    : username,
+		};
+
+		$.ajax({
+			type        : 'GET', 
+			url         : '../operations/getPassengersInfo.php', //archivo que procesa los datos 
+			data        : formData, 
+			dataType    : 'json', 
+			encode          : true
+		}).done(function(data) {
+			
+			participantesInfo.push(data);
+	
+			
+
+			var username = data[0].username;
+			var name = data[0].name;
+			var dni = data[0].dni;
+			var email = data[0].email;
+			var phone = data[0].phone;
+			var photo = data[0].photo;
+
+		//Codigo html que se crea de manera dinamica
+		var html2 = '<li><span class="item"><span class="item-left"><img id="userPhoto" src="../resources/userImages/'+photo+'" alt=""/><span class="item-info"><span id="nombreUserChat">'+name+'</span><span>'+phone+'</span></span></span><span class="item-right"><button name="'+username+'" id="abrirChat" class="btn btn-xs btn-danger pull-right"><span class="glyphicon glyphicon-pencil"></span></button></span></span></li>';
+		$(html2).appendTo("#chats");
+
+		});
+
+
+	}
+}
+
+
+
+/**  **/
 //Funcion para abir el chat y cargar la informacion
 $(document).on ("click", "#abrirChat", function () {
-
 
 	$("#Foto").empty();
 	$("#mensajes").empty(); //mostramos el chat
@@ -16,7 +166,26 @@ $(document).on ("click", "#abrirChat", function () {
 	var user2;
 	
 	user2 = $(this).attr("name"); //Cogemos el nombre de la persona que click
+	var con = 0;
+	for (var j=0; j<participantesInfo.length; j++){
+	  	var asas = participantesInfo[j][0].username;
+		if(participantesInfo[j][0].username == user2){
+			if(con==0){
+				con++;
+				var username = participantesInfo[j][0].username;
+				var name = participantesInfo[j][0].name;
+				var photo = participantesInfo[j][0].photo;
 
+				var html1 = '<img class="md-user-image" src="../resources/userImages/'+photo+'">';
+				$(html1).appendTo("#Foto");
+				var html2 = '<h1 id="idUser2" name="'+username+'">Chat - '+name+'</h1>';
+				$(html2).appendTo("#Foto");
+				var html3 = '<small><br><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></small>';
+				$(html3).appendTo("#Foto");
+					
+			}
+		}
+	}
 
 	var formData = {
 		'user1'    :userLog,
@@ -25,61 +194,41 @@ $(document).on ("click", "#abrirChat", function () {
 
 	$.ajax({
 	type        : 'GET', 
-	url         : '../operations/getChatMessages.php', //archivo que procesa los datos 
+	url         : '../operations/getMessages.php', //archivo que procesa los datos 
 	data        : formData, 
 	dataType    : 'json', 
         encode          : true
 	}).done(function(data) {
-		var msg = (data); //obtenemos los datos 
-		console.log(msg);
-		msg.forEach((msg) => {
-			msgs.push(msg); //Para cada objeto recibido lo guardamos en un array
+		data.forEach((data) => {
+			msgs.push(data); //Para cada objeto recibido lo guardamos en un array
 
 		});
 
-	
-    var con = 0;
+
+   
   	for (var i=0; i<msgs.length; i++){
   		var user1 = msgs[i].user1;
-  		var user2 = msgs[i].user2;
+  		var newuser2 = msgs[i].user2;
   		var hour = msgs[i].hour;
   		var msg = msgs[i].msg;
   		
-  		for (var j=0; j<arrayDatosPersona.length; j++){
-	  		
-			if(arrayDatosPersona[j].user == user2){
-				if(con==0){
-					con++;
-					var username = arrayDatosPersona[j].user;
-					var name = arrayDatosPersona[j].name;
-					var photo = arrayDatosPersona[j].photo;
-
-					var html1 = '<img class="md-user-image" src="'+photo+'">';
-					$(html1).appendTo("#Foto");
-					var html2 = '<h1 id="idUser2" name="'+username+'">Chat - '+name+'</h1>';
-					$(html2).appendTo("#Foto");
-					var html3 = '<small><br><span class="glyphicon glyphicon-globe" aria-hidden="true"></span></small>';
-					$(html3).appendTo("#Foto");
-					
-				}
-			}
-
-		}
 
   		if(user1 == userLog){
-  			var html3 = ' <div class="chat_message_wrapper chat_message_right"><div class="chat_user_avatar"><a href="" target="_blank"><img alt="'+photo+'" title="" src="'+photo+'" class="md-user-image"/></a></div><ul class="chat_message"><li><p>'+msg+'<span class="chat_message_time">'+hour+'</span></p> </li></ul></div> ';
+  			var photoLog = logInfo[0].photo;
+  			var html3 = ' <div class="chat_message_wrapper chat_message_right"><div class="chat_user_avatar"><a href="" target="_blank"><img alt="" title="" src="../resources/userImages/'+photoLog+'" class="md-user-image"/></a></div><ul class="chat_message"><li><p>'+msg+'<span class="chat_message_time">'+hour+'</span></p> </li></ul></div> ';
   			$(html3).appendTo("#mensajes");
   		}else{
-  			var html3 = '<div class="chat_message_wrapper"><div class="chat_user_avatar"><a href="" target="_blank"><img alt="'+photo+'" title="" src="" class="md-user-image"/></a></div><ul class="chat_message"><li><p>'+msg+'<span class="chat_message_time">'+hour+'</span></p></li></ul></div>';
+  			var html3 = '<div class="chat_message_wrapper"><div class="chat_user_avatar"><a href="" target="_blank"><img alt="" title="" src="../resources/userImages/'+photo+'" class="md-user-image"/></a></div><ul class="chat_message"><li><p>'+msg+'<span class="chat_message_time">'+hour+'</span></p></li></ul></div>';
   			$(html3).appendTo("#mensajes");
   		}
 
   	}
 
-	$("#sidebar_secondary").show() //mostramos el chat
-
 	});
 
+	$("#sidebar_secondary").show() //mostramos el chat
+
+});
 
 //Funcion para enviar la informacion
 $(document).on ("click", "#enviarMensaje", function () {
@@ -108,91 +257,9 @@ $(document).on ("click", "#enviarMensaje", function () {
                         encode          : true
         }).always(function() {
         	$("#submit_message").val('');
-            var html3 = ' <div class="chat_message_wrapper chat_message_right"><div class="chat_user_avatar"><a href="" target="_blank"><img alt="photo" title="" src="photo" class="md-user-image"/></a></div><ul class="chat_message"><li><p>'+msg+'<span class="chat_message_time">'+hour+'</span></p> </li></ul></div> ';
+        	var photoLog = logInfo[0].photo;
+            var html3 = ' <div class="chat_message_wrapper chat_message_right"><div class="chat_user_avatar"><a href="" target="_blank"><img alt="photo" title="" src="../resources/userImages/'+photoLog+'" class="md-user-image"/></a></div><ul class="chat_message"><li><p>'+msg+'<span class="chat_message_time">'+hour+'</span></p> </li></ul></div> ';
   			$(html3).appendTo("#mensajes");
             });
 });
 
-});
-
-//Funcion para actualizar el chat
-$(document).on ("click", "#actualizarChat", function () {
-	 getMessages();
-});
-
-$(document).on ("click", "#removeClass", function () {
-	 getMessages();
-});
-
-
-function getMessages() {
-	$("#sidebar_secondary").hide(); //Ocultamos el chat
-	/**
-	** Numero de chats del usuario logeado
-	**/
-
-	//Informacion que se manda
-	var formData = {
-		'userLog'    : userLog,
-	};
-
-	var userLog_chats=[];
-	$.ajax({
-		type        : 'GET', 
-		url         : '../operations/getNChats.php', //archivo que procesa los datos 
-		data        : formData, 
-		dataType    : 'json', 
-	        encode          : true
-	}).done(function(data) {
-		console.log(data);
-		var users = (data); //obtenemos los datos 
-		
-		users.forEach((users) => { //Para cada objeto recibido lo guardamos en un array
-			userLog_chats.push(users); 
-		});
-
-		//Codigo html que se crea de manera dinamica
-		var html1 = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-comment"></span> '+userLog_chats.length +' Chats<span class="caret"></span></a>';
-		$(html1).appendTo("#n_chats");
-	
-
-		/**
-		**Datos de la gente con la que el user_log mantiene chats
-		**/  
-		var users=[]
-		for (var i=0; i<userLog_chats.length; i++) {
-
-			//Informacion que se manda
-			var formData = {
-				'user2'    : userLog_chats[i].user2,
-			};
-
-			$.ajax({
-			type        : 'GET', 
-			url         : '../operations/getChatUsers.php', //archivo que procesa los datos 
-			data        : formData, 
-			dataType    : 'json', 
-		        encode          : true
-			}).done(function(data) {
-				var user_info = (data); //obtenemos los datos 
-				console.log(user_info);
-				user_info.forEach((user_info) => {
-
-					users.push(user_info); //Para cada objeto recibido lo guardamos en un array
-					arrayDatosPersona = users.slice(); //Copiamos el array
-
-					var username = user_info.user;
-					var name = user_info.name;
-					var phone = user_info.telephone;
-					var photo = user_info.photo;
-
-					//Codigo html que se crea de manera dinamica
-					var html2 = '<li><span class="item"><span class="item-left"><img src="" alt=""/><span class="item-info"><span id="nombreUserChat">'+name+'</span><span>'+phone+'</span></span></span><span class="item-right"><button name="'+username+'" id="abrirChat" class="btn btn-xs btn-danger pull-right"><span class="glyphicon glyphicon-pencil"></span></button></span></span></li>';
-					$(html2).appendTo("#chats");
-				});
-
-			});
-		}
-	});
-    
-}

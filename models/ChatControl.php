@@ -15,49 +15,84 @@
 			return self::$instance;
 		}
 
-		function getNChats($userLog){
 
-			$dbManager = DBManager::getInstance();
-			$connection = $dbManager->getConnection();
+	function getJourneys($userLog){
 
-			$query = $connection->query("SELECT DISTINCT user1,user2,hour,msg FROM Chats WHERE user1 = '$userLog' group by user2");
+		$dbManager = DBManager::getInstance();
+		$connection = $dbManager->getConnection();
 
-			
-			return $query;
+		$query = $connection->query("SELECT journeyID FROM journeypassengers WHERE username = '$userLog'");
+		return $query;
+	}
 
-		}
+	function getPassengers($journey,$userLog){
 
-		function getUser($user2){
+		$dbManager = DBManager::getInstance();
+		$connection = $dbManager->getConnection();
 
-			$dbManager = DBManager::getInstance();
-			$connection = $dbManager->getConnection();
+		$query = $connection->query("SELECT username FROM journeypassengers WHERE journeyID = '$journey' AND NOT username = '$userLog'");
+		return $query;
+	}
 
-			$query = $connection->query("SELECT username,email,name,phone,dni,photo FROM Users WHERE username = '$user2'");
-			return $query;
-		}
+	function getPassengersInfo($username){
 
-		function getChatMessages($user1,$user2){
+		$dbManager = DBManager::getInstance();
+		$connection = $dbManager->getConnection();
 
-			$dbManager = DBManager::getInstance();
-			$connection = $dbManager->getConnection();
+		$query = $connection->query("SELECT username, name, dni, email, phone, photo FROM users WHERE username = '$username'");
+		return $query;
+	}
 
 
-			$query = $connection->query("SELECT user1,user2,hour,msg FROM Chats WHERE user1 = '$user1' AND user2 ='$user2' OR  user1 = '$user2' AND user2 ='$user1'");
+	function getTrip($journey){
+		$dbManager = DBManager::getInstance();
+		$connection = $dbManager->getConnection();
 
-			return $query;
-		}
-
-		function setChatMessages($user1,$user2,$hour,$msg){
-
-			$dbManager = DBManager::getInstance();
-			$connection = $dbManager->getConnection();
-
-			$query = $connection->query("INSERT INTO Chats (user1, user2, hour, msg)
-	        	 VALUES ('$user1','$user2', '$hour', '$msg')");
-		   return $query;
-		}
+		$query = $connection->query("SELECT tripID FROM journeys WHERE journeyID = '$journey'");
+		return $query;
 
 	}
+
+	function getDriver($trip){
+		$dbManager = DBManager::getInstance();
+		$connection = $dbManager->getConnection();
+
+		$query = $connection->query("SELECT driverUsername FROM trips WHERE tripID = '$trip'");
+		return $query;
+
+	}
+
+	function getMessages($user1,$user2){
+
+		$dbManager = DBManager::getInstance();
+		$connection = $dbManager->getConnection();
+
+		$query = $connection->query("SELECT user1,user2,hour,msg FROM chats WHERE user1 = '$user1' AND user2 ='$user2' OR  user1 = '$user2' AND user2 ='$user1'");
+
+		return $query;
+	}
+
+	function getLogInfo($userLog){
+
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+		$query = $connection->query("SELECT username, name, dni, email, phone, photo FROM users WHERE username = '$userLog'");
+		return $query;
+		}
+
+	function setMessage($user1,$user2,$hour,$msg){
+
+		$dbManager = DBManager::getInstance();
+		$connection = $dbManager->getConnection();
+
+		$query = $connection->query("INSERT INTO Chats (user1, user2, hour, msg)
+        	 VALUES ('$user1','$user2', '$hour', '$msg')");
+	   return $query;
+	}
+
+
+}
 	
 
 

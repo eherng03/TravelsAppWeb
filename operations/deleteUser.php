@@ -1,12 +1,11 @@
 <?php
-    include '../models/adminMainWindowControl.php';
-    include '../objects/Driver.php';
+    include '../models/adminControl.php';
 
-    $user = $_REQUEST['user'];
+    $username = $_REQUEST['username'];
     //acceso a la BBDD
-    $adminMainWindowControl = AdminMainWimdowControl::getInstance();
-    $result = $adminMainWindowControl -> getDriver($user1,$user2);
-
+    $adminControl = AdminControl::getInstance();
+    $result = $adminControl -> deleteUser($username);
+    $driver = array();
 ?>
 
 
