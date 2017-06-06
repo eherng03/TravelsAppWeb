@@ -1,11 +1,7 @@
 <?php
 	include "../dataBase/DBManager.php";
-
-
 	class AdminControl{
-
 		private static $instance;
-
 		private function __construct(){}
 		
 		public static function getInstance(){
@@ -14,51 +10,33 @@
 			}
 			return self::$instance;
 		}
-
+		
 		function getDriver(){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-
 			$query = $connection->query("SELECT username,name,dni,email,phone,photo FROM Users WHERE rol = '1' ");
-
 		    return $query;
-
 		}
 
 		function getPassenger(){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-
 			$query = $connection->query("SELECT username,name,dni,email,phone,photo FROM Users WHERE rol = '0' ");
-
 		    return $query;
-
 		}
 
 		function deleteUser($username){
-
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-
 			$query = $connection->query("DELETE FROM Users  WHERE username = '$username' ");
-
-
 		}
 
 		function getComments($driverUsername){
-
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-
 			$query = $connection->query("SELECT comment, passUsername FROM drivercomments WHERE driverUsername = '$driverUsername' ");
 			 return $query;
-
-
 		}
-
-
 	}
 	
-
-
 ?>

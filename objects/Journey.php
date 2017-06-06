@@ -27,6 +27,8 @@
 			$this->cost = $cost;
 		}
 
+		
+
 
 	}
 ?>

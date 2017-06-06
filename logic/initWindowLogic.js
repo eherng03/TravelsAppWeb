@@ -41,12 +41,6 @@ $(document).ready(function($) {
 	    todayHighlight: true
 	});
 
-	/*$.ajax({
-	    type: 'POST',
-	    url: 'templateJourney.php',
-	    data: {'trip': trip, 'driver': driver},
-	    success: function(data){
-	    	data.appendTo('#searchResult')
-	    }
-	}*/
+	
+
 });

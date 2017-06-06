@@ -262,4 +262,3 @@ $(document).on ("click", "#enviarMensaje", function () {
   			$(html3).appendTo("#mensajes");
             });
 });
-

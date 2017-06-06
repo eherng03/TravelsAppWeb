@@ -143,14 +143,14 @@
                             <input type="text" class="form-control">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                         </div>
+                        <!-- TODO AQUI VA LA FECHA -->
                         <br>
                         <input class="btn" type="submit" value="Buscar" id = "searchBtn">
                     </form>
                 </div>
                 </div>
             </div>
-            <div id = searchResult>
-            </div>
+
         </main>
     
     </body>

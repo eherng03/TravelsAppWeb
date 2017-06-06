@@ -3,6 +3,7 @@
 
 
 	class TripControl{
+
 		private static $instance;
 
 		private function __construct(){}
