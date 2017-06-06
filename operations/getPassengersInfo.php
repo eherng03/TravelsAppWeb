@@ -1,13 +1,13 @@
 <?php
-    include '../models/ChatControl.php';
+    include '../models/UserControl.php';
 
 
     $username = $_REQUEST['username'];
 
 
     //acceso a la BBDD
-    $chatControl = ChatControl::getInstance();
-    $result = $chatControl -> getPassengersInfo($username);
+    $userControl = UserControl::getInstance();
+    $result = $userControl -> getPassengersInfo($username);
 
     $userInfo = array();
 

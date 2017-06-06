@@ -1,12 +1,12 @@
 <?php
-    include '../models/ChatControl.php';
+    include '../models/DriverControl.php';
 
 
     $tripID = $_REQUEST['tripID'];
 
     //acceso a la BBDD
-    $chatControl = ChatControl::getInstance();
-    $result = $chatControl -> getDriver($tripID);
+    $driverControl = DriverControl::getInstance();
+    $result = $driverControl -> getDriverByID($tripID);
 
     $driver = array();
 

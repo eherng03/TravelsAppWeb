@@ -3,10 +3,10 @@
 		private static $instance;
 		private $connection;
 		
-		private $host = 'sql11.freemysqlhosting.net';
-		private $user = 'sql11176712';
-		private $pass = 'xKr66u4JUh';
-		private $db = 'sql11176712';
+		private $host = 'localhost';
+		private $user = 'root';
+		private $pass = '';
+		private $db = 'appweb';
 		private $conn = null;
 		
 		private function __construct(){

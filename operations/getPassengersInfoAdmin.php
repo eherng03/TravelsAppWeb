@@ -1,12 +1,12 @@
 <?php
-    include '../models/AdminControl.php';
+    include '../models/UserControl.php';
 
 
 
 
     //acceso a la BBDD
-    $adminControl = AdminControl::getInstance();
-    $result = $adminControl -> getPassenger();
+    $userControl = UserControl::getInstance();
+    $result = $userControl -> getUsersPassenger();
     $passenger = array();
 
     //guardados todos los datos como object destino

@@ -1,12 +1,12 @@
 <?php
-    include '../models/ChatControl.php';
+    include '../models/UserControl.php';
 
 
     $userLog = $_REQUEST['userLog'];
 
     //acceso a la BBDD
-    $chatControl = ChatControl::getInstance();
-    $result = $chatControl -> getLogInfo($userLog);
+    $userControl = UserControl::getInstance();
+    $result = $userControl -> getLogInfo($userLog);
 
     $logInfo = array();
 

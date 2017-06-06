@@ -20,5 +20,7 @@
 			$query = $connection->query("SELECT driverUsername FROM trips WHERE tripID = '$trip'");
 			return $query;
 		}
+
+		
 	}
 ?>

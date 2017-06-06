@@ -1,11 +1,11 @@
 <?php
-    include '../models/adminControl.php';
+    include '../models/CommentControl.php';
 
     $driverUsername = $_REQUEST['driverUsername'];
 
     //acceso a la BBDD
-    $adminControl = AdminControl::getInstance();
-    $result = $adminControl -> getComments($driverUsername);
+    $commentControl = CommentControl::getInstance();
+    $result = $commentControl -> getCommentsByUsername($driverUsername);
 
 
     $comments = array();

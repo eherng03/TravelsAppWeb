@@ -1,13 +1,13 @@
 <?php
-    include '../models/ChatControl.php';
+    include '../models/JourneyPassengersControl.php';
 
 
     $journey = $_REQUEST['journey'];
     $userLog = $_REQUEST['userLog'];
 
     //acceso a la BBDD
-    $chatControl = ChatControl::getInstance();
-    $result = $chatControl -> getPassengers($journey,$userLog);
+    $journeyPassengersControl = JourneyPassengersControl::getInstance();
+    $result = $journeyPassengersControl -> getPassengers($journey,$userLog);
 
     $passengers = array();
 
