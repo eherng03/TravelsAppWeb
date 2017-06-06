@@ -2,7 +2,7 @@
 	include "../dataBase/DBManager.php";
 
 
-	class DriverControl{
+	class JourneyPassengersControl{
 		private static $instance;
 
 		private function __construct(){}
@@ -13,11 +13,10 @@
 			}
 			return self::$instance;
 		}
-
-		function getDriverByID($trip){
+		function getPassengers($journey,$userLog){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-			$query = $connection->query("SELECT driverUsername FROM trips WHERE tripID = '$trip'");
+			$query = $connection->query("SELECT username FROM journeypassengers WHERE journeyID = '$journey' AND NOT username = '$userLog'");
 			return $query;
 		}
 	}

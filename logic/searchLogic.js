@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	//Rellena el select de origenes
 	$.get("../operations/selectJourneySearch.php", function(data) {
-        var comboBox = document.getElementById("Origin");
+        var comboBox = document.getElementById("origin");
         var journeys = JSON.parse(data);
 
         journeys.forEach((journey) =>{
@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     //Rellena el select de destinos
 	$.get("../operations/selectJourneySearch.php", function(data) {
-        var comboBox = document.getElementById("Destiny");
+        var comboBox = document.getElementById("destination");
         var journeys = JSON.parse(data);
 
         journeys.forEach((journey) =>{

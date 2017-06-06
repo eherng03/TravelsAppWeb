@@ -93,8 +93,7 @@
                                     <br>
                                 </div>
                                 <div class="form-group">
-                                     <input class="form-control" type="text" placeholder="Nombre" name="nameRegister" id="nameRegister" required/>
-                                </div>
+4                                </div>
                                 <div class="form-group">
                                     <input class="form-control" type="text" placeholder="Username" name="usernameRegister" id="usernameRegister" required/>
                                 </div>
@@ -130,12 +129,12 @@
                     <form class="form-horizontal" role="form">
 
                             <label>Origen</label>
-                            <select class="form-control" id="Origin">
+                            <select class="form-control" id="origin">
                                 <option value="">Todos</option>
                             </select>
                      
                             <label>Destino</label>
-                            <select class="form-control" id="Destiny">
+                            <select class="form-control" id="destination">
                                 <option value="">Todos</option>
                             </select>
 
@@ -143,10 +142,12 @@
                             <input type="text" class="form-control">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                         </div>
-                        <!-- TODO AQUI VA LA FECHA -->
+
                         <br>
                         <input class="btn" type="submit" value="Buscar" id = "searchBtn">
                     </form>
+                    <div id = searchResult>
+                    </div>
                 </div>
                 </div>
             </div>
