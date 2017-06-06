@@ -2,8 +2,9 @@
 //TRAYECTO
 	class Journey{ 
 		private $tripID;		//??	Hay que saber a que viaje pertenece de alguna manera para obteer el conductor
-		private $source;
-		private $destination;
+		private $journeyID;
+		public $origin;
+		public $destination;
 		private $departureHour;
 		private $departureDate;
 		private $arrivaleHour;
@@ -12,21 +13,20 @@
 		private $passengers;
 		private $cost;
 
-		public function __construct($departureHour, $departureDate, $arrivaleHour, $arrivalDate, $source, $destination, $seatsNumber, $cost){
-			$this->source = $source;
+		public function __construct($tripID, $journeyID, $departureHour, $departureDate, $arrivaleHour, $arrivalDate, $origin, $destination, $seatsNumber, $cost){
+			$this->tripID = $tripID;
+			$this->journeyID = $journeyID;
+			$this->origin = $origin;
 			$this->destination = $destination;
-			$this->departureHour;
-			$this->departureDate;
-			$this->arrivaleHour;
-			$this->arrivalDate;
+			$this->departureHour = $departureHour;
+			$this->departureDate = $departureHour;
+			$this->arrivaleHour = $departureHour;
+			$this->arrivalDate = $departureHour;
 			$this->seatsNumber = $seatsNumber;
 			$this->passengers = array();
 			$this->cost = $cost;
 		}
 
-		//TODO here needed getters and setters
-
-		//TODO addPassenger and check the number of free sits
 
 	}
 ?>
