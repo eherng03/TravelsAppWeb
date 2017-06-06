@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2017 a las 22:23:35
+-- Tiempo de generación: 06-06-2017 a las 12:22:31
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -33,6 +33,14 @@ CREATE TABLE `chats` (
   `msg` varchar(200) CHARACTER SET utf8 NOT NULL COMMENT '200 char max'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `chats`
+--
+
+INSERT INTO `chats` (`user1`, `user2`, `hour`, `msg`) VALUES
+('abanod', 'EvaHergar', '11', 'cusca'),
+('EvaHergar', 'abanod', '10', 'carapene');
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +66,14 @@ CREATE TABLE `drivers` (
   `score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `drivers`
+--
+
+INSERT INTO `drivers` (`username`, `score`) VALUES
+('abanod', 0),
+('asdfghj', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -78,12 +94,23 @@ CREATE TABLE `journeypassengers` (
 CREATE TABLE `journeys` (
   `tripID` int(11) NOT NULL COMMENT 'foreign key',
   `journeyID` int(11) NOT NULL,
-  `hour` varchar(5) CHARACTER SET utf8 NOT NULL COMMENT 'format: "##:##"',
+  `departureHour` varchar(5) CHARACTER SET utf8 NOT NULL COMMENT 'format: "##:##"',
+  `departureDate` varchar(11) NOT NULL,
+  `arrivalHour` varchar(5) CHARACTER SET utf8 NOT NULL,
+  `arrivalDate` varchar(11) NOT NULL,
   `cost` int(11) NOT NULL,
   `nSeats` int(11) NOT NULL,
   `origin` varchar(40) CHARACTER SET utf8 NOT NULL,
   `destination` varchar(40) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `journeys`
+--
+
+INSERT INTO `journeys` (`tripID`, `journeyID`, `departureHour`, `departureDate`, `arrivalHour`, `arrivalDate`, `cost`, `nSeats`, `origin`, `destination`) VALUES
+(1, 1, '10', '06/06/2017', '12', '06/06/2017', 20, 3, 'Leon', 'Valladolid'),
+(1, 2, '12', '06/062017', '14', '06/06/2017', 20, 3, 'Valladolid', 'Madrid');
 
 -- --------------------------------------------------------
 
@@ -94,6 +121,13 @@ CREATE TABLE `journeys` (
 CREATE TABLE `passengers` (
   `username` varchar(30) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `passengers`
+--
+
+INSERT INTO `passengers` (`username`) VALUES
+('wertyuj');
 
 -- --------------------------------------------------------
 
@@ -108,6 +142,13 @@ CREATE TABLE `trips` (
   `destination` varchar(40) CHARACTER SET utf8 NOT NULL,
   `cancelled` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `trips`
+--
+
+INSERT INTO `trips` (`tripID`, `driverUsername`, `origin`, `destination`, `cancelled`) VALUES
+(1, 'abanod', 'Leon', 'Madrid', 0);
 
 -- --------------------------------------------------------
 
@@ -133,8 +174,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`username`, `pass`, `name`, `dni`, `email`, `phone`, `photo`, `rol`) VALUES
 ('1', '1', '1', '1', '1', '1', '1.jpg', 0),
 ('abanod', 'caca', 'alberto', '123698547', 'caca@hotmail.es', '123456789', 'abanod.png', 1),
+('asdfghj', 'asdfgh', 'dfghjk', 'asdfgh', 'asdfg', 'asdfgh', 'asdfghj.png', 1),
 ('EvaHergar', 'olakase', 'Eva', '74175369U', 'evahergar@gmail.com', '123456789', 'EvaHergar.png', 0),
-('pepepepe', 'jamon', 'pepe', '123456789', 'jshsfdjh', '123456789', 'pepepepe.png', 0);
+('pepepepe', 'jamon', 'pepe', '123456789', 'jshsfdjh', '123456789', 'pepepepe.png', 0),
+('wertyuj', 'ertyujk', 'sdfghj', 'ertyui', 'ertyui', 'dfghjklÃ±', 'wertyuj.png', 0);
 
 --
 -- Índices para tablas volcadas
@@ -144,7 +187,8 @@ INSERT INTO `users` (`username`, `pass`, `name`, `dni`, `email`, `phone`, `photo
 -- Indices de la tabla `chats`
 --
 ALTER TABLE `chats`
-  ADD PRIMARY KEY (`user1`,`user2`,`hour`);
+  ADD PRIMARY KEY (`user1`,`user2`,`hour`),
+  ADD KEY `user2` (`user2`);
 
 --
 -- Indices de la tabla `drivercomments`
@@ -166,7 +210,7 @@ ALTER TABLE `drivers`
 -- Indices de la tabla `journeypassengers`
 --
 ALTER TABLE `journeypassengers`
-  ADD PRIMARY KEY (`journeyID`),
+  ADD PRIMARY KEY (`journeyID`,`username`),
   ADD KEY `journeyID` (`journeyID`),
   ADD KEY `username` (`username`);
 
@@ -207,7 +251,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `tripID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tripID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Restricciones para tablas volcadas
 --
@@ -216,7 +260,8 @@ ALTER TABLE `trips`
 -- Filtros para la tabla `chats`
 --
 ALTER TABLE `chats`
-  ADD CONSTRAINT `chats_ibfk_1` FOREIGN KEY (`user1`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `chats_ibfk_1` FOREIGN KEY (`user1`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `chats_ibfk_2` FOREIGN KEY (`user2`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `drivercomments`
@@ -235,14 +280,14 @@ ALTER TABLE `drivers`
 -- Filtros para la tabla `journeypassengers`
 --
 ALTER TABLE `journeypassengers`
-  ADD CONSTRAINT `journeypassengers_ibfk_1` FOREIGN KEY (`username`) REFERENCES `passengers` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `journeypassengers_ibfk_1` FOREIGN KEY (`username`) REFERENCES `passengers` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `journeypassengers_ibfk_2` FOREIGN KEY (`journeyID`) REFERENCES `journeys` (`journeyID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `journeys`
 --
 ALTER TABLE `journeys`
-  ADD CONSTRAINT `journeys_ibfk_1` FOREIGN KEY (`tripID`) REFERENCES `trips` (`tripID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `journeys_ibfk_2` FOREIGN KEY (`journeyID`) REFERENCES `journeypassengers` (`journeyID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `journeys_ibfk_1` FOREIGN KEY (`tripID`) REFERENCES `trips` (`tripID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `passengers`
