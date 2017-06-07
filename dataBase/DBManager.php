@@ -6,7 +6,7 @@
 		private $host = 'localhost';
 		private $user = 'root';
 		private $pass = '';
-		private $db = 'appweb';
+		private $db = 'travelsdb';
 		private $conn = null;
 		
 		private function __construct(){
