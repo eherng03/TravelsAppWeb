@@ -93,7 +93,8 @@
                                     <br>
                                 </div>
                                 <div class="form-group">
-4                                </div>
+                                     <input class="form-control" type="text" placeholder="Nombre" name="nameRegister" id="nameRegister" required/>
+                                </div>
                                 <div class="form-group">
                                     <input class="form-control" type="text" placeholder="Username" name="usernameRegister" id="usernameRegister" required/>
                                 </div>
@@ -142,12 +143,10 @@
                             <input type="text" class="form-control">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                         </div>
-
+                        <!-- TODO AQUI VA LA FECHA -->
                         <br>
                         <input class="btn" type="submit" value="Buscar" id = "searchBtn">
                     </form>
-                    <div id = searchResult>
-                    </div>
                 </div>
                 </div>
             </div>
