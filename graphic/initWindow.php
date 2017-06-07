@@ -44,19 +44,18 @@
         </header>
 
         <main>
-           <!--TODOEVAPLS-->
-            <?php if(isset($_GET['register']) && $_GET['register'] === "no"){?>
-                alert(USUARIO REPETIDO);
+           <?php if(isset($_GET['register']) && $_GET['register'] === "no"){?>
+                <script>alert("USUARIO REPETIDO");</script>
             <?php }?>
           
             <?php if(isset($_GET['register']) && $_GET['register'] === "admin"){?>
-                <sript>
-                    alert(NO PUEDES REGISTRARTE COMO ADMINISTRADOR);
-                </sript>
+                <script>
+                    alert("NO PUEDES REGISTRARTE COMO ADMINISTRADOR");
+                </script>
             <?php } ?>
           
             <?php if(isset($_GET['login']) && $_GET['login'] === "error"){?>
-                alert(USUARIO Y/O CONTRASEÑA ERRONEOS);
+                <script>alert("USUARIO Y/O CONTRASEÑA ERRONEOS");</script>
             <?php } ?>
 
                 <!--LOGIN-->
