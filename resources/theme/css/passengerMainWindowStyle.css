@@ -1,12 +1,38 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:100);
-@import url(http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css);
+@import url('https://fonts.googleapis.com/css?family=ABeeZee');
+
 
 body{
-  font-family: 'Roboto';
+  font-family: 'ABeeZee', sans-serif;
   background-image: url('../../background.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
+  padding: 0;
+  margin: 0;
+}
+
+main{
+  font-family: 'ABeeZee', sans-serif;
+  margin-top: 20px;
+  display: block;
+  
+}
+
+header {
+    font-family: 'ABeeZee', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    height: 62px;
+    line-height: 62px;
+    margin: 0 auto;
+    max-width: 1360px;
+    padding: 0 32px;
+    position: relative;
+    z-index: 220;
+}
+
+h1{
+  margin: 8px;
 }
 
 .journeys-button, .search-button{
@@ -14,7 +40,7 @@ body{
 }
 
 .journeys-container, .search-container{
-  background: #AED9F4;
+    background: #AED9F4;
     border-radius: 15px;
     margin: 10px auto;
     margin-top: 20px;
@@ -33,22 +59,7 @@ body{
   width: auto;
 }
 
-main{
-  margin-top: 20px;
-  display: block;
-}
 
-header {
-    font-size: 30px;
-    font-weight: bold;
-    height: 62px;
-    line-height: 62px;
-    margin: 0 auto;
-    max-width: 1360px;
-    padding: 0 32px;
-    position: relative;
-    z-index: 220;
-}
 
 .journeys-container, .search-container{
     background: #AED9F4;
@@ -76,6 +87,16 @@ header {
     margin: 0 auto;
 }
 
+.form-group{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.form-control{
+    border-radius: 0px;
+    margin-bottom: 10px;
+}
 
 
 
