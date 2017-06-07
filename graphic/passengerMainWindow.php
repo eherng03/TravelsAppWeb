@@ -72,12 +72,12 @@
                     <form class="form-horizontal" role="form">
 
                             <label>Origen</label>
-                            <select class="form-control" id="Origin">
+                            <select class="form-control" id="origin">
                                 <option value="">Todos</option>
                             </select>
                      
                             <label>Destino</label>
-                            <select class="form-control" id="Destiny">
+                            <select class="form-control" id="destination">
                                 <option value="">Todos</option>
                             </select>
 
