@@ -1,12 +1,14 @@
 <?php
 	include "../models/JourneyControl.php";
 	include "../models/TripControl.php";
-	include "../models/DriverControl.php";
+	include "../models/UserControl.php";
     include "../objects/Journey.php";
     include "../objects/Trip.php";
+    include "../objects/Driver.php";
+    include "../templates/TemplateJourney.php";
     
-    $origin = $_REQUEST['origin'];
-   	$destination = $_REQUEST['destination'];
+    $origin = $_POST['origin'];
+   	$destination = $_POST['destination'];
 
     //acceso a la BBDD
     $journeyControl = JourneyControl::getInstance();
@@ -26,17 +28,33 @@
 			
 			$journeysWithTripID = $journeyControl->getJourneysByTrip($tripID);
 			//Saco el conductor de ese viaje
-			$driverUsername = $journeyControl->getDriverUsername($tripID);
-			$trip = new Trip($origin, $destination, $driverUsername);
-			//Recorro todos los journeys 
-			while($rowJourneys = $journeysTripID->fetch_array()){
-				$trip.addJourney(new Journey($tripID, $rowJourneys['journeyID'], $rowJourneys['departureDate'], $rowJourneys['arrivalDate'], $rowJourneys['origin'], $rowJourneys['destination'], $rowJourneys['nSeats'], $rowJourneys['cost']));
-				$trip.addCost($rowJourneys['cost']);
+			$driverUsernameQuery = $tripControl->getDriverUsername($tripID);
+			while($rowDriverUsername = $driverUsernameQuery->fetch_array()){
+				$driverUsername = $rowDriverUsername['driverUsername'];
 			}
-			$driverControl = DriverControl::getInstance();
-			$driver = $driverControl->getDriverByUsername($driverUsername);
-
+			$trip = new Trip($origin, $destination, $driverUsername);
+			$minNumberSeats = 1000000;
+			//Recorro todos los journeys 
+			while($rowJourneys = $journeysWithTripID->fetch_array()){
+				$trip->addPrice($rowJourneys['price']);
+				if($minNumberSeats > $rowJourneys['nSeats']){
+					$minNumberSeats = $rowJourneys['nSeats'];
+				}
+				$trip->addJourney(new Journey($tripID, $rowJourneys['journeyID'], $rowJourneys['departureDate'], $rowJourneys['arrivalDate'], $rowJourneys['origin'], $rowJourneys['destination'], $rowJourneys['nSeats'], $rowJourneys['price']));
+			}
+			$trip->setSeats($minNumberSeats);
+			$userControl = UserControl::getInstance();
+			$driverData = $userControl->getUserByUserName($driverUsername);
+			$driver = null;
+			while($rowDriverData = $driverData->fetch_array()){
+				$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
+			}
+			$templateJourney = TemplateJourney::getInstance();
+			$templateshtml = "";
+			$templateshtml .= $templateJourney->getTemplate($driver, $trip);
 		}
     }
+
+    echo $templateshtml;
 
 ?>

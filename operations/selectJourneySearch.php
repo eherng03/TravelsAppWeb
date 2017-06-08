@@ -8,7 +8,7 @@
 
     $journeys = array();
     while ($row = $result->fetch_array()){
-        array_push($journeys, new Journey($row['tripID'], $row['journeyID'], $row['departureHour'], $row['departureDate'], $row['arrivalHour'], $row['arrivalDate'], $row['origin'], $row['destination'], $row['nSeats'], $row['cost']));
+        array_push($journeys, new Journey($row['tripID'], $row['journeyID'], $row['departureDate'], $row['arrivalDate'], $row['origin'], $row['destination'], $row['nSeats'], $row['price']));
     }
     
     echo json_encode($journeys);

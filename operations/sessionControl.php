@@ -45,7 +45,9 @@
 				}
 			
 			} else {
-				print_r("Contraseña incorrecta.");
+				$query->close();
+				header("Location: ../graphic/initWindow.php?login=error"); 
+				exit();
 			}
 		}else {
 			$query->close();
