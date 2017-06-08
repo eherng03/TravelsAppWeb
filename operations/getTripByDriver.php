@@ -6,7 +6,7 @@
 
     //acceso a la BBDD
     $tripControl = TripControl::getInstance();
-    $result = $tripControl->getTripByJourneyID($journeyID);
+    $result = $tripControl->getTripByDriver($driverID);
 
     $trips = array();
 

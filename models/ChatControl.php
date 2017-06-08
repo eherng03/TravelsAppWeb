@@ -1,5 +1,5 @@
 <?php
-	include "../dataBase/DBManager.php";
+	include_once "../dataBase/DBManager.php";
 	class ChatControl{
 		private static $instance;
 		private function __construct(){}

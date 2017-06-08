@@ -1,5 +1,5 @@
 <?php
-	include "../dataBase/DBManager.php";
+	include_once "../dataBase/DBManager.php";
 
 
 	class JourneyControl{
@@ -45,6 +45,15 @@
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM journeys WHERE (tripID = '$tripID') AND (destination = '$destination')");
+
+		    return $query;
+		}
+
+		function getJourneysByTrip($tripID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+			$query = $connection->query("SELECT journeyID FROM journeys WHERE tripID = '$tripID'");
 
 		    return $query;
 		}

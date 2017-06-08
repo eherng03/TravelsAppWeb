@@ -1,5 +1,5 @@
 <?php
-	include "../dataBase/DBManager.php";
+	include_once "../dataBase/DBManager.php";
 
 
 	class TripControl{
@@ -25,7 +25,7 @@
 		function getTripByDriver($driverID){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-			$query = $connection->query("SELECT tripID FROM trips WHERE driverUsername = '$driverID'");
+			$query = $connection->query("SELECT tripID, destination FROM trips WHERE driverUsername = '$driverID'");
 			return $query;
 		}
 

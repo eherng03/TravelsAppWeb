@@ -6,8 +6,8 @@ var usersInfo = [];
 $(document).ready( function() {
 	$("#sidebar_secondary").hide(); //Ocultamos el chat
 	userLog = $("#hdnSession").val();		//Username del conductor
-	//getLogInfo();
-	//getJourneys();
+	getLogInfo();
+	getTripId();
 
 	
 	//getTrayectos();
@@ -31,28 +31,8 @@ function getLogInfo(){
 		});
 
 }
-/**
-function getJourneys(){
-	
-	var formData = {
-			'userLog'    : userLog,
-		};
 
-		$.ajax({
-			type        : 'GET', 
-			url         : '../operations/getJourneysDri.php', //archivo que procesa los datos 
-			data        : formData, 
-			dataType    : 'json', 
-			encode          : true
-		}).done(function(data) {
-			var journeys = (data); //obtenemos los datos 
-			journeys.forEach((journeys) => {
-				getTripId(journeys.journeyID,usersInfo);
-			});
-		});
-}
-*/
-function getTripId(usersInfo){
+function getTripId(){
 	var formData = {
 			'driverID'    : userLog,	//Mandamos el username del driver
 		};
@@ -73,61 +53,60 @@ function getTripId(usersInfo){
 				var html = '<ul class="nav navbar-nav navbar-right"><li class="dropdown" id="n_chats'+destination+'"><ul class="dropdown-menu dropdown-cart" role="menu" id="chats'+destination+'"></ul></li></ul>';
 				$(html).appendTo("#navBar");
 
-				getPassengers(journeyID, usersInfo, destination);
-				getDriverUsername(tripID, usersInfo, destination);
+				getJourneys(tripID, destination);
+				
 			});
 		});
 }
 
 
-function getPassengers(journey,usersInfo,destination) {
-var html1 = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-comment"></span>Chats - '+destination+'<span class="caret"></span></a>';
-$(html1).appendTo('#n_chats'+destination+'');
- var arrayPasajeros = [];
-	var formData = {
-			'journey'    : journey,
-			'userLog'    : userLog,
-		};
 
-		$.ajax({
-			type        : 'GET', 
-			url         : '../operations/getPassengers.php', //archivo que procesa los datos 
-			data        : formData, 
-			dataType    : 'json', 
-			encode          : true
-		}).done(function(data) {
-			var passengers = (data); //obtenemos los datos 
-			//console.log(passengers);
-			passengers.forEach((passengers) => {
-				arrayPasajeros.push(passengers.username);
-				getUsersInfo(passengers.username,usersInfo,destination);
-			});
-	});
-}
-
-function getDriverUsername(tripID,usersInfo,destination){
+function getJourneys(tripID, destination){
+	
 	var formData = {
 			'tripID'    : tripID,
 		};
 
 		$.ajax({
 			type        : 'GET', 
-			url         : '../operations/getDriverUsername.php', //archivo que procesa los datos 
+			url         : '../operations/getJourneysDriver.php', //archivo que procesa los datos 
 			data        : formData, 
 			dataType    : 'json', 
 			encode          : true
 		}).done(function(data) {
-			var driverUsername = data.driverUsername;
-			if(driverUsername != userLog){
-				getDriverInfo(driverUsername,usersInfo,destination);
-			}
-	
+			var journeys = (data); //obtenemos los datos 
+			journeys.forEach((journeys) => {
+				var journeyID = journeys.journeyID;
+				getPassengers(journeyID, destination);
+			});
 		});
 }
 
 
-/** Funcion que devuelve la informacion participantes **/
-function getUsersInfo(username,usersInfo,destination){
+function getPassengers(journey, destination) {
+var html1 = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-comment"></span>Chats - '+destination+'<span class="caret"></span></a>';
+$(html1).appendTo('#n_chats'+destination+'');
+ var arrayPasajeros = [];
+	var formData = {
+			'journey'    : journey,
+		};
+
+		$.ajax({
+			type        : 'GET', 
+			url         : '../operations/getPassengersDriver.php', //archivo que procesa los datos 
+			data        : formData, 
+			dataType    : 'json', 
+			encode          : true
+		}).done(function(data) {
+			var passengers = (data); //obtenemos los datos
+			passengers.forEach((passengers) => {
+				arrayPasajeros.push(passengers.username);
+				getUsersInfo(passengers.username,destination);
+			});
+	});
+}
+
+function getUsersInfo(username,destination){
 var a = destination;
 	var formData = {
 		'username'    : username,
@@ -158,39 +137,6 @@ var a = destination;
 	
 }
 
-/** Funcion que devuelve la informacion participantes **/
-function getDriverInfo(username,usersInfo,destination){
-var a = destination;
-	var formData = {
-		'username'    : username,
-	};
-
-	$.ajax({
-		type        : 'GET', 
-		url         : '../operations/getPassengersInfo.php', //archivo que procesa los datos 
-		data        : formData, 
-		dataType    : 'json', 
-		encode          : true
-	}).done(function(data) {
-		
-		usersInfo.push(data);
-
-		var username = data[0].username;
-		var name = data[0].name;
-		var dni = data[0].dni;
-		var email = data[0].email;
-		var phone = data[0].phone;
-		var photo = data[0].photo;
-
-	//Codigo html que se crea de manera dinamica
-	var html2 = '<li><span class="item"><span class="item-left"><img id="userPhoto" src="../resources/userImages/'+photo+'" alt=""/><span class="item-info"><span id="nombreUserChat">'+name+'</span><span>'+phone+'</span><span>Conductor</span></span></span><span class="item-right"><button name="'+username+'" id="abrirChat" class="btn btn-xs btn-danger pull-right"><span class="glyphicon glyphicon-pencil"></span></button></span></span></li>';
-	$(html2).appendTo('#chats'+destination+'');
-
-	});
-
-
-	
-}
 
 function openChat(user2){
 $("#sidebar_secondary").hide(); //mostramos el chat

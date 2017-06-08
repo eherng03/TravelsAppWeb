@@ -1,6 +1,6 @@
 
 <?php
-	include "../dataBase/DBManager.php";
+	include_once "../dataBase/DBManager.php";
 
 
 	class JourneyPassengersControl{
@@ -28,7 +28,16 @@
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT journeyID FROM journeypassengers WHERE username = '$userLog'");
 			return $query;
-		}	
+		}
+
+		function getUsersByJourneys($journey){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT username FROM journeypassengers WHERE journeyID = '$journey'");
+			return $query;
+		}
+			
+
 	}
 ?>
 
