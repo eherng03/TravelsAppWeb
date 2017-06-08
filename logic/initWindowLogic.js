@@ -41,28 +41,4 @@ $(document).ready(function($) {
 	    todayHighlight: true
 	});
 
-	$("#searchBtn").click(function(){
-		var origin = document.getElementById("origin").find(":selected");
-		var destination = document.getElementById("destination").find(":selected");
-		var date = $("#datepicker").datepicker( "getDate" );
-		$.ajax({
-			url: "../operations/getSearchResults.php",
-			type: GET,
-			data: {"origin": origin, "destination": destination, "date": date},
-			success: function(data){
-				
-			}
-		});
-		
-
-		$.ajax({
-			url: 'templateJourney.php',
-		    type: 'POST',
-		    data: {'trip': trip, 'driver': driver},
-		    success: function(data){
-		    	data.appendTo('#searchResult');
-		    }
-		});
-	});
-
 });

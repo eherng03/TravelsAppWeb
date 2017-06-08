@@ -32,7 +32,7 @@ function loadDrivers() {
 		type        : 'GET', 
 		url         : '../operations/getDriversInfo.php', //archivo que procesa los datos 
 		dataType    : 'json', 
-	        encode          : true
+	    encode          : true
 		}).done(function(data) { //obtenemos los datos 
 
 			data.forEach((data) => {
