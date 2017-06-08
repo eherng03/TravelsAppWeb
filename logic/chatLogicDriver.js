@@ -52,7 +52,8 @@ function getTripId(){
 				var tripID = tripInfo.tripID;
 				var html = '<ul class="nav navbar-nav navbar-right"><li class="dropdown" id="n_chats'+destination+'"><ul class="dropdown-menu dropdown-cart" role="menu" id="chats'+destination+'"></ul></li></ul>';
 				$(html).appendTo("#navBar");
-
+				var html1 = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-comment"></span>Chats - '+destination+'<span class="caret"></span></a>';
+				$(html1).appendTo('#n_chats'+destination+'');
 				getJourneys(tripID, destination);
 				
 			});
@@ -84,8 +85,7 @@ function getJourneys(tripID, destination){
 
 
 function getPassengers(journey, destination) {
-var html1 = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-comment"></span>Chats - '+destination+'<span class="caret"></span></a>';
-$(html1).appendTo('#n_chats'+destination+'');
+
  var arrayPasajeros = [];
 	var formData = {
 			'journey'    : journey,
