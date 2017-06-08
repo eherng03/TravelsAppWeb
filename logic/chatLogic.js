@@ -1,12 +1,14 @@
 var userLog = "abanod";
-var participantesInfo = [];
 var logInfo = [];
+var usersInfo = [];
 
 /** Document ready **/
 $(document).ready( function() {
 	$("#sidebar_secondary").hide(); //Ocultamos el chat
 	getLogInfo();
-	getTrayectos();
+	getJourneys();
+	//getTrayectos();
+
 
 });
 
@@ -26,11 +28,10 @@ function getLogInfo(){
 		});
 
 }
-function getTrayectos(){
-	/** Get trayectos del la persona logueada  **/
 
-		//Informacion que se manda
-		var formData = {
+function getJourneys(){
+	
+	var formData = {
 			'userLog'    : userLog,
 		};
 
@@ -41,19 +42,43 @@ function getTrayectos(){
 			dataType    : 'json', 
 			encode          : true
 		}).done(function(data) {
-		var journey = (data.journeyID); //obtenemos los datos 
-		getParticipantes(journey);
+			var journeys = (data); //obtenemos los datos 
+			journeys.forEach((journeys) => {
+				getTripId(journeys.journeyID,usersInfo);
+			});
 		});
-		
 }
 
-/** Funcion que devuelve los participantes **/
-function getParticipantes(journey) {
-		//console.log(journey);
+function getTripId(journeyID,usersInfo){
+	var formData = {
+			'journeyID'    : journeyID,
+		};
 
-	/** Get paticipantes de Journey a la que pertenece el usuario 
-	logueado  **/
-	var arrayPasajeros=[];
+		$.ajax({
+			type        : 'GET', 
+			url         : '../operations/getTrip.php', //archivo que procesa los datos 
+			data        : formData, 
+			dataType    : 'json', 
+			encode          : true
+		}).done(function(data) {
+			var tripInfo = (data); //obtenemos los datos 
+			tripInfo.forEach((tripInfo) => {
+				var destination = tripInfo.destination;
+				var tripID = tripInfo.tripID;
+				var html = '<ul class="nav navbar-nav navbar-right"><li class="dropdown" id="n_chats'+destination+'"><ul class="dropdown-menu dropdown-cart" role="menu" id="chats'+destination+'"></ul></li></ul>';
+				$(html).appendTo("#navBar");
+
+				getPassengers(journeyID, usersInfo, destination);
+				getDriverUsername(tripID, usersInfo, destination);
+			});
+		});
+}
+
+
+function getPassengers(journey,usersInfo,destination) {
+var html1 = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-comment"></span>Chats - '+destination+'<span class="caret"></span></a>';
+$(html1).appendTo('#n_chats'+destination+'');
+ var arrayPasajeros = [];
 	var formData = {
 			'journey'    : journey,
 			'userLog'    : userLog,
@@ -70,89 +95,97 @@ function getParticipantes(journey) {
 			//console.log(passengers);
 			passengers.forEach((passengers) => {
 				arrayPasajeros.push(passengers.username);
-
+				getUsersInfo(passengers.username,usersInfo,destination);
 			});
-		
+	});
+}
 
-
-		var formData = {
-			'journey'    : journey,
+function getDriverUsername(tripID,usersInfo,destination){
+	var formData = {
+			'tripID'    : tripID,
 		};
 
 		$.ajax({
 			type        : 'GET', 
-			url         : '../operations/getTrip.php', //archivo que procesa los datos 
+			url         : '../operations/getDriverUsername.php', //archivo que procesa los datos 
 			data        : formData, 
 			dataType    : 'json', 
 			encode          : true
 		}).done(function(data) {
-			var tripID = (data.tripID); //obtenemos los datos 
-			var formData = {
-				'tripID'    : tripID,
-			};
-
-			$.ajax({
-				type        : 'GET', 
-				url         : '../operations/getDriver.php', //archivo que procesa los datos 
-				data        : formData, 
-				dataType    : 'json', 
-				encode          : true
-			}).done(function(data) {
-				arrayPasajeros.push(data.driverUsername);
-
-				var html1 = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-comment"></span> '+arrayPasajeros.length +' Chats<span class="caret"></span></a>';
-				$(html1).appendTo("#n_chats");
-				getParticipantesInfo(arrayPasajeros);
-
-			});
-
-		});
-
-
+			var driverUsername = data.driverUsername;
+			if(driverUsername != userLog){
+				getDriverInfo(driverUsername,usersInfo,destination);
+			}
+	
 		});
 }
-
 
 
 /** Funcion que devuelve la informacion participantes **/
-function getParticipantesInfo(arrayPasajeros){
-	for (var i=0; i<arrayPasajeros.length; i++) {
+function getUsersInfo(username,usersInfo,destination){
+var a = destination;
+	var formData = {
+		'username'    : username,
+	};
 
-		var username = arrayPasajeros[i];
+	$.ajax({
+		type        : 'GET', 
+		url         : '../operations/getPassengersInfo.php', //archivo que procesa los datos 
+		data        : formData, 
+		dataType    : 'json', 
+		encode          : true
+	}).done(function(data) {
+		
+		usersInfo.push(data);
 
-		var formData = {
-			'username'    : username,
-		};
+		var username = data[0].username;
+		var name = data[0].name;
+		var dni = data[0].dni;
+		var email = data[0].email;
+		var phone = data[0].phone;
+		var photo = data[0].photo;
 
-		$.ajax({
-			type        : 'GET', 
-			url         : '../operations/getPassengersInfo.php', //archivo que procesa los datos 
-			data        : formData, 
-			dataType    : 'json', 
-			encode          : true
-		}).done(function(data) {
-			
-			participantesInfo.push(data);
+	//Codigo html que se crea de manera dinamica
+	var html2 = '<li><span class="item"><span class="item-left"><img id="userPhoto" src="../resources/userImages/'+photo+'" alt=""/><span class="item-info"><span id="nombreUserChat">'+name+'</span><span>'+phone+'</span></span></span><span class="item-right"><button name="'+username+'" id="abrirChat" class="btn btn-xs btn-danger pull-right"><span class="glyphicon glyphicon-pencil"></span></button></span></span></li>';
+	$(html2).appendTo('#chats'+destination+'');
+
+	});
 	
-			
-
-			var username = data[0].username;
-			var name = data[0].name;
-			var dni = data[0].dni;
-			var email = data[0].email;
-			var phone = data[0].phone;
-			var photo = data[0].photo;
-
-		//Codigo html que se crea de manera dinamica
-		var html2 = '<li><span class="item"><span class="item-left"><img id="userPhoto" src="../resources/userImages/'+photo+'" alt=""/><span class="item-info"><span id="nombreUserChat">'+name+'</span><span>'+phone+'</span></span></span><span class="item-right"><button name="'+username+'" id="abrirChat" class="btn btn-xs btn-danger pull-right"><span class="glyphicon glyphicon-pencil"></span></button></span></span></li>';
-		$(html2).appendTo("#chats");
-
-		});
-
-
-	}
 }
 
+/** Funcion que devuelve la informacion participantes **/
+function getDriverInfo(username,usersInfo,destination){
+var a = destination;
+	var formData = {
+		'username'    : username,
+	};
+
+	$.ajax({
+		type        : 'GET', 
+		url         : '../operations/getPassengersInfo.php', //archivo que procesa los datos 
+		data        : formData, 
+		dataType    : 'json', 
+		encode          : true
+	}).done(function(data) {
+		
+		usersInfo.push(data);
+
+		var username = data[0].username;
+		var name = data[0].name;
+		var dni = data[0].dni;
+		var email = data[0].email;
+		var phone = data[0].phone;
+		var photo = data[0].photo;
+
+	//Codigo html que se crea de manera dinamica
+	var html2 = '<li><span class="item"><span class="item-left"><img id="userPhoto" src="../resources/userImages/'+photo+'" alt=""/><span class="item-info"><span id="nombreUserChat">'+name+'</span><span>'+phone+'</span><span>Conductor</span></span></span><span class="item-right"><button name="'+username+'" id="abrirChat" class="btn btn-xs btn-danger pull-right"><span class="glyphicon glyphicon-pencil"></span></button></span></span></li>';
+	$(html2).appendTo('#chats'+destination+'');
+
+	});
+
+
+	
+}
 
 
 /**  **/
@@ -167,14 +200,14 @@ $(document).on ("click", "#abrirChat", function () {
 	
 	user2 = $(this).attr("name"); //Cogemos el nombre de la persona que click
 	var con = 0;
-	for (var j=0; j<participantesInfo.length; j++){
-	  	var asas = participantesInfo[j][0].username;
-		if(participantesInfo[j][0].username == user2){
+	for (var j=0; j<usersInfo.length; j++){
+	  	var asas = usersInfo[j][0].username;
+		if(usersInfo[j][0].username == user2){
 			if(con==0){
 				con++;
-				var username = participantesInfo[j][0].username;
-				var name = participantesInfo[j][0].name;
-				var photo = participantesInfo[j][0].photo;
+				var username = usersInfo[j][0].username;
+				var name = usersInfo[j][0].name;
+				var photo = usersInfo[j][0].photo;
 
 				var html1 = '<img class="md-user-image" src="../resources/userImages/'+photo+'">';
 				$(html1).appendTo("#Foto");
@@ -205,11 +238,32 @@ $(document).on ("click", "#abrirChat", function () {
 		});
 
 
+	//Metodo burbuja para ordenar los mensajes recibidos HH:MM:SS
+	for (var i=2; i<msgs.length; i++){
+		for (var j=0; j<=msgs.length-i; j++){
+
+			var hora1 = msgs[j].hour;
+		
+
+			var hora2 = msgs[j+1].hour;
+
+			if(hora1 > hora2 ){
+				var aux  = msgs[j];
+				msgs[j] = msgs[j+1];
+				msgs[j+1] = aux;
+			}
+		}
+	}
+
    
   	for (var i=0; i<msgs.length; i++){
+
   		var user1 = msgs[i].user1;
   		var newuser2 = msgs[i].user2;
-  		var hour = msgs[i].hour;
+  		var date = new Date(parseInt(msgs[i].hour));
+
+  		var hour = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
   		var msg = msgs[i].msg;
   		
 
@@ -238,12 +292,16 @@ $(document).on ("click", "#enviarMensaje", function () {
 	var user2 = $("#idUser2").attr("name");
 	var msg = $('#submit_message').val();
 	var dt = new Date();
-	var hour = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+	var mlsecond = dt.getTime();
+	console.log(mlsecond);
+	//var dt = dt.getDate();
+	//var dt = date.getFullYear() + ":" + date.getMonth() + ":" + date.getDate() + ":" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+	hour = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
 
 	var formData = {
 		'user1'  :user1,
 		'user2'  :user2,
-		'hour'   :hour,
+		'mlsecond'   :mlsecond,
 		'msg'    :msg,
 
 	};

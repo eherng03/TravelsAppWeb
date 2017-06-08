@@ -341,3 +341,9 @@ ul.dropdown-cart li .item-right button{
     max-height: 300px;
     overflow-y:scroll; 
 }
+
+.chat_box_wrapper{
+    opacity: 1; 
+    display: block; 
+    transform: translateX(0px);
+}

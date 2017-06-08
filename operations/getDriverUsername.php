@@ -1,12 +1,12 @@
 <?php
-    include '../models/DriverControl.php';
+    include '../models/TripControl.php';
 
 
     $tripID = $_REQUEST['tripID'];
 
     //acceso a la BBDD
-    $driverControl = DriverControl::getInstance();
-    $result = $driverControl -> getDriverByID($tripID);
+    $tripControl = TripControl::getInstance();
+    $result = $tripControl -> getDriverUsername($tripID);
 
     $driver = array();
 
@@ -14,7 +14,7 @@
     while($row = $result->fetch_array()){
          $driver = $row;
     }
-
+    //echo '<pre>'; print_r($driver); echo '</pre>';
     echo json_encode($driver);
 
 ?>

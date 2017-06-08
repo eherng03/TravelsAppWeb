@@ -1,21 +1,21 @@
 <?php
-    include '../models/JourneyControl.php';
+    include '../models/JourneyPassengersControl.php';
 
 
     $userLog = $_REQUEST['userLog'];
 
     //acceso a la BBDD
-    $journeyControl = JourneyControl::getInstance();
-    $result = $journeyControl -> getJourneysByUserName($userLog);
+    $journeyPassengersControl = JourneyPassengersControl::getInstance();
+    $result = $journeyPassengersControl -> getJourneysByUser($userLog);
 
     $journeys = array();
 
     //guardados todos los datos como object destino
     while($row = $result->fetch_array()){
-         $journeys = $row;
+          array_push($journeys, $row);
     }
     
-    //echo '<pre>'; print_r($chats); echo '</pre>';
+    //echo '<pre>'; print_r($journeys); echo '</pre>';
     // return de datos via AJAX
     echo json_encode($journeys);
 ?>

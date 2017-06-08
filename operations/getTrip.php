@@ -2,19 +2,19 @@
     include '../models/JourneyControl.php';
 
 
-    $journey = $_REQUEST['journey'];
+    $journeyID = $_REQUEST['journeyID'];
 
     //acceso a la BBDD
     $journeyControl = JourneyControl::getInstance();
-    $result = $journeyControl -> getTrip($journey);
+    $result = $journeyControl -> getTripByJourneyID($journeyID);
 
     $trip = array();
 
     //guardados todos los datos como object destino
     while($row = $result->fetch_array()){
-         $trip = $row;
+         array_push($trip, $row);
     }
-
+    //echo '<pre>'; print_r($trip); echo '</pre>';
     echo json_encode($trip);
 
 ?>
