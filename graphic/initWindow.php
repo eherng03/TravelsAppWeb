@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf-8">
         <title>Nos vamos de viaje</title>
@@ -56,6 +56,10 @@
           
             <?php if(isset($_GET['login']) && $_GET['login'] === "error"){?>
                 <script>alert("USUARIO Y/O CONTRASEÑA ERRONEOS");</script>
+            <?php } ?>
+
+            <?php if(isset($_GET['session']) && $_GET['session'] === "no"){?>
+                <script>alert("NO TIENES PERMISOS PARA ACCEDER A ESTA VENTANA");</script>
             <?php } ?>
 
                 <!--LOGIN-->
@@ -144,7 +148,7 @@
                         </div>
                         <!-- TODO AQUI VA LA FECHA -->
                         <br>
-                        <input class="btn" type="submit" value="Buscar" id = "searchBtn">
+                        <input class="btn" type="button" value="Buscar" id = "searchBtn">
                     </form>
                 </div>
                 </div>

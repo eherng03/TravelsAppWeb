@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+    //Conductor no puede estar aqui
+    session_start();
+    if($_SESSION['userType'] != 2)
+      header('Location: ../graphic/initWindow.php?session=no');
+?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -36,7 +41,7 @@
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-xs-6"><a class="active" id="conductores-link" href="#">Conductores</a></div>
-                  <div class="col-xs-6"><a id="usuarios-link" href="#">Usuarios</a></div>
+                  <div class="col-xs-6"><a id="usuarios-link" href="#">Pasajeros</a></div>
                 </div>
                 <hr>
               </div>
@@ -48,9 +53,9 @@
                         <thead>
                           <tr>
                             <th class="text-center"></th>
-                            <th class="text-center">name</th>
-                            <th class="text-center">email</th>
                             <th class="text-center">username</th>
+                            <th class="text-center">email</th>
+                            <th class="text-center">name</th>
                             <th class="text-center">telefono</th>
                             <th class="text-center">dni</th>
                             <th class="text-center">Foto</th>
@@ -65,9 +70,9 @@
                         <thead>
                           <tr>
                             <th class="text-center"></th>
-                            <th class="text-center">name</th>
-                            <th class="text-center">email</th>
                             <th class="text-center">username</th>
+                            <th class="text-center">email</th>
+                            <th class="text-center">name</th>
                             <th class="text-center">telefono</th>
                             <th class="text-center">dni</th>
                             <th class="text-center">Foto</th>

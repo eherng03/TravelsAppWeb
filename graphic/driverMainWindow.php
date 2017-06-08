@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php
+    //Pasajero no puede estar aqui
+    session_start();
+    if($_SESSION['userType'] != 1)
+      header('Location: ../graphic/initWindow.php?session=no');
+?>
+<html>
     <head>
         <meta charset="utf-8">
         <title>Conductor</title>
@@ -7,7 +13,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script type='text/javascript' src='../logic/driverMainWindowLogic.js'></script>
 
-        <script src="../logic/chatLogic.js"></script>
+        <script src="../logic/chatLogicDriver.js"></script>
 		 <link rel="stylesheet" type="text/css" href="../resources/theme/css/chat.css">
 		
 		<script src='../resources/bootstrap/js/bootstrap.js'></script>
@@ -36,9 +42,9 @@
                     </a>
     			</div>
 			    <!-- nav links-->
-			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			     <div id="navBar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      	<ul class="nav navbar-nav">
-			        	<li class="active journeys-button"><a href="#">
+			        	<li class="journeys-button"><a href="#">
 			        		Ver trayectos 
 			        	</a></li>
 			        	<li><a href="#" class = "create-button">
@@ -58,32 +64,51 @@
 			  </div>
 			</nav>
         </header>
+        <input type="hidden" id="hdnSession" value= 
+                <?php echo $_SESSION['username']; ?>
+        />
         <main>
 				<!--CREAR NUEVO TRAYECTO-->
 
 				<div class = "create-container">
-					<h1 class = "create-title">Datos del viaje</h1>
-	                <div class = "create-content">
-	                    <div class="well-content">
-	                    <form class="form-horizontal" role="form">
+                    <h1 class = "create-title">Datos del viaje</h1>
+                    <div class = "create-content">
+                        <div class="well-content">
+                            <form class="form-horizontal" role="form" action="../operations/createTrip.php" method="post">
 
-	                            <label>Origen</label>
-	                            <input class="form-control" placeholder="Origen" name="origin" type="text" id="origin" required/>
-	                     
-	                            <label>Destino</label>
-	                            <input class="form-control" placeholder="Origen" name="origin" type="text" id="origin" required/>
+                                <label>Origen</label>
+                                <input class="form-control" placeholder="Origen" name="origin" type="text" id="origin" required/>
+                                <div class="input-group date"  data-provide = "datepicker" id = "datepicker">
+                                        <input type="text" class="form-control" placeholder="Fecha" name="dateOrigin" id="dateOrigin" required>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                </div>
+                                <hr>
 
-		                        <div class="input-group date"  data-provide = "datepicker" id = "datepicker">
-		                            <input type="text" class="form-control" placeholder="Fecha" name="date" id="date" required>
-		                            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-		                        </div>
-	                        <!-- TODO AQUI VA LA FECHA -->
-	                        <br>
-	                        <input class="btn" type="submit" value="Crear" id = "createBtn">
-	                    </form>
-	                </div>
-	                </div>
-            </div>
+                                <div id="destinations">
+                                    <label>Destino 1</label>
+                                    <input class="form-control" placeholder="Destino" name="dest1" type="text" id="dest1" required/>
+                                    <label>Numero de asientos</label>
+                                    <input class="form-control" placeholder="Numero de asientos" name="nSeats1" type="text" id="nSeats1" required/>
+                                    <label>Precio</label>
+                                    <input class="form-control" placeholder="Precio" name="price1" type="text" id="price1" required/>
+
+                                    <div class="input-group date"  data-provide = "datepicker" id = "datepicker">
+                                        <input type="text" class="form-control" placeholder="Fecha" name="date1" id="date1" required>
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                    </div>
+                                    <hr>
+                                </div>
+                                
+                                <div>
+                                    <input class="btn" type="button" value="Añadir Parada" id="addDest"/>
+                                </div>
+                                
+                                <br>
+                                <input class="btn" type="submit" value="Crear" id = "createBtn">
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
 				</div>
 				
@@ -129,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            <div class="chat_box_wrapper chat_box_small chat_box_active" id="chat" style="opacity: 1; display: block; transform: translateX(0px);">
+            <div class="chat_box_wrapper chat_box_small chat_box_active" id="chat">
                 <div class="chat_box touchscroll chat_box_colors_a" id="mensajes">
                     
                 </div>

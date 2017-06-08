@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php
+    //Conductor no puede estar aqui
+    session_start();
+    if($_SESSION['userType'] != 0)
+      header('Location: ../graphic/initWindow.php?session=no');
+?>
+
+<html>
     <head>
         <meta charset="utf-8">
         <title>Pasajero</title>
@@ -9,7 +16,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script type='text/javascript' src='../logic/passengerMainWindowLogic.js'></script>
         <script type='text/javascript' src='../logic/searchLogic.js'></script>
-        <script type='text/javascript' src="../logic/chatLogic.js"></script>
+        <script type='text/javascript' src="../logic/chatLogicPassenger.js"></script>
 		
         <!--EXTERNAL-->
 		<script src='../resources/bootstrap/js/bootstrap.js'></script>
@@ -37,9 +44,9 @@
                     </a>
                 </div>
                 <!-- nav links-->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div id="navBar" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active journeys-button"><a href="#">
+                        <li class="journeys-button"><a href="#">
                             Ver mis trayectos 
                         </a></li>
                         <li><a href="#"  class = "search-button">
@@ -50,8 +57,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown" id="n_chats">
                         <ul class="dropdown-menu dropdown-cart" role="menu" id="chats"></ul>
-                    </li>
-                  </ul>
+                        </li>
+                    </ul>
                 </div>
               </div>
             </nav>
@@ -64,6 +71,10 @@
 						
 				</div>
 			</div>
+            <input type="hidden" id="hdnSession" value= 
+                <?php echo $_SESSION['username']; ?>
+            />
+
             <!--BUSQUEDA-->
             <div class = "search-container">
                 <h1 class = "search-title">Encuentra el viaje que necesitas</h1>
@@ -105,7 +116,7 @@
       </div>
     </div>
   </div>
-  <div class="chat_box_wrapper chat_box_small chat_box_active" id="chat" style="opacity: 1; display: block; transform: translateX(0px);">
+  <div class="chat_box_wrapper chat_box_small chat_box_active" id="chat">
     <div class="chat_box touchscroll chat_box_colors_a" id="mensajes"></div>
   </div>
   <div class="chat_submit_box">
