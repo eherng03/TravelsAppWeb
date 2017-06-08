@@ -1,9 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Oswald:400,300);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-body
-{
-font-family: 'Open Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=ABeeZee');
+
+body{
+    font-family: 'ABeeZee', sans-seri
 }
+
 .chat_box .chat_message_wrapper ul.chat_message > li + li {
     margin-top: 4px;
 }
@@ -17,7 +17,7 @@ a:focus {
 .popup-head-left.pull-left h1 {
     color: #fff;
     float: left;
-    font-family: oswald;
+    font-family: 'ABeeZee', sans-serif;
     font-size: 18px;
     margin: 2px 0 0 5px;
    
@@ -27,7 +27,6 @@ a:focus {
     font-size: 11px;
     color: #fff;
     line-height: 4px;
-    opacity: 0.5;
     padding: 0 0 0 7px;
 }
 .chat-header-button {
@@ -36,7 +35,6 @@ a:focus {
     border-radius: 7px;
     font-size: 15px;
     height: 26px;
-    opacity: 0.9;
     padding: 0;
     text-align: center;
     width: 26px;
@@ -68,7 +66,7 @@ a:focus {
 }
 .gurdeepoushan .dropdown-menu li a {
     border-radius: 7px;
-    font-family: oswald;
+    font-family: 'ABeeZee', sans-serif;
     padding: 3px;
    transition: all 0.3s ease-in-out 0s;
 }
@@ -77,7 +75,7 @@ a:focus {
     color: #fff;
 }
 .popup-head {
-    background: #304445 none repeat scroll 0 0 !important;
+    background: #8A4040 none repeat scroll 0 0 !important;
     border-bottom: 3px solid #ccc;
     color: #fff;
     display: table;
@@ -97,16 +95,15 @@ a:focus {
     padding: 0 6px;
 }
 .chat_box_wrapper.chat_box_small.chat_box_active {
-    
+    background: #D7D7D7;
     height: 342px;
     overflow-y: scroll;
     width: 316px;
 }
+
 aside {
      background-attachment: fixed;
     background-clip: border-box;
-    background-color: rgba(0, 0, 0, 0);
-    background-image: url("");
     background-origin: padding-box;
     background-position: center top;
     background-repeat: repeat;
@@ -117,7 +114,7 @@ aside {
     position: fixed;
     right: 70px;
     width: 300px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'ABeeZee', sans-serif;
 }
 .chat_box {
     padding: 16px;
@@ -277,6 +274,8 @@ img {
     line-height: 1px;
 }
 .chat_submit_box {
+    background: #8A4040;
+    border-top: 2px solid #8A4040;
     bottom: 0;
     box-sizing: border-box;
     left: 0;
@@ -343,7 +342,6 @@ ul.dropdown-cart li .item-right button{
 }
 
 .chat_box_wrapper{
-    opacity: 1; 
     display: block; 
     transform: translateX(0px);
 }
