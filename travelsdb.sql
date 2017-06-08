@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2017 a las 12:22:31
+-- Tiempo de generación: 08-06-2017 a las 21:41:56
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `chats` (
   `user1` varchar(30) CHARACTER SET utf8 NOT NULL,
   `user2` varchar(30) CHARACTER SET utf8 NOT NULL,
-  `hour` varchar(10) CHARACTER SET utf8 NOT NULL,
+  `hour` varchar(50) CHARACTER SET utf8 NOT NULL,
   `msg` varchar(200) CHARACTER SET utf8 NOT NULL COMMENT '200 char max'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -38,8 +38,13 @@ CREATE TABLE `chats` (
 --
 
 INSERT INTO `chats` (`user1`, `user2`, `hour`, `msg`) VALUES
-('abanod', 'EvaHergar', '11', 'cusca'),
-('EvaHergar', 'abanod', '10', 'carapene');
+('abanod', 'EvaHergar', '1496932986625', 'eres subnormal'),
+('EvaHergar', 'abanod', '1496932980513', 'jamon'),
+('EvaHergar', 'abanod', '1496932986621', 'pepe'),
+('EvaHergar', 'abanod', '1496933139508', 'hola'),
+('EvaHergar', 'abanod', '1496933145225', 'carapene'),
+('EvaHergar', 'abanod', '1496933151006', 'cusca'),
+('EvaHergar', 'abanod', '1496933158351', 'alberto puto amo');
 
 -- --------------------------------------------------------
 
@@ -54,6 +59,14 @@ CREATE TABLE `drivercomments` (
   `score` int(11) NOT NULL,
   `commentID` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `drivercomments`
+--
+
+INSERT INTO `drivercomments` (`driverUsername`, `passUsername`, `comment`, `score`, `commentID`) VALUES
+('abanod', 'eeeee', 'sdfghjk', 2, 0),
+('abanod', 'EvaHergar', 'Es un falso y venenoso', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -72,7 +85,7 @@ CREATE TABLE `drivers` (
 
 INSERT INTO `drivers` (`username`, `score`) VALUES
 ('abanod', 0),
-('asdfghj', 0);
+('pepeperas', 0);
 
 -- --------------------------------------------------------
 
@@ -85,6 +98,13 @@ CREATE TABLE `journeypassengers` (
   `username` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `journeypassengers`
+--
+
+INSERT INTO `journeypassengers` (`journeyID`, `username`) VALUES
+(1, 'EvaHergar');
+
 -- --------------------------------------------------------
 
 --
@@ -94,9 +114,7 @@ CREATE TABLE `journeypassengers` (
 CREATE TABLE `journeys` (
   `tripID` int(11) NOT NULL COMMENT 'foreign key',
   `journeyID` int(11) NOT NULL,
-  `departureHour` varchar(5) CHARACTER SET utf8 NOT NULL COMMENT 'format: "##:##"',
   `departureDate` varchar(11) NOT NULL,
-  `arrivalHour` varchar(5) CHARACTER SET utf8 NOT NULL,
   `arrivalDate` varchar(11) NOT NULL,
   `cost` int(11) NOT NULL,
   `nSeats` int(11) NOT NULL,
@@ -108,9 +126,10 @@ CREATE TABLE `journeys` (
 -- Volcado de datos para la tabla `journeys`
 --
 
-INSERT INTO `journeys` (`tripID`, `journeyID`, `departureHour`, `departureDate`, `arrivalHour`, `arrivalDate`, `cost`, `nSeats`, `origin`, `destination`) VALUES
-(1, 1, '10', '06/06/2017', '12', '06/06/2017', 20, 3, 'Leon', 'Valladolid'),
-(1, 2, '12', '06/062017', '14', '06/06/2017', 20, 3, 'Valladolid', 'Madrid');
+INSERT INTO `journeys` (`tripID`, `journeyID`, `departureDate`, `arrivalDate`, `cost`, `nSeats`, `origin`, `destination`) VALUES
+(1, 1, '06/06/2017', '06/06/2017', 20, 3, 'Leon', 'Valladolid'),
+(1, 2, '06/062017', '06/06/2017', 20, 3, 'Valladolid', 'Madrid'),
+(2, 0, '03/06/2017', '03/06/2017', 10, 3, 'Oviedo', 'Zamora');
 
 -- --------------------------------------------------------
 
@@ -127,7 +146,9 @@ CREATE TABLE `passengers` (
 --
 
 INSERT INTO `passengers` (`username`) VALUES
-('wertyuj');
+('eeeee'),
+('EvaHergar'),
+('pepepepe');
 
 -- --------------------------------------------------------
 
@@ -148,7 +169,8 @@ CREATE TABLE `trips` (
 --
 
 INSERT INTO `trips` (`tripID`, `driverUsername`, `origin`, `destination`, `cancelled`) VALUES
-(1, 'abanod', 'Leon', 'Madrid', 0);
+(1, 'abanod', 'Leon', 'Madrid', 0),
+(2, 'pepeperas', 'Oviedo', 'Sevilla', 0);
 
 -- --------------------------------------------------------
 
@@ -172,12 +194,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `pass`, `name`, `dni`, `email`, `phone`, `photo`, `rol`) VALUES
-('1', '1', '1', '1', '1', '1', '1.jpg', 0),
 ('abanod', 'caca', 'alberto', '123698547', 'caca@hotmail.es', '123456789', 'abanod.png', 1),
-('asdfghj', 'asdfgh', 'dfghjk', 'asdfgh', 'asdfg', 'asdfgh', 'asdfghj.png', 1),
+('eeeee', 'eeeee', 'Eeee', 'eeeeeeeee', 'eeeeeee', 'eeeeeee', 'eeeee.png', 0),
 ('EvaHergar', 'olakase', 'Eva', '74175369U', 'evahergar@gmail.com', '123456789', 'EvaHergar.png', 0),
 ('pepepepe', 'jamon', 'pepe', '123456789', 'jshsfdjh', '123456789', 'pepepepe.png', 0),
-('wertyuj', 'ertyujk', 'sdfghj', 'ertyui', 'ertyui', 'dfghjklÃ±', 'wertyuj.png', 0);
+('pepeperas', 'pepe', 'pepe', 'dfghj', 'sdfgh', 'sdfghjhgf', 'pepeperas.png', 1);
 
 --
 -- Índices para tablas volcadas
@@ -211,7 +232,6 @@ ALTER TABLE `drivers`
 --
 ALTER TABLE `journeypassengers`
   ADD PRIMARY KEY (`journeyID`,`username`),
-  ADD KEY `journeyID` (`journeyID`),
   ADD KEY `username` (`username`);
 
 --
@@ -251,7 +271,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `tripID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tripID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Restricciones para tablas volcadas
 --
@@ -261,7 +281,7 @@ ALTER TABLE `trips`
 --
 ALTER TABLE `chats`
   ADD CONSTRAINT `chats_ibfk_1` FOREIGN KEY (`user1`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `chats_ibfk_2` FOREIGN KEY (`user2`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `chats_ibfk_2` FOREIGN KEY (`user2`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `drivercomments`
@@ -280,8 +300,8 @@ ALTER TABLE `drivers`
 -- Filtros para la tabla `journeypassengers`
 --
 ALTER TABLE `journeypassengers`
-  ADD CONSTRAINT `journeypassengers_ibfk_1` FOREIGN KEY (`username`) REFERENCES `passengers` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `journeypassengers_ibfk_2` FOREIGN KEY (`journeyID`) REFERENCES `journeys` (`journeyID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `journeypassengers_ibfk_1` FOREIGN KEY (`username`) REFERENCES `passengers` (`username`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `journeypassengers_ibfk_2` FOREIGN KEY (`journeyID`) REFERENCES `journeys` (`journeyID`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `journeys`
