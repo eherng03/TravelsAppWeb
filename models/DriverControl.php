@@ -13,14 +13,5 @@
 			}
 			return self::$instance;
 		}
-
-		function getDriverByID($trip){
-			$dbManager = DBManager::getInstance();
-			$connection = $dbManager->getConnection();
-			$query = $connection->query("SELECT driverUsername FROM trips WHERE tripID = '$trip'");
-			return $query;
-		}
-
-		
 	}
 ?>

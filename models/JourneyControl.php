@@ -53,10 +53,12 @@
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
-			$query = $connection->query("SELECT journeyID FROM journeys WHERE tripID = '$tripID'");
+			$query = $connection->query("SELECT * FROM journeys WHERE tripID = '$tripID'");
 
 		    return $query;
 		}
+
+		
 	}
 ?>
 

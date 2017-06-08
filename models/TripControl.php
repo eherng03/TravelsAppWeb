@@ -22,13 +22,19 @@
 			return $query;
 		}
 
-		function getTripByDriver($driverID){
+		public function getDriverByID($trip){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-			$query = $connection->query("SELECT tripID, destination FROM trips WHERE driverUsername = '$driverID'");
+			$query = $connection->query("SELECT driverUsername FROM trips WHERE tripID = '$trip'");
 			return $query;
 		}
 
+		function getTripByDriver($driverID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT tripID FROM trips WHERE driverUsername = '$driverID'");
+			return $query;
+		}
 
 	}
 ?>
