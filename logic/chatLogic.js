@@ -1,4 +1,4 @@
-var userLog = "abanod";
+var userLog = "EvaHergar";
 var logInfo = [];
 var usersInfo = [];
 
@@ -187,18 +187,15 @@ var a = destination;
 	
 }
 
-
-/**  **/
-//Funcion para abir el chat y cargar la informacion
-$(document).on ("click", "#abrirChat", function () {
-
-	$("#Foto").empty();
-	$("#mensajes").empty(); //mostramos el chat
+function openChat(user2){
+$("#sidebar_secondary").hide(); //mostramos el chat
+$("#Foto").empty();
+$("#mensajes").empty(); //mostramos el chat
 	
 	var msgs=[];
-	var user2;
+	var user2 = user2;
 	
-	user2 = $(this).attr("name"); //Cogemos el nombre de la persona que click
+	
 	var con = 0;
 	for (var j=0; j<usersInfo.length; j++){
 	  	var asas = usersInfo[j][0].username;
@@ -209,7 +206,7 @@ $(document).on ("click", "#abrirChat", function () {
 				var name = usersInfo[j][0].name;
 				var photo = usersInfo[j][0].photo;
 
-				var html1 = '<img class="md-user-image" src="../resources/userImages/'+photo+'">';
+				var html1 = '<img class="md-user-image" name="'+username+'" src="../resources/userImages/'+photo+'">';
 				$(html1).appendTo("#Foto");
 				var html2 = '<h1 id="idUser2" name="'+username+'">Chat - '+name+'</h1>';
 				$(html2).appendTo("#Foto");
@@ -279,10 +276,12 @@ $(document).on ("click", "#abrirChat", function () {
   	}
 
 	});
-
+	$("#chat").animate({ scrollTop: $(document).height()*1000 }, "slow");
 	$("#sidebar_secondary").show() //mostramos el chat
 
-});
+}
+
+
 
 //Funcion para enviar la informacion
 $(document).on ("click", "#enviarMensaje", function () {
@@ -319,4 +318,25 @@ $(document).on ("click", "#enviarMensaje", function () {
             var html3 = ' <div class="chat_message_wrapper chat_message_right"><div class="chat_user_avatar"><a href="" target="_blank"><img alt="photo" title="" src="../resources/userImages/'+photoLog+'" class="md-user-image"/></a></div><ul class="chat_message"><li><p>'+msg+'<span class="chat_message_time">'+hour+'</span></p> </li></ul></div> ';
   			$(html3).appendTo("#mensajes");
             });
+        $("#chat").animate({ scrollTop: $(document).height()*1000 }, "slow");
 });
+
+//Funcion para abir el chat y cargar la informacion
+$(document).on ("click", "#abrirChat", function () {
+	user2 = $(this).attr("name"); //Cogemos el nombre de la persona que click
+	openChat(user2);
+});
+//Funcion para actualizar el chat		
+ $(document).on ("click", "#actualizarChat", function () {
+ 		user2 = $(".md-user-image").attr("name"); //Cogemos el nombre de la persona que click
+ 	 openChat(user2);		
+ });		
+ 		
+ $(document).on ("click", "#removeClass", function () {		
+ 	$("#sidebar_secondary").hide(); 
+ });
+
+
+
+
+
