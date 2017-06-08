@@ -1,7 +1,11 @@
 <?php
 	require "../dataBase/DBManager.php";
-	session_start();
+	session_start();		//Con esto deja escribir en el array $_SESSION
 	
+	//usertype 0 = PASSENGER
+	//usertype 1 = DRIVER
+	//usertype 2 = ADMIN
+
 	$singleton = DBManager::getInstance();
 	$conn = $singleton->getConnection();
 	
@@ -9,6 +13,9 @@
 	$pass = $_POST['password'];
 	
 	if($user == "admin" && $pass == "admin"){
+		$_SESSION['username'] = $user;
+		$_SESSION['isLogged'] = true;
+		$_SESSION['userType'] = 2;
 		header("Location: ../graphic/adminMainWindow.php");
 	}else{
 			
