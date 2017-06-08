@@ -16,14 +16,9 @@
 			$this->name = $name;
 			$this->email = $email;
 			$this->user = $user;
-			//$this->password = $password;
 			$this->telephone = $telephone;
 			$this->dni = $dni;
 			$this->photo = $photo;
-			//$this->journeys = array();
-			//$this->numberJourneys = 0;
-			//$this->scoreAverage = 0;
-			//$this->coments = array();
 		}
 
 		//TODO here needed getters and setters
