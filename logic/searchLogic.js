@@ -35,14 +35,14 @@ $(document).ready(function() {
         //Enviamos en la peticion origen, destino y fecha en milisegundos (el dia entero, inicio y fin)
         $.ajax({
             url: "../operations/getSearchResults.php",
-            type: 'GET',
+            type: 'POST',
             data: {"origin": origin, "destination": destination, "dateStart": milsStart, "dateEnd": milsEnd},
             success: function(data){
                 
             }
         });
         
-
+/*
         $.ajax({
             url: 'templateJourney.php',
             type: 'POST',
@@ -50,6 +50,6 @@ $(document).ready(function() {
             success: function(data){
                 data.appendTo('#searchResult');
             }
-        });
+        });*/
     });
 });
