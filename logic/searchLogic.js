@@ -38,7 +38,11 @@ $(document).ready(function() {
             type: 'POST',
             data: {"origin": origin, "destination": destination, "dateStart": milsStart, "dateEnd": milsEnd},
             success: function(data){
-                
+                var containerSearchResult = document.getElementById("searchResult");
+                while(containerSearchResult.firstChild){
+                    containerSearchResult.removeChild(containerSearchResult.firstChild);
+                }
+                $(containerSearchResult).append(data);
             }
         });
         
