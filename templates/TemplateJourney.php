@@ -13,24 +13,23 @@
 		
 		public function getTemplate($driver, $trip){
 		   	return "<div class = 'Journey'> 
-						<table >
+						<table>
 							<tr>
-							  <td> <img src= '".$driver->photo."' alt=''/>
+							  <td> <img src= '../resources/userImages/".$driver->photo."'/>
 								Nombre: ".$driver->name."	
 								</td>
-								 <td>Trayecto:".$trip->getOrigin()."-".$trip->getDestination()."</td>
+								 <td>Trayecto: ".$trip->getOrigin()."-".$trip->getDestination()."</td>
 							</tr>					
 							<tr>
 							 
-							<td>Precio:".$trip->getPrice()."</td>
-							<td>Nº plazas disponibles:".$trip->getSeats()."</td>
+							<td>Precio: ".$trip->getPrice()."</td>
+							<td>Nº plazas disponibles: ".$trip->getSeats()."</td>
 							</tr>
 							
 							<tr>
 												
-							  <td>Día y hora de salida :".$trip->getInitDate()."Día y hora de llegada:".$trip->getArrivalDate()."</td>
-							</tr>	 
-						
+							  <td>Día y hora de salida: ".$trip->getInitDate()." Día y hora de llegada: ".$trip->getArrivalDate()."</td>
+							</tr>	
 						</table>
 					</div>";
 		}
