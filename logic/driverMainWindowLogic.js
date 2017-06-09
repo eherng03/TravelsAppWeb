@@ -1,4 +1,7 @@
+var userLog;
+
 $(document).ready(function($) {
+	userLog = $("#hdnSession").val();		//Username del conductor
 	$(".create-container").hide();
 	$(".score-container").hide();
 	window.nDests = 2;
@@ -37,7 +40,6 @@ $(document).ready(function($) {
 	    todayHighlight: true
 	});
 
-	$('#datetimepicker1').datetimepicker({format: 'yyyy-mm-dd hh:ii'});
 
 	$("#iconButton").click(function(){
 		$(".register-container").slideUp("fast");
@@ -62,5 +64,20 @@ $(document).ready(function($) {
 			nDests += 1;
 	});
 
-	
+/**
+	$("#createBtn").click(function(event) {
+		var origin = $("#origin").val();
+		var date = $("#datepickerDest").datepicker( "getDate" );
+        var milsStart = date.getTime();
+        var destination = $("#destination").val();
+        $.ajax({
+            url: 'createTrip.php',
+            type: 'POST',
+            data: {'origin': origin, 'driver': driver},
+            success: function(data){
+                data.appendTo('#searchResult');
+            }
+        });
+	});
+	*/
 });
