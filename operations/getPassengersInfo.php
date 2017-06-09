@@ -7,7 +7,7 @@
 
     //acceso a la BBDD
     $userControl = UserControl::getInstance();
-    $result = $userControl -> getPassengersInfo($username);
+    $result = $userControl->getUserByUserName($username);
 
     $userInfo = array();
 

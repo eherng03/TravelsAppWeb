@@ -6,7 +6,7 @@
 
     //acceso a la BBDD
     $userControl = UserControl::getInstance();
-    $result = $userControl -> getLogInfo($userLog);
+    $result = $userControl->getUserByUserName($userLog);
 
     $logInfo = array();
 
