@@ -34,13 +34,31 @@
 			}
 			$trip = new Trip($origin, $destination, $driverUsername);
 			$minNumberSeats = 1000000;
-			//Recorro todos los journeys 
+			//Recorro todos los journeys y meto en el trip por los que pasa el cliente
+			
+			$idJourneyOrigin = -1;
+			$idJourneyDestination = -1;
+
 			while($rowJourneys = $journeysWithTripID->fetch_array()){
-				$trip->addPrice($rowJourneys['price']);
-				if($minNumberSeats > $rowJourneys['nSeats']){
-					$minNumberSeats = $rowJourneys['nSeats'];
+				if($rowJourneys['origin'] == $trip->getOrigin()){
+					$idJourneyOrigin = $rowJourneys['journeyID'];
+					$trip->setInitDate($rowJourneys['departureDate']);
 				}
-				$trip->addJourney(new Journey($tripID, $rowJourneys['journeyID'], $rowJourneys['departureDate'], $rowJourneys['arrivalDate'], $rowJourneys['origin'], $rowJourneys['destination'], $rowJourneys['nSeats'], $rowJourneys['price']));
+
+				if($idJourneyOrigin != -1 && $idJourneyOrigin <= $rowJourneys['journeyID']){
+					$trip->addPrice($rowJourneys['price']);
+				
+					if($minNumberSeats > $rowJourneys['nSeats']){
+						$minNumberSeats = $rowJourneys['nSeats'];
+					}
+
+					$trip->addJourney(new Journey($tripID, $rowJourneys['journeyID'], $rowJourneys['departureDate'], $rowJourneys['arrivalDate'], $rowJourneys['origin'], $rowJourneys['destination'], $rowJourneys['nSeats'], $rowJourneys['price']));
+				}
+
+				if($rowJourneys['destination'] == $trip->getDestination()){
+					$trip->setArrivalDate($rowJourneys['arrivalDate']);
+					break;
+				}
 			}
 			$trip->setSeats($minNumberSeats);
 			$userControl = UserControl::getInstance();
