@@ -1,7 +1,7 @@
 <?php
     //Pasajero no puede estar aqui
     session_start();
-    if($_SESSION['userType'] != 1)
+    if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 1)
       header('Location: ../graphic/initWindow.php?session=no');
 ?>
 <html>

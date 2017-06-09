@@ -1,7 +1,7 @@
 <?php
     //Conductor no puede estar aqui
     session_start();
-    if($_SESSION['userType'] != 0)
+    if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 0)
       header('Location: ../graphic/initWindow.php?session=no');
 ?>
 
@@ -66,7 +66,7 @@
         <main>			
 			 <!--TRAYECTOS-->
 			<div class="journeys-container">
-				<div class = "journeys">
+				<div class = "journeys" id="journeys">
 						<h1>Mis trayectos</h1>
 						
 				</div>

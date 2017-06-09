@@ -24,4 +24,17 @@ $(document).ready(function() {
 	    autoclose: true,
 	    todayHighlight: true
 	});
+	
+	
+	//Cargar trayectos pasajero
+	$.ajax({
+		url: "../operations/getJourneysPassenger.php",
+		type: 'POST',
+		data: {"username": $('#hdnSession').val()},
+		success: function(data){
+			var containerJourneys = document.getElementById("journeys");
+
+			$(containerJourneys).append(data);
+		}
+	});
 });

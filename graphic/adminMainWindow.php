@@ -1,7 +1,6 @@
 <?php
-    //Conductor no puede estar aqui
     session_start();
-    if($_SESSION['userType'] != 2)
+    if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 2)
       header('Location: ../graphic/initWindow.php?session=no');
 ?>
 <html>

@@ -57,6 +57,15 @@
 
 		    return $query;
 		}
+		
+		function getJourneysByPassenger($username){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+			$query = $connection->query("SELECT * FROM Journeys WHERE JourneyID = (SELECT JourneyID FROM JourneyPassengers WHERE username = '$username')");
+
+		    return $query;
+		}
 
 		
 	}

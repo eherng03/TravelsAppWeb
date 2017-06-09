@@ -7,31 +7,49 @@
 		public $destination;
 		private $departureDate;
 		private $arrivalDate;
-		private $seatsNumber;
+		private $seats;
 		private $passengers;
-		private $cost;
+		private $price;
 
-		public function __construct($tripID, $journeyID, $departureDate, $arrivalDate, $origin, $destination, $seatsNumber, $cost){
+		public function __construct($tripID, $journeyID, $departureDate, $arrivalDate, $origin, $destination, $seats, $price){
 			$this->tripID = $tripID;
 			$this->journeyID = $journeyID;
 			$this->origin = $origin;
 			$this->destination = $destination;
 			$this->departureDate = $departureDate;			
 			$this->arrivalDate = $arrivalDate;
-			$this->seatsNumber = $seatsNumber;
+			$this->seats = $seats;
 			$this->passengers = array();
-			$this->cost = $cost;
+			$this->price = $price;
 		}
 
 		public function getDepartureDate(){
-			return $departureDate;
+			return $this->departureDate;
 		}
 
 		public function getArrivalDate(){
-			return $arrivalDate;
+			return $this->arrivalDate;
 		}
 		
+		public function getOrigin(){
+			return $this->origin;
+		}
 
+		public function getDestination(){
+			return $this->destination;
+		}
+
+		public function getPrice(){
+			return $this->price;
+		}
+
+		public function getSeats(){
+			return $this->seats;
+		}
+		
+		public function getInitDate(){
+			return $this->departureDate;
+		}
 
 	}
 ?>
