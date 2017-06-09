@@ -35,7 +35,7 @@
 		}
 		
 		
-		$templateshtml .= $templateJourney->getTemplate($driver, $journeys[$i]);
+		$templateshtml .= $templateJourney->getTemplate($driver, $journeys[$i], "-");
 		$i += 1;
     }
 	

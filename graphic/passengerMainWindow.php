@@ -16,6 +16,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script type='text/javascript' src='../logic/passengerMainWindowLogic.js'></script>
         <script type='text/javascript' src='../logic/searchLogic.js'></script>
+        <script type='text/javascript' src='../logic/searchLogic.js'></script>
         <script type='text/javascript' src="../logic/chatLogicPassenger.js"></script>
 		
         <!--EXTERNAL-->
@@ -100,6 +101,8 @@
                         <br>
                         <input class="btn" type="submit" value="Buscar" id = "searchBtn">
                     </form>
+                    <div id = "searchResult">
+                    </div>
                 </div>
                 </div>
             </div>

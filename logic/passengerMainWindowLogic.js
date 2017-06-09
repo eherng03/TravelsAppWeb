@@ -25,7 +25,6 @@ $(document).ready(function() {
 	    todayHighlight: true
 	});
 	
-	
 	//Cargar trayectos pasajero
 	$.ajax({
 		url: "../operations/getJourneysPassenger.php",

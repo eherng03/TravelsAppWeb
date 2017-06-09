@@ -51,5 +51,12 @@
 			return $this->departureDate;
 		}
 
+		public function getID(){
+			return $this->journeyID;
+		}
+
+		public function getTripID(){
+			return $this->tripID;
+		}
 	}
 ?>
