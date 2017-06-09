@@ -7,7 +7,7 @@
 		private $price;
 		private $journeys;
 		private $initDate;
-		private $arrivalDate; //TODO al crear uno es la fecha del ultimo destino
+		private $arrivalDate; 
 		private $seats;
 
 		public function __construct($origin, $destination, $driverUsername){
@@ -16,6 +16,7 @@
 			$this->driverUsername = $driverUsername;
 			$this->journeys = array();
 			$this->price = 0;
+			$this->cancelled = 0;
 		}
 
 		public function addJourney($journey){
@@ -42,6 +43,19 @@
 			return $this->seats;
 		}
 
+		public function setArrivalDate($arrivalDate){
+			$this->arrivalDate = $arrivalDate;
+		}
+
+		public function setInitDate($initDate){
+			$this->initDate = $initDate;
+		}
+
+
+		public function setSeats($minNumberSeats){
+			$this->seats = $minNumberSeats;
+		}
+
 		public function getArrivalDate(){
 			return $this->arrivalDate;
 		}
@@ -50,8 +64,8 @@
 			return $this->initDate;
 		}
 
-		public function setSeats($minNumberSeats){
-			$this->seats = $minNumberSeats;
+		public function getJourneys(){
+			return $this->journeys;
 		}
 	}
 ?>

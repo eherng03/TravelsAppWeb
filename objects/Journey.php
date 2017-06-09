@@ -1,7 +1,7 @@
 <?php
 //TRAYECTO
 	class Journey{ 
-		private $tripID;		//??	Hay que saber a que viaje pertenece de alguna manera para obteer el conductor
+		private $tripID;
 		private $journeyID;
 		public $origin;
 		public $destination;
@@ -23,6 +23,13 @@
 			$this->cost = $cost;
 		}
 
+		public function getDepartureDate(){
+			return $departureDate;
+		}
+
+		public function getArrivalDate(){
+			return $arrivalDate;
+		}
 		
 
 

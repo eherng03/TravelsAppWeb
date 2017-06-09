@@ -10,7 +10,7 @@
 		public $journeys;
 		public $numberJourneys;
 		public $scoreAverage;
-		public $coments;
+		public $comments;
 
 		public function __construct($name, $email, $user, $telephone, $dni, $photo){
 			$this->name = $name;
@@ -19,6 +19,8 @@
 			$this->telephone = $telephone;
 			$this->dni = $dni;
 			$this->photo = $photo;
+			$this->score = 0;
+			$this->comemnts = array();
 		}
 
 		//TODO here needed getters and setters
