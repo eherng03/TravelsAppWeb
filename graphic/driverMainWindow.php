@@ -26,6 +26,12 @@
 		
     </head>
     <body>
+	<?php if(isset($_GET['create']) && $_GET['create'] === "no"){?>
+                <script>alert("ERROR AL CREAR VIAJE.");</script>
+        <?php }?>
+        <?php if(isset($_GET['create']) && $_GET['create'] === "yes"){?>
+                <script>alert("VIAJE CREADO CORRECTAMENTE.");</script>
+        <?php }?>
         <header class = "Header">
             <nav class="navbar navbar-default navbar-fixed-top">
   				<div class="container-fluid">
