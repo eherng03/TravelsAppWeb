@@ -1,7 +1,7 @@
 <?php
 //TRAYECTO
 	class Journey{ 
-		private $tripID;
+		public $tripID;
 		private $journeyID;
 		public $origin;
 		public $destination;
