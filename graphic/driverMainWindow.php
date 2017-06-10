@@ -53,6 +53,9 @@
 			        	<li><a class = "score-button" href="#">
 			        		Mis valoraciones
 			        	</a></li>
+					<li><a href="initWindow.php">
+						Cerrar sesion
+					</a></li>
 			      	</ul>
 			      	<!-- Chat. Si no hay mensajes no sale nada-->
 			      	<ul class="nav navbar-nav navbar-right">
@@ -98,7 +101,8 @@
                                     </div>
                                     <hr>
                                 </div>
-                                
+                                <input type="hidden" name="nDests" id = "nDests">
+                                <input type="hidden" name = "driver" id="driver">
                                 <div>
                                     <input class="btn" type="button" value="Añadir Parada" id="addDest"/>
                                 </div>
@@ -109,10 +113,8 @@
                         </div>
                     </div>
                 </div>
-
-				</div>
 				
-				<!--MIS TRAYECTOS-->
+		<!--MIS TRAYECTOS-->
                 <div class="journeys-container">
                     <div class = "journeys-content">
                         <h1 class = "section-title">Viajes</h1>
