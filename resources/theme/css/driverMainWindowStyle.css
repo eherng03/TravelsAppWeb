@@ -112,3 +112,13 @@ header {
     border-radius: 0px;
     margin-bottom: 10px;
 }
+.Journey{
+  margin: 5px;
+  padding: 12px 22px 12px 22px;
+  border: 1px solid #8A4040;
+  border-radius: 4px;
+}
+
+td{
+  padding: 12px 22px 12px 22px;
+}
