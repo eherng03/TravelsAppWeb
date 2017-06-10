@@ -1,8 +1,8 @@
 var userLog;
 
 $(document).ready(function() {
-	userLog = $("#hdnSession").val(); //Username del conductor
-	
+    userLog = $("#hdnSession").val(); //Username del conductor
+
     //Rellena el select de origenes
     $.get("../operations/selectJourneySearch.php", function(data) {
         var comboBox = document.getElementById("origin");
@@ -40,29 +40,21 @@ $(document).ready(function() {
         $.ajax({
             url: "../operations/getSearchResults.php",
             type: 'POST',
-            data: {"origin": origin, "destination": destination, "dateStart": milsStart, "dateEnd": milsEnd, "userNameLogged": userLog},
+            data: {"origin": origin, "destination": destination, "dateStart": milsStart, "dateEnd": milsEnd, userNameLogged: userLog},
+            
             success: function(data){
                 var containerSearchResult = document.getElementById("searchResult");
                 while(containerSearchResult.firstChild){
                     containerSearchResult.removeChild(containerSearchResult.firstChild);
                 }
-                $(containerSearchResult).append(data);
+                $("#searchResult").append(data);
             }
         });
-	});
-        
-		/*
-        $.ajax({
-            url: 'templateJourney.php',
-            type: 'POST',
-            data: {'trip': trip, 'driver': driver},
-            success: function(data){
-                data.appendTo('#searchResult');
-            }
-        });*/
-    
+    });
+
 });
 
-/*function bookClicked(){
-	alert("hola");
-}*/
+$(document).on('click', '#bookBtn', function(){ 
+    var idTrip = $(this).attr('idTrip');
+    var idsJourney = $(this).attr('idsJourneys');
+});
