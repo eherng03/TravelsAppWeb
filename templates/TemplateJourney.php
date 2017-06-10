@@ -31,7 +31,7 @@
 							  <td>Día y hora de salida: ".date('D, d M Y H:i', $trip->getInitDate())." Día y hora de llegada: ".date('D, d M Y H:i', $trip->getArrivalDate())."</td>
 							</tr>	
 						</table>";
-			if($userNameLogged != '-'){
+			if($userNameLogged != '-' && $userNameLogged != "reserved"){
 				$journeysID = array();
 				$journeys = $trip->getJourneys();
 				foreach ($journeys as $journey) {
@@ -44,6 +44,8 @@
 					$journeysIDString .= " ";
 				}
 				$html .= "<input class='book-button' type='button' value='Reservar' id = 'bookBtn' idTrip = '".$trip->getJourneys()[0]->getTripID()."' idsJourneys = '".$journeysIDString."'>";
+			}elseif($userNameLogged == "reserved"){
+				$html .= "<input class='cancel-button' type='button' value='Anular' id = 'cancelBtn' idTrip = '".$trip->getTripID()."' idsJourneys = '".$trip->getID()."'>";
 			}
 			$html .= "</div>";
 		   	return $html;	
