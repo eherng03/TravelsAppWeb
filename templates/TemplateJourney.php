@@ -12,7 +12,6 @@
 		}
 		
 		public function getTemplate($driver, $trip, $userNameLogged){
-			
 		   	$html = "<div class = 'Journey'> 
 						<table>
 							<tr>
@@ -29,7 +28,7 @@
 							
 							<tr>
 												
-							  <td>Día y hora de salida: ".$trip->getInitDate()." Día y hora de llegada: ".$trip->getArrivalDate()."</td>
+							  <td>Día y hora de salida: ".date('D, d M Y H:i', $trip->getInitDate())." Día y hora de llegada: ".date('D, d M Y H:i', $trip->getArrivalDate())."</td>
 							</tr>	
 						</table>";
 			if($userNameLogged != '-'){
@@ -66,7 +65,7 @@
 							
 							<tr>
 												
-							  <td>Día y hora de salida: ".$journey->getInitDate()." Día y hora de llegada: ".$journey->getArrivalDate()."</td>
+							  <td>Día y hora de salida: ".date('D, d M Y H:i', $journey->getInitDate())." Día y hora de llegada: ".date('D, d M Y H:i', $journey->getArrivalDate())."</td>
 							</tr>	
 						</table>
 					</div>";
