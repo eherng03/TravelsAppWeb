@@ -73,7 +73,7 @@
 					$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
 				}
 				$templateJourney = TemplateJourney::getInstance();
-				$templateshtml .= $templateJourney->getTemplate($driver, $trip, $userNameLogged);
+				$templateshtml .= $templateJourney->getTemplate($driver, $trip, $userNameLogged, $cancelled);
 			}
 			echo $templateshtml;
 	    } 
