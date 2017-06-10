@@ -46,7 +46,13 @@
 		$resultJourney = $journeyControl->insertJourney($tripID, $jour->getID() , $jour->getDepartureDate(), $jour->getArrivalDate(), $jour->getPrice(), $jour->getSeats(), $jour->getOrigin(), $jour->getDestination());	
 	}
 
-
+	if($resultJourney == 0){
+		header("Location: ../graphic/driverMainWindow.php?create=yes");
+		exit();
+	}else{
+		header("Location: ../graphic/driverMainWindow.php?create=no");
+		exit();
+	}
 	//print_r("Viaje insertado correctamente.");
 
 ?>
