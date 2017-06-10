@@ -11,7 +11,7 @@
 			return self::$instance;
 		}
 		
-		public function getTemplate($driver, $trip, $userNameLogged){
+		public function getTemplate($driver, $trip, $userNameLogged, $cancelled){
 		   	$html = "<div class = 'Journey'> 
 						<table>
 							<tr>
@@ -29,8 +29,14 @@
 							<tr>
 												
 							  <td>Día y hora de salida: ".date('D, d M Y H:i', $trip->getInitDate())." Día y hora de llegada: ".date('D, d M Y H:i', $trip->getArrivalDate())."</td>
-							</tr>	
-						</table>";
+							</tr>";
+			if($cancelled == 1){
+				$html .= "<tr>				
+							<td>Cancelado</td>
+						</tr>";
+			}
+
+			$html .= "</table>"; 
 			if($userNameLogged != '-' && $userNameLogged != "reserved"){
 				$journeysID = array();
 				$journeys = $trip->getJourneys();
@@ -51,9 +57,8 @@
 		   	return $html;	
 		}
 
-		public function getTemplateForDriver($journey, $trip){
-			
-		   	return "<div class = 'Journey'> 
+		public function getTemplateForDriver($journey, $trip, $cancelled){
+		   	$html = "<div class = 'Journey'> 
 						<table>
 							<tr>
 								<td>Viaje: ".$trip->getOrigin()."-".$trip->getDestination()."</td>
@@ -68,9 +73,16 @@
 							<tr>
 												
 							  <td>Día y hora de salida: ".date('D, d M Y H:i', $journey->getInitDate())." Día y hora de llegada: ".date('D, d M Y H:i', $journey->getArrivalDate())."</td>
-							</tr>	
-						</table>
+							</tr>";
+			if($cancelled == 1){
+				$html .= "<tr>				
+							<td>Cancelado</td>
+						</tr>";
+			}
+			$html .= "</table>
 					</div>";
+
+			return $html;
 		}
 	}
 	
