@@ -50,7 +50,7 @@
 					$journeysIDString .= " ";
 				}
 				$html .= "<input class='book-button' type='button' value='Reservar' id = 'bookBtn' idTrip = '".$trip->getJourneys()[0]->getTripID()."' idsJourneys = '".$journeysIDString."'>";
-			}elseif($userNameLogged == "reserved"){
+			}elseif($userNameLogged == "reserved" && $cancelled == 0){
 				$html .= "<input class='cancel-button' type='button' value='Anular' id = 'cancelBtn' idTrip = '".$trip->getTripID()."' idJourney = '".$trip->getID()."'>";
 			}
 			$html .= "</div>";
