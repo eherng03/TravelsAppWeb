@@ -99,6 +99,25 @@
 			
 			$result = $connection->query("INSERT INTO journeys(tripID, journeyID, departureDate, arrivalDate, price, nSeats, origin, destination) VALUES ('$tripID', '$journeyID', '$departureDate', '$arrivalDate', '$price', '$nSeats', '$origin', '$destination')");
 		}
+		
+		function getJourneysIDbyOriginAndTrip($origin, $tripID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+			$query = $connection->query("SELECT journeyID FROM journeys WHERE (origin = '$origin') AND (tripID = '$tripID')");
+
+		    return $query;
+		}
+
+		function getJourneysDatabyJourneyAndTrip($journeyID, $tripID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+			$query = $connection->query("SELECT * FROM journeys WHERE (journeyID >= '$journeyID') AND (tripID = '$tripID')");
+
+		    return $query;
+		}
+	
 	}
 ?>
 
