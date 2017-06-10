@@ -1,7 +1,7 @@
 <?php
 	class Trip{ 
-		private $origin;
-		private $destination;
+		public $origin;
+		public $destination;
 		private $driverUsername; 
 		private $cancelled; 
 		private $price;
