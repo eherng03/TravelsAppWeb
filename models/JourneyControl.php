@@ -39,6 +39,15 @@
 		    return $query;
 		}
 
+		function getJourneysByOriginAndDate($origin, $dateStart, $dateEnd){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+			$query = $connection->query("SELECT * FROM journeys WHERE origin = '$origin' AND departureDate >= '$dateStart' AND departureDate < '$dateEnd'");
+
+		    return $query;
+		}
+
 		function getJourneysByTripAndDest($tripID, $destination){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
