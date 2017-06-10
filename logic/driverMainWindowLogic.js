@@ -49,8 +49,7 @@ $(document).ready(function($) {
 	//Añadir paradas
 	$("#addDest").click(function(event) {
 		//TODO cambiar si sobra tiempo
-		$("#destinations").html($("#destinations").html()+
-			"<label>Destino "+nDests+"</label>"+
+		$("#destinations").append("<label>Destino "+nDests+"</label>"+
 			"<input class='form-control' placeholder='Destino' name='dest"+nDests+"' type='text' id='dest"+nDests+"' required/>"+
 			"<label>Numero de asientos</label>"+
 			"<input class='form-control' placeholder='Numero de asientos' name='nSeats"+nDests+"' type='text' id='nSeats"+nDests+"' required/>"+
@@ -63,6 +62,45 @@ $(document).ready(function($) {
 			"</div> <hr>");
 			nDests += 1;
 	});
+	
+	//Cargar trayectos pasajero
+	$.ajax({
+		url: "../operations/getJourneysDriverShow.php",
+		type: 'POST',
+		data: {"username": $('#hdnSession').val()},
+		success: function(data){
+			var containerJourneys = document.getElementById("journeys");
+
+			$(containerJourneys).append(data);
+		}
+	});
+	
+	
+	//Viajes que se pueden cancelar
+	$.get("../operations/selectTripsCancel.php", {"username": $('#hdnSession').val()}).done(function(data) {
+        var comboBox = document.getElementById("cancel");
+        var trips = JSON.parse(data);
+
+        trips.forEach((trip) =>{
+            var opt = document.createElement('option');
+            //TODO funciona porque origen es privado
+            opt.innerHTML = trip.origin +"-"+ trip.destination;
+            comboBox.appendChild(opt);
+        });
+    });
+	
+	//Viajes que se pueden borrar
+	$.get("../operations/selectTripsDelete.php", {"username": $('#hdnSession').val()}).done(function(data) {
+        var comboBox = document.getElementById("delete");
+		var trips = JSON.parse(data);
+
+        trips.forEach((trip) =>{
+            var opt = document.createElement('option');
+            //TODO funciona porque origen es privado
+            opt.innerHTML = trip.origin +"-"+ trip.destination;
+            comboBox.appendChild(opt);
+        });
+    });
 
 /**
 	$("#createBtn").click(function(event) {
