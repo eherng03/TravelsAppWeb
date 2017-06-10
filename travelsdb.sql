@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2017 a las 11:09:47
+-- Tiempo de generación: 10-06-2017 a las 18:08:41
 -- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 7.1.2
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -100,14 +100,6 @@ CREATE TABLE `journeypassengers` (
   `username` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `journeypassengers`
---
-
-INSERT INTO `journeypassengers` (`tripID`, `journeyID`, `username`) VALUES
-(1, 1, 'EvaHergar'),
-(2, 2, 'EvaHergar');
-
 -- --------------------------------------------------------
 
 --
@@ -124,16 +116,6 @@ CREATE TABLE `journeys` (
   `origin` varchar(40) CHARACTER SET utf8 NOT NULL,
   `destination` varchar(40) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `journeys`
---
-
-INSERT INTO `journeys` (`tripID`, `journeyID`, `departureDate`, `arrivalDate`, `price`, `nSeats`, `origin`, `destination`) VALUES
-(1, 1, '06/06/2017', '06/06/2017', 20, 3, 'Leon', 'Valladolid'),
-(1, 2, '06/062017', '06/06/2017', 20, 3, 'Valladolid', 'Madrid'),
-(2, 1, 'Hoy', 'Mañana', 1, 1, 'Cusca de Alba', 'Cusca de Eva'),
-(2, 2, 'Maniana', 'Pasado', 2, 2, 'Cusca de Eva', 'Cusca de Mario');
 
 -- --------------------------------------------------------
 
@@ -167,14 +149,6 @@ CREATE TABLE `trips` (
   `destination` varchar(40) CHARACTER SET utf8 NOT NULL,
   `cancelled` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `trips`
---
-
-INSERT INTO `trips` (`tripID`, `driverUsername`, `origin`, `destination`, `cancelled`) VALUES
-(1, 'abanod', 'Leon', 'Madrid', 0),
-(2, 'abanod', 'Cusca de Alba', 'Cusca de Eva', 0);
 
 -- --------------------------------------------------------
 
@@ -278,7 +252,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `tripID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tripID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Restricciones para tablas volcadas
 --
