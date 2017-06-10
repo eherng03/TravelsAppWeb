@@ -1,7 +1,6 @@
 <?php
 
 	class TemplateJourney{
-
 		private static $instance;
 		private function __construct(){}
 		
@@ -12,7 +11,7 @@
 			return self::$instance;
 		}
 		
-		public function getTemplate($driver, $journey, $userNameLogged){
+		public function getTemplate($driver, $trip, $userNameLogged){
 			
 		   	$html = "<div class = 'Journey'> 
 						<table>
@@ -20,30 +19,33 @@
 							  <td> <img src= '../resources/userImages/".$driver->photo."'/>
 								Nombre: ".$driver->name."	
 								</td>
-								 <td>Trayecto: ".$journey->getOrigin()."-".$journey->getDestination()."</td>
+								 <td>Trayecto: ".$trip->getOrigin()."-".$trip->getDestination()."</td>
 							</tr>					
 							<tr>
 							 
-							<td>Precio: ".$journey->getPrice()."€</td>
-							<td>Nº plazas disponibles: ".$journey->getSeats()."</td>
+							<td>Precio: ".$trip->getPrice()."€</td>
+							<td>Nº plazas disponibles: ".$trip->getSeats()."</td>
 							</tr>
 							
 							<tr>
 												
-							  <td>Día y hora de salida: ".$journey->getInitDate()." Día y hora de llegada: ".$journey->getArrivalDate()."</td>
+							  <td>Día y hora de salida: ".$trip->getInitDate()." Día y hora de llegada: ".$trip->getArrivalDate()."</td>
 							</tr>	
 						</table>";
-						
 			if($userNameLogged != '-'){
 				$journeysID = array();
-				$journeys = $journey->getJourneys();
+				$journeys = $trip->getJourneys();
 				foreach ($journeys as $journey) {
 					array_push($journeysID, $journey->getID());
 				}
-				$html .= "<input class='book-button' type='button' value='Reservar' id = 'bookBtn' onclick = 'bookClicked()''>
-					<input type='hidden' id='journeyID' value=".json_encode($journeysID)."/>";
+				
+				$journeysIDString = "";
+				foreach ($journeysID as $journeyID) {
+					$journeysIDString .= $journeyID;
+					$journeysIDString .= " ";
+				}
+				$html .= "<input class='book-button' type='button' value='Reservar' id = 'bookBtn' onclick = 'bookClicked()' idTrip = '".$trip->getJourneys()[0]->getTripID()."' idsJourneys = '".$journeysIDString."'>";
 			}
-			
 			$html .= "</div>";
 		   	return $html;	
 		}
