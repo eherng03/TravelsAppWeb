@@ -36,6 +36,20 @@
 			$query = $connection->query("SELECT username FROM journeypassengers WHERE journeyID = '$journey'");
 			return $query;
 		}
+		
+		function getTripsToCancel($driverID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT * FROM trips WHERE tripID = (SELECT tripID FROM journeys WHERE ");
+			return $query;
+		}
+		
+		function getTripsToDelete($driverID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT * FROM trips WHERE driverUsername = '$driverID'");
+			return $query;
+		}
 			
 
 	}

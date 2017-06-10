@@ -23,7 +23,6 @@
 		    return $query;
 		}
 
-
 		function getTripByJourneyID($journeyID){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
@@ -58,11 +57,29 @@
 		    return $query;
 		}
 		
+		function getJourneyInfoByTripIDandJourneyID($tripID,$journeyID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+			$query = $connection->query("SELECT * FROM Journeys WHERE tripID = '$tripID' AND journeyID = '$journeyID'");
+
+		    return $query;
+		}
+		
 		function getJourneysByPassenger($username){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
-			$query = $connection->query("SELECT * FROM Journeys WHERE JourneyID = (SELECT JourneyID FROM JourneyPassengers WHERE username = '$username')");
+			$query = $connection->query("SELECT * FROM JourneyPassengers WHERE username = '$username'");
+
+		    return $query;
+		}
+		
+		function getJourneysByDriver($username){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+			$query = $connection->query("SELECT * FROM journeys WHERE tripID IN (SELECT tripID FROM trips WHERE driverUsername = '$username')");
 
 		    return $query;
 		}
