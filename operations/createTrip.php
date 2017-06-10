@@ -47,6 +47,6 @@
 	}
 
 
-	print_r("Viaje insertado correctamente.");
+	//print_r("Viaje insertado correctamente.");
 
 ?>
