@@ -4,7 +4,9 @@ $(document).ready(function($) {
 	userLog = $("#hdnSession").val();		//Username del conductor
 	$(".create-container").hide();
 	$(".score-container").hide();
+	
 	window.nDests = 2;
+	$("#driver").val(userLog);
 
 	$(".journeys-button").click(function(event) {
 		//Si pulso en ver trayectos se esconden las demás opciones
@@ -48,6 +50,7 @@ $(document).ready(function($) {
 
 	//Añadir paradas
 	$("#addDest").click(function(event) {
+		nDests += 1;
 		//TODO cambiar si sobra tiempo
 		$("#destinations").append("<label>Destino "+nDests+"</label>"+
 			"<input class='form-control' placeholder='Destino' name='dest"+nDests+"' type='text' id='dest"+nDests+"' required/>"+
@@ -60,7 +63,8 @@ $(document).ready(function($) {
 				"<input type='text' class='form-control' placeholder='Fecha' name='date"+nDests+"' id='date"+nDests+"' required>"+
 				"<span class='input-group-addon'><i class='glyphicon glyphicon-th'></i></span>"+
 			"</div> <hr>");
-			nDests += 1;
+		
+		$("#nDests").val(nDests);
 	});
 	
 	//Cargar trayectos pasajero
