@@ -5,7 +5,7 @@ $(document).ready(function($) {
 	$(".create-container").hide();
 	$(".score-container").hide();
 	
-	window.nDests = 2;
+	window.nDests = 1;
 	$("#driver").val(userLog);
 
 	$(".journeys-button").click(function(event) {
