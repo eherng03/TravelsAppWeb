@@ -2,15 +2,18 @@
 	include "../models/JourneyPassengersControl.php";
 
 	$idTrip = $_POST['idTrip'];
-	$idsJourneyString = $_POST['idsJourneys'];
+	$idsJourneyString = $_POST['idsJourney'];
 	//$idTrip = 1;
 	//$idsJourneyString = "1 2 ";
-	$idsJourneys = split("[ ]+", $idsJourneyString);
-	array_pop($idsJourneys);
-	$username = $_POST['userName'];
+	$idsJourney = split("[ ]+", $idsJourneyString);
+	array_pop($idsJourney);
+	$username = $_POST['username'];
 	//$username = "alba";
+	print_r($username);
+	print_r($idsJourney);
+	print_r($idTrip);
 	$journeyPassengersControl = JourneyPassengersControl::getInstance();
-	foreach ($idsJourneys as $idJourney) {
+	foreach ($idsJourney as $idJourney) {
 		$journeyPassengersControl->insertPassenger($idTrip, $idJourney, $username);
 	}
 	
