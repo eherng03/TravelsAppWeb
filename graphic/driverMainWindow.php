@@ -124,21 +124,44 @@
                 <div class="journeys-container">
                     <div class = "journeys-content">
                         <h1 class = "section-title">Viajes</h1>
-						<div class = "journeys-content">
-							<p>Aqui salen todos los trayectos del conductor con lasplantilals</p>
+						<div class = "journeys-content" id="journeys">
                        	</div>
                     </div>
                 </div>
+				
+				<!--CANCELAR/BORRAR-->
+                <div class="journeys-container">
+                    <div class = "journeys-content">
+                        <h1 class = "section-title">Cancelar / Borrar Viajes</h1>
+						<div class = "journeys-content" id="select-container">
+							
+							Cancelar (tiene pasajeros apuntados)
+							<select class="form-control" id="cancel">
+								<option>---</option>
+                            </select>
+							<input type="button" value="Cancelar" id="cancelButton"/>
+							
+							<br>
+							Borrar (no tiene pasajeros apuntados)
+							<select class="form-control" id="delete">
+								<option>---</option>
+                            </select>
+							<input type="button" value="Borrar" id="deleteButton"/>
+						
+                       	</div>
+                    </div>
+                </div>
+				
 				
 				 <!--VALORACIONES-->
                 <div class="score-container">
               
                     <div class = "scores-content">
                         <h1 class = "section-title">Mis valoraciones</h1>
-                            <div class = "average" id="divAverage">
+                            <div class = "average">
 
                             </div>
-							<div class = "comments" id="divComments">
+							<div class = "comments">
 								
 							</div>
                     </div>
