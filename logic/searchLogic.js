@@ -81,3 +81,18 @@ $(document).on('click', '#bookBtn', function(){
             }
         });
 });
+
+$(document).on('click', '#cancelBtn', function(){ 
+    var idTrip = $(this).attr('idTrip');
+    var idJourney = $(this).attr('idJourney');
+     $.ajax({
+            url: "../operations/unbook.php",
+            type: 'POST',
+            data: {"idTrip": idTrip, "idJourney": idJourney, "username": userLog},
+            
+            success: function(data){
+                alert("Ha cancelado su trayecto");
+                location.reload();
+            }
+        });
+});
