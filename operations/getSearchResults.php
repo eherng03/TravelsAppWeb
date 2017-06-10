@@ -9,11 +9,13 @@
     
     $origin = $_POST['origin'];
    	$destination = $_POST['destination'];
-   	$userNameLogged = $_POST['userNameLogged'];
+	$userNameLogged = $_POST['userNameLogged'];
+
     //acceso a la BBDD
     $journeyControl = JourneyControl::getInstance();
     //Tenemos todos los journeys con el mismo origen almacenados
     $result = $journeyControl->getJourneysByOrigin($origin);
+
     //Miramos a ver si en el trip al que pertenece el  journey existe el destino de la busqueda
     //$journeys = array();
     while ($row = $result->fetch_array()){

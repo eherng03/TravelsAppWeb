@@ -10,33 +10,33 @@
     $journeyControl = JourneyControl::getInstance();
 	$templateJourney = TemplateJourney::getInstance();
 	$userControl = UserControl::getInstance();
+	$tripControl = TripControl::getInstance();
 	
-    $journeysQuery = $journeyControl->getJourneysByPassenger($_POST['username']);      
-
-	$tripControl = TripControl::getInstance();	
-
-    $journeys = array();
 	$templateshtml = "";
-	$i = 0;
+    $journeysQuery = $journeyControl->getJourneysByPassenger($_POST['username']);      
     while ($row = $journeysQuery->fetch_array()){
-        array_push($journeys, new Journey($row['tripID'], $row['journeyID'], $row['departureDate'], $row['arrivalDate'], $row['origin'], $row['destination'], $row['nSeats'], $row['price']));
+		$tripID = $row['tripID'];
+		$jID = $row['journeyID'];
 		
-		//Obtener driverUsername 
-		$driverUsernameQuery = $tripControl->getDriverUsername($row['tripID']);
-		while($rowDriverUsername = $driverUsernameQuery->fetch_array()){
-			$driverUsername = $rowDriverUsername['driverUsername'];
+		$journeyQuery2 = $journeyControl->getJourneyInfoByTripIDandJourneyID($tripID,$jID);
+        while ($row2 = $journeyQuery2->fetch_array()){
+			$j = new Journey($row2['tripID'], $row2['journeyID'], $row2['departureDate'], $row2['arrivalDate'], $row2['origin'], $row2['destination'], $row2['nSeats'], $row2['price']);
+		
+			//Obtener driverUsername 
+			$driverUsernameQuery = $tripControl->getDriverUsername($row['tripID']);
+			while($rowDriverUsername = $driverUsernameQuery->fetch_array()){
+				$driverUsername = $rowDriverUsername['driverUsername'];
+			}
+		
+			$driverData = $userControl->getUserByUserName($driverUsername);
+		
+			$driver = null;		
+			while($rowDriverData = $driverData->fetch_array()){
+				$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
+			}
+		
+			$templateshtml .= $templateJourney->getTemplate($driver, $j, "-");
 		}
-		
-		$driverData = $userControl->getUserByUserName($driverUsername);
-		
-		$driver = null;		
-		while($rowDriverData = $driverData->fetch_array()){
-			$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
-		}
-		
-		
-		$templateshtml .= $templateJourney->getTemplate($driver, $journeys[$i], "-");
-		$i += 1;
     }
 	
 	echo $templateshtml;
