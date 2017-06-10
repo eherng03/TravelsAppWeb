@@ -102,20 +102,4 @@ $(document).ready(function($) {
         });
     });
 
-/**
-	$("#createBtn").click(function(event) {
-		var origin = $("#origin").val();
-		var date = $("#datepickerDest").datepicker( "getDate" );
-        var milsStart = date.getTime();
-        var destination = $("#destination").val();
-        $.ajax({
-            url: 'createTrip.php',
-            type: 'POST',
-            data: {'origin': origin, 'driver': driver},
-            success: function(data){
-                data.appendTo('#searchResult');
-            }
-        });
-	});
-	*/
 });
