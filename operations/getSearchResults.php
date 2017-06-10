@@ -10,11 +10,13 @@
     $origin = $_POST['origin'];
    	$destination = $_POST['destination'];
    	$userNameLogged = $_POST['userNameLogged'];
+   	$dateStart = $_POST['dateStart']/1000;
+   	$dateEnd = $_POST['dateEnd']/1000;
    	$templateshtml = "";
     //acceso a la BBDD
     $journeyControl = JourneyControl::getInstance();
     //Tenemos todos los journeys con el mismo origen almacenados
-    $result = $journeyControl->getJourneysByOrigin($origin);
+    $result = $journeyControl->getJourneysByOriginAndDate($origin, $dateStart, $dateEnd);
     //Miramos a ver si en el trip al que pertenece el  journey existe el destino de la busqueda
     //$journeys = array();
     while ($row = $result->fetch_array()){
