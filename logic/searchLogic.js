@@ -16,16 +16,28 @@ $(document).ready(function() {
         });
     });
 
-    //Rellena el select de destinos
-    $.get("../operations/selectJourneySearch.php", function(data) {
-        var comboBox = document.getElementById("destination");
-        var journeys = JSON.parse(data);
+    $('#origin').change(function(event) {
+        var selectedOrigin = $(this).find(":selected");
+        var trip = selectedOrigin.val();
+        var origin = selectedOrigin.text();
 
-        journeys.forEach((journey) =>{
-            var opt = document.createElement('option');
-            //TODO funciona porque origen es privado
-            opt.innerHTML = journey.destination;
-            comboBox.appendChild(opt);
+        $.ajax({
+                type: 'POST',
+                url: '../operations/getSelectDestinations.php',
+                data: {'origin': origin, "trip": trip},
+                success: function(data){
+                     $("#destination").empty();
+                    var comboBox = document.getElementById("destination");
+                    var opt = document.createElement('option');
+                    opt.innerHTML = "- - -";
+                    comboBox.appendChild(opt);
+                    var journeys = JSON.parse(data);
+                    journeys.forEach((journey) =>{
+                        var opt = document.createElement('option');
+                        opt.innerHTML = journey.destination;
+                        comboBox.appendChild(opt);
+                    });
+                }
         });
     });
 
