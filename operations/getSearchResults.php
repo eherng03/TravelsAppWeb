@@ -9,15 +9,14 @@
     
     $origin = $_POST['origin'];
    	$destination = $_POST['destination'];
-	$userNameLogged = $_POST['userNameLogged'];
-
+   	$userNameLogged = $_POST['userNameLogged'];
     //acceso a la BBDD
     $journeyControl = JourneyControl::getInstance();
     //Tenemos todos los journeys con el mismo origen almacenados
     $result = $journeyControl->getJourneysByOrigin($origin);
-
     //Miramos a ver si en el trip al que pertenece el  journey existe el destino de la busqueda
     //$journeys = array();
+	$templateshtml = "";
     while ($row = $result->fetch_array()){
     	$tripID = $row['tripID'];
     	$journeysWithTripIDandDest = $journeyControl->getJourneysByTripAndDest($tripID, $destination);
@@ -39,23 +38,19 @@
 			
 			$idJourneyOrigin = -1;
 			$idJourneyDestination = -1;
-
 			while($rowJourneys = $journeysWithTripID->fetch_array()){
 				if($rowJourneys['origin'] == $trip->getOrigin()){
 					$idJourneyOrigin = $rowJourneys['journeyID'];
 					$trip->setInitDate($rowJourneys['departureDate']);
 				}
-
 				if($idJourneyOrigin != -1 && $idJourneyOrigin <= $rowJourneys['journeyID']){
 					$trip->addPrice($rowJourneys['price']);
 				
 					if($minNumberSeats > $rowJourneys['nSeats']){
 						$minNumberSeats = $rowJourneys['nSeats'];
 					}
-
 					$trip->addJourney(new Journey($tripID, $rowJourneys['journeyID'], $rowJourneys['departureDate'], $rowJourneys['arrivalDate'], $rowJourneys['origin'], $rowJourneys['destination'], $rowJourneys['nSeats'], $rowJourneys['price']));
 				}
-
 				if($rowJourneys['destination'] == $trip->getDestination()){
 					$trip->setArrivalDate($rowJourneys['arrivalDate']);
 					break;
@@ -69,11 +64,9 @@
 				$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
 			}
 			$templateJourney = TemplateJourney::getInstance();
-			$templateshtml = "";
+			
 			$templateshtml .= $templateJourney->getTemplate($driver, $trip, $userNameLogged);
 		}
     }
-
     echo $templateshtml;
-
 ?>

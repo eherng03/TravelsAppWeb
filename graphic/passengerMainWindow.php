@@ -14,9 +14,10 @@
         <link rel="stylesheet" type="text/css" href="../resources/theme/css/chat.css">
         <!--JS-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script type='text/javascript' src='../logic/passengerMainWindowLogic.js'></script>
-        <script type='text/javascript' src='../logic/searchLogic.js'></script>
-        <script type='text/javascript' src="../logic/chatLogicPassenger.js"></script>
+		<script type='text/javascript' src='../logic/searchLogic.js'></script>
+		<script type='text/javascript' src="../logic/chatLogicPassenger.js"></script>
+		<script type='text/javascript' src='../logic/passengerMainWindowLogic.js'></script>
+        
 		
         <!--EXTERNAL-->
 		<script src='../resources/bootstrap/js/bootstrap.js'></script>
@@ -101,7 +102,7 @@
 							</div>
 							<!-- TODO AQUI VA LA FECHA -->
 							<br>
-							<input class="btn" type="submit" value="Buscar" id = "searchBtn">
+							<input class="btn" type="submit" value="Buscar" id = "searchBtn"/>
 						</form>
 						<div id = "searchResult"></div>
 					</div>

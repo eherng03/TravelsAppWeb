@@ -40,7 +40,7 @@ $(document).ready(function() {
         $.ajax({
             url: "../operations/getSearchResults.php",
             type: 'POST',
-            data: {"origin": origin, "destination": destination, "dateStart": milsStart, "dateEnd": milsEnd, userNameLogged: userLog},
+            data: {"origin": origin, "destination": destination, "dateStart": milsStart, "dateEnd": milsEnd, "userNameLogged": userLog},
             success: function(data){
                 var containerSearchResult = document.getElementById("searchResult");
                 while(containerSearchResult.firstChild){
@@ -49,6 +49,7 @@ $(document).ready(function() {
                 $(containerSearchResult).append(data);
             }
         });
+	});
         
 		/*
         $.ajax({
@@ -59,9 +60,9 @@ $(document).ready(function() {
                 data.appendTo('#searchResult');
             }
         });*/
-    });
+    
 });
 
-function bookClicked(){
+/*function bookClicked(){
 	alert("hola");
-}
+}*/

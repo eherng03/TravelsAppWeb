@@ -20,23 +20,23 @@
 							  <td> <img src= '../resources/userImages/".$driver->photo."'/>
 								Nombre: ".$driver->name."	
 								</td>
-								 <td>Trayecto: ".$trip->getOrigin()."-".$trip->getDestination()."</td>
+								 <td>Trayecto: ".$journey->getOrigin()."-".$journey->getDestination()."</td>
 							</tr>					
 							<tr>
 							 
-							<td>Precio: ".$trip->getPrice()."€</td>
-							<td>Nº plazas disponibles: ".$trip->getSeats()."</td>
+							<td>Precio: ".$journey->getPrice()."€</td>
+							<td>Nº plazas disponibles: ".$journey->getSeats()."</td>
 							</tr>
 							
 							<tr>
 												
-							  <td>Día y hora de salida: ".$trip->getInitDate()." Día y hora de llegada: ".$trip->getArrivalDate()."</td>
+							  <td>Día y hora de salida: ".$journey->getInitDate()." Día y hora de llegada: ".$journey->getArrivalDate()."</td>
 							</tr>	
 						</table>";
 						
 			if($userNameLogged != '-'){
 				$journeysID = array();
-				$journeys = $trip->getJourneys();
+				$journeys = $journey->getJourneys();
 				foreach ($journeys as $journey) {
 					array_push($journeysID, $journey->getID());
 				}
