@@ -11,6 +11,7 @@ $(document).ready(function() {
         journeys.forEach((journey) =>{
             var opt = document.createElement('option');
             //TODO funciona porque origen es privado
+            opt.value = journey.tripID;
             opt.innerHTML = journey.origin;
             comboBox.appendChild(opt);
         });
