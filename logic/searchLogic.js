@@ -57,4 +57,13 @@ $(document).ready(function() {
 $(document).on('click', '#bookBtn', function(){ 
     var idTrip = $(this).attr('idTrip');
     var idsJourney = $(this).attr('idsJourneys');
+     $.ajax({
+            url: "../operations/book.php",
+            type: 'POST',
+            data: {"idTrip": idTrip, "idsJourney": idsJourney, "username": userLog},
+            
+            success: function(data){
+                alert("Ha reservado su viaje");
+            }
+        });
 });
