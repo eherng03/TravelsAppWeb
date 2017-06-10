@@ -16,20 +16,50 @@
 		}
 
 		function getDriverUsername($tripID){
+		   $dbManager = DBManager::getInstance();
+		   $connection = $dbManager->getConnection();
+		   $query = $connection->query("SELECT driverUsername FROM trips WHERE tripID = '$tripID'");
+		   return $query;
+	  	}
+
+		public function getDriverByID($trip){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-			$query = $connection->query("SELECT driverUsername FROM trips WHERE tripID = '$tripID'");
+			$query = $connection->query("SELECT driverUsername FROM trips WHERE tripID = '$trip'");
 			return $query;
 		}
-		
+	  
+		function getTripInfoByID($tripID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT * FROM trips WHERE tripID = '$tripID'");
+			return $query;
+		}
+
+		function getTripByDriver($driverID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT tripID, destination FROM trips WHERE driverUsername = '$driverID'");
+			return $query;
+		}
+	  
+		function getTripInfoByDriver($driverID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT * FROM trips WHERE driverUsername = '$driverID'");
+			return $query;
+		}
+
+//EVA
 		function insertTrip($driverID, $origin, $destination){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("INSERT INTO trips(driverUsername, origin, destination) VALUES ('$driverID' ,'$origin','$destination')");
-			
+
 			$result = $connection->query("SELECT tripID FROM trips WHERE (driverUsername = '$driverID') AND (origin = '$origin') AND  (destination = '$destination')");
 
 			return $result;		//Devuelve el ultimo elemento (creo)
 		}
+
 	}
 ?>
