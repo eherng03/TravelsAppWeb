@@ -130,8 +130,7 @@
                         </form>
                     </div>
                 </div>
-                <input type="hidden" id="hdnSession" value= "-"
-                />
+				<input type="hidden" id="hdnSession" value= "-"/>
             <!--BUSQUEDA-->
             <div class = "search">
                 <h1 class = "search-title">Encuentra el viaje que necesitas</h1>

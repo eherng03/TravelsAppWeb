@@ -16,7 +16,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script type='text/javascript' src='../logic/passengerMainWindowLogic.js'></script>
         <script type='text/javascript' src='../logic/searchLogic.js'></script>
-        <script type='text/javascript' src='../logic/searchLogic.js'></script>
         <script type='text/javascript' src="../logic/chatLogicPassenger.js"></script>
 		
         <!--EXTERNAL-->
@@ -53,6 +52,9 @@
                         <li><a href="#"  class = "search-button">
                             Buscar viaje
                         </a></li>
+						<li><a href="initWindow.php">
+						Cerrar sesion
+						</a></li>
                     </ul>
                     <!-- Chat. Si no hay mensajes no sale nada-->
                     <ul class="nav navbar-nav navbar-right">
@@ -81,29 +83,28 @@
                 <h1 class = "search-title">Encuentra el viaje que necesitas</h1>
                 <div class = "search-content">
                     <div class="well-searchbox">
-                    <form class="form-horizontal" role="form">
+						<form class="form-horizontal" role="form">
 
-                            <label>Origen</label>
-                            <select class="form-control" id="origin">
-                                <option value="">Todos</option>
-                            </select>
-                     
-                            <label>Destino</label>
-                            <select class="form-control" id="destination">
-                                <option value="">Todos</option>
-                            </select>
+								<label>Origen</label>
+								<select class="form-control" id="origin">
+									<option value="">Todos</option>
+								</select>
+						 
+								<label>Destino</label>
+								<select class="form-control" id="destination">
+									<option value="">Todos</option>
+								</select>
 
-                        <div class="input-group date"  data-provide = "datepicker" id = "datepicker">
-                            <input type="text" class="form-control">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                        </div>
-                        <!-- TODO AQUI VA LA FECHA -->
-                        <br>
-                        <input class="btn" type="submit" value="Buscar" id = "searchBtn">
-                    </form>
-                    <div id = "searchResult">
-                    </div>
-                </div>
+							<div class="input-group date"  data-provide = "datepicker" id = "datepicker">
+								<input type="text" class="form-control">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							</div>
+							<!-- TODO AQUI VA LA FECHA -->
+							<br>
+							<input class="btn" type="submit" value="Buscar" id = "searchBtn">
+						</form>
+						<div id = "searchResult"></div>
+					</div>
                 </div>
             </div>
         </main>
