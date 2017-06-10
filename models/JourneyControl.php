@@ -117,6 +117,15 @@
 
 		    return $query;
 		}
+
+		function getJourneyDatabyJourneyAndTrip($journeyID, $tripID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+
+			$query = $connection->query("SELECT * FROM journeys WHERE (journeyID = '$journeyID') AND (tripID = '$tripID')");
+
+		    return $query;
+		}
 	
 	}
 ?>
