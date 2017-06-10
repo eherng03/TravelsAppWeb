@@ -25,9 +25,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
-                        <img src="../resources/car.png">
-                    </a>
+					
+					<ul class="nav navbar-nav">
+                        <li><a class="navbar-toggle collapsed" href="initWindow.php">
+							Cerrar sesion
+						</a></li>
+                    </ul>
+                    
+					
                 </div>
               </div>
             </nav>
