@@ -1,5 +1,5 @@
 <?php
-	class TemplateJourney{
+	class TemplateScore{
 
 		private static $instance;
 		private function __construct(){}
@@ -12,18 +12,19 @@
 		}
 		
 		public function getTemplate($comment){
-		   	return "<div class = 'comentarios'> 
+		   	return "<div class = 'puntuacion'> 
 						<table>
 							<tr>
-							  <td>Nombre:".$coment->getPassUserName()."</td>
+							  <td>Nombre: ".$comment->getPassUserName()."</td>
 							</tr> 
 							<tr>
-								<td>Puntuación:".$coment->getScore()."</td>
-							</tr>
+							  <td>Comentario: ".$comment->getComment()."</td>
+							</tr> 
 							<tr>
-								<td>Comentario:".$coment->gerComent()."</td>
+							  <td>Puntuación: ".$comment->getScore()."</td>
 							</tr> 
 						</table>
 					</div>";
 		}
+	}
 ?>

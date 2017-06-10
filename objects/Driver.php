@@ -26,6 +26,11 @@
 		//TODO here needed getters and setters
 
 		//TODO other public functions
+		
+		public function getScoreAverage(){
+			return $this->scoreAverage;
+		}
 
 	}
+
 ?>

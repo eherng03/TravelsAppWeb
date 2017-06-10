@@ -13,5 +13,14 @@
 			}
 			return self::$instance;
 		}
+
+
+		function getScoreAverage($userLog){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT score FROM drivers WHERE username = '$userLog' ");
+			 return $query;
+		}
+
 	}
 ?>

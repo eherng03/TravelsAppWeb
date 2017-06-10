@@ -11,11 +11,19 @@
 			}
 			return self::$instance;
 		}
-		
+		//Este no saca la puntuacion
 		function getCommentsByUsername($driverUsername){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT comment, passUsername FROM drivercomments WHERE driverUsername = '$driverUsername' ");
+			 return $query;
+		}
+
+		//Saca toda la fila
+		function getComments($userLog){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT driverUsername, passUsername, comment, score, commentID FROM drivercomments WHERE driverUsername = '$userLog' ");
 			 return $query;
 		}
 	}

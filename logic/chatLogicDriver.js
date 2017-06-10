@@ -1,11 +1,11 @@
-var userLog;
+var userLog = "EvaHergar";
 var logInfo = [];
 var usersInfo = [];
 
 /** Document ready **/
 $(document).ready( function() {
 	$("#sidebar_secondary").hide(); //Ocultamos el chat
-	userLog = $("#hdnSession").val();		//Username del conductor
+	//userLog = $("#hdnSession").val();		//Username del conductor
 	getLogInfo();
 	getTripId();
 
@@ -54,14 +54,14 @@ function getTripId(){
 				$(html).appendTo("#navBar");
 				var html1 = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-comment"></span>Chats - '+destination+'<span class="caret"></span></a>';
 				$(html1).appendTo('#n_chats'+destination+'');
-				getJourneys(tripID, destination);
+				getPassengers(tripID, destination);
 				
 			});
 		});
 }
 
 
-
+/*
 function getJourneys(tripID, destination){
 	
 	var formData = {
@@ -82,7 +82,7 @@ function getJourneys(tripID, destination){
 			});
 		});
 }
-
+*/
 
 function getPassengers(journey, destination) {
 

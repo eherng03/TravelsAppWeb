@@ -53,9 +53,6 @@
 			        	<li><a class = "score-button" href="#">
 			        		Mis valoraciones
 			        	</a></li>
-						<li><a href="initWindow.php">
-						Cerrar sesion
-						</a></li>
 			      	</ul>
 			      	<!-- Chat. Si no hay mensajes no sale nada-->
 			      	<ul class="nav navbar-nav navbar-right">
@@ -63,9 +60,6 @@
 			          	<ul class="dropdown-menu dropdown-cart" role="menu" id="chats"></ul>
 			        </li>
 			      </ul>
-				  <input type="hidden" id="hdnSession" value= 
-						<?php echo $_SESSION['username']; ?>
-				   />	
 			    </div>
 			  </div>
 			</nav>
@@ -116,50 +110,27 @@
                     </div>
                 </div>
 
-				</div>	
+				</div>
 				
 				<!--MIS TRAYECTOS-->
                 <div class="journeys-container">
                     <div class = "journeys-content">
                         <h1 class = "section-title">Viajes</h1>
-						<div class = "journeys-content" id="journeys">
+						<div class = "journeys-content">
+							<p>Aqui salen todos los trayectos del conductor con lasplantilals</p>
                        	</div>
                     </div>
                 </div>
-				
-				<!--CANCELAR/BORRAR-->
-                <div class="journeys-container">
-                    <div class = "journeys-content">
-                        <h1 class = "section-title">Cancelar / Borrar Viajes</h1>
-						<div class = "journeys-content" id="select-container">
-							
-							Cancelar (tiene pasajeros apuntados)
-							<select class="form-control" id="cancel">
-								<option>---</option>
-                            </select>
-							<input type="button" value="Cancelar" id="cancelButton"/>
-							
-							<br>
-							Borrar (no tiene pasajeros apuntados)
-							<select class="form-control" id="delete">
-								<option>---</option>
-                            </select>
-							<input type="button" value="Borrar" id="deleteButton"/>
-						
-                       	</div>
-                    </div>
-                </div>
-				
 				
 				 <!--VALORACIONES-->
                 <div class="score-container">
               
                     <div class = "scores-content">
                         <h1 class = "section-title">Mis valoraciones</h1>
-                            <div class = "average">
+                            <div class = "average" id="divAverage">
 
                             </div>
-							<div class = "comments">
+							<div class = "comments" id="divComments">
 								
 							</div>
                     </div>
@@ -198,5 +169,5 @@
                 </div>
             </div>
         </aside>
-		
+
 </body>
