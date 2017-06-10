@@ -84,7 +84,12 @@
 		    return $query;
 		}
 
-		
+		function insertJourney($tripID, $journeyID, $departureDate, $arrivalDate, $price, $nSeats, $origin, $destination){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			
+			$result = $connection->query("INSERT INTO journeys(tripID, journeyID, departureDate, arrivalDate, price, nSeats, origin, destination) VALUES ('$tripID', '$journeyID', '$departureDate', '$arrivalDate', '$price', '$nSeats', '$origin', '$destination')");
+		}
 	}
 ?>
 
