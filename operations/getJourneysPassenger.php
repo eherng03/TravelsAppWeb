@@ -35,7 +35,7 @@
 				$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
 			}
 		
-			$templateshtml .= $templateJourney->getTemplate($driver, $j, "-");
+			$templateshtml .= $templateJourney->getTemplate($driver, $j, "reserved");
 		}
     }
 	
