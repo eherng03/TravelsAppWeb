@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2017 a las 18:08:41
+-- Tiempo de generación: 11-06-2017 a las 01:21:06
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -100,6 +100,14 @@ CREATE TABLE `journeypassengers` (
   `username` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `journeypassengers`
+--
+
+INSERT INTO `journeypassengers` (`tripID`, `journeyID`, `username`) VALUES
+(13, 1, 'EvaHergar'),
+(13, 2, 'EvaHergar');
+
 -- --------------------------------------------------------
 
 --
@@ -116,6 +124,15 @@ CREATE TABLE `journeys` (
   `origin` varchar(40) CHARACTER SET utf8 NOT NULL,
   `destination` varchar(40) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `journeys`
+--
+
+INSERT INTO `journeys` (`tripID`, `journeyID`, `departureDate`, `arrivalDate`, `price`, `nSeats`, `origin`, `destination`) VALUES
+(13, 1, '1497045600', '1497045600', 20, 3, 'Leon', 'Valladolid'),
+(13, 2, '1497045600', '1497045600', 20, 3, 'Valladolid', 'Madrid'),
+(15, 1, '1497132000', '1497736800', 500, 5, 'Madrid', 'rusia');
 
 -- --------------------------------------------------------
 
@@ -149,6 +166,15 @@ CREATE TABLE `trips` (
   `destination` varchar(40) CHARACTER SET utf8 NOT NULL,
   `cancelled` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `trips`
+--
+
+INSERT INTO `trips` (`tripID`, `driverUsername`, `origin`, `destination`, `cancelled`) VALUES
+(13, 'abanod', 'Leon', 'Madrid', 0),
+(14, 'abanod', 'burkina faso', '', 0),
+(15, 'abanod', 'Madrid', 'rusia', 0);
 
 -- --------------------------------------------------------
 
@@ -252,7 +278,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `tripID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `tripID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- Restricciones para tablas volcadas
 --
