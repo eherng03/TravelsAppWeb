@@ -64,6 +64,7 @@ $(document).on('click', '#bookBtn', function(){
             
             success: function(data){
                 alert("Ha reservado su viaje");
+                location.reload();
             }
         });
 });
