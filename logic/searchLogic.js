@@ -91,7 +91,7 @@ $(document).on('click', '#cancelBtn', function(){
             data: {"idTrip": idTrip, "idJourney": idJourney, "username": userLog},
             
             success: function(data){
-                alert("Ha cancelado su trayecto");
+                alert(data);
                 location.reload();
             }
         });
