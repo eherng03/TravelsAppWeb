@@ -88,12 +88,12 @@
 
 								<label>Origen</label>
 								<select class="form-control" id="origin">
-									<option value="">Todos</option>
+									<option value="">---</option>
 								</select>
 						 
 								<label>Destino</label>
 								<select class="form-control" id="destination">
-									<option value="">Todos</option>
+									<option value="">---</option>
 								</select>
 
 							<div class="input-group date"  data-provide = "datepicker" id = "datepicker">
