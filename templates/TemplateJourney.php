@@ -44,7 +44,7 @@
 					$journeysIDString .= $journeyID;
 					$journeysIDString .= " ";
 				}
-				$html .= "<input class='book-button' type='button' value='Reservar' id = 'bookBtn' onclick = 'bookClicked()' idTrip = '".$trip->getJourneys()[0]->getTripID()."' idsJourneys = '".$journeysIDString."'>";
+				$html .= "<input class='book-button' type='button' value='Reservar' id = 'bookBtn' idTrip = '".$trip->getJourneys()[0]->getTripID()."' idsJourneys = '".$journeysIDString."'>";
 			}
 			$html .= "</div>";
 		   	return $html;	
