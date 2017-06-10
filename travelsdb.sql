@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2017 a las 18:18:12
+-- Tiempo de generación: 10-06-2017 a las 11:09:47
 -- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
+-- Versión de PHP: 7.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -84,6 +84,7 @@ CREATE TABLE `drivers` (
 --
 
 INSERT INTO `drivers` (`username`, `score`) VALUES
+('1', 0),
 ('abanod', 0),
 ('pepeperas', 0);
 
@@ -94,6 +95,7 @@ INSERT INTO `drivers` (`username`, `score`) VALUES
 --
 
 CREATE TABLE `journeypassengers` (
+  `tripID` int(11) NOT NULL,
   `journeyID` int(11) NOT NULL,
   `username` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -102,8 +104,9 @@ CREATE TABLE `journeypassengers` (
 -- Volcado de datos para la tabla `journeypassengers`
 --
 
-INSERT INTO `journeypassengers` (`journeyID`, `username`) VALUES
-(1, 'EvaHergar');
+INSERT INTO `journeypassengers` (`tripID`, `journeyID`, `username`) VALUES
+(1, 1, 'EvaHergar'),
+(2, 2, 'EvaHergar');
 
 -- --------------------------------------------------------
 
@@ -129,7 +132,8 @@ CREATE TABLE `journeys` (
 INSERT INTO `journeys` (`tripID`, `journeyID`, `departureDate`, `arrivalDate`, `price`, `nSeats`, `origin`, `destination`) VALUES
 (1, 1, '06/06/2017', '06/06/2017', 20, 3, 'Leon', 'Valladolid'),
 (1, 2, '06/062017', '06/06/2017', 20, 3, 'Valladolid', 'Madrid'),
-(2, 0, '03/06/2017', '03/06/2017', 10, 3, 'Oviedo', 'Zamora');
+(2, 1, 'Hoy', 'Mañana', 1, 1, 'Cusca de Alba', 'Cusca de Eva'),
+(2, 2, 'Maniana', 'Pasado', 2, 2, 'Cusca de Eva', 'Cusca de Mario');
 
 -- --------------------------------------------------------
 
@@ -170,7 +174,7 @@ CREATE TABLE `trips` (
 
 INSERT INTO `trips` (`tripID`, `driverUsername`, `origin`, `destination`, `cancelled`) VALUES
 (1, 'abanod', 'Leon', 'Madrid', 0),
-(2, 'pepeperas', 'Oviedo', 'Sevilla', 0);
+(2, 'abanod', 'Cusca de Alba', 'Cusca de Eva', 0);
 
 -- --------------------------------------------------------
 
@@ -194,6 +198,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `pass`, `name`, `dni`, `email`, `phone`, `photo`, `rol`) VALUES
+('1', '1', '1', '1', '1', '1', '1.jpg', 1),
 ('abanod', 'caca', 'alberto', '123698547', 'caca@hotmail.es', '123456789', 'abanod.png', 1),
 ('eeeee', 'eeeee', 'Eeee', 'eeeeeeeee', 'eeeeeee', 'eeeeeee', 'eeeee.png', 0),
 ('EvaHergar', 'olakase', 'Eva', '74175369U', 'evahergar@gmail.com', '123456789', 'EvaHergar.png', 0),
@@ -231,8 +236,10 @@ ALTER TABLE `drivers`
 -- Indices de la tabla `journeypassengers`
 --
 ALTER TABLE `journeypassengers`
-  ADD PRIMARY KEY (`journeyID`,`username`),
-  ADD KEY `username` (`username`);
+  ADD PRIMARY KEY (`tripID`,`journeyID`,`username`),
+  ADD KEY `username` (`username`),
+  ADD KEY `tripID` (`tripID`),
+  ADD KEY `journeypassengers_ibfk_2` (`journeyID`);
 
 --
 -- Indices de la tabla `journeys`
@@ -300,8 +307,9 @@ ALTER TABLE `drivers`
 -- Filtros para la tabla `journeypassengers`
 --
 ALTER TABLE `journeypassengers`
-  ADD CONSTRAINT `journeypassengers_ibfk_1` FOREIGN KEY (`username`) REFERENCES `passengers` (`username`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  ADD CONSTRAINT `journeypassengers_ibfk_2` FOREIGN KEY (`journeyID`) REFERENCES `journeys` (`journeyID`) ON DELETE CASCADE ON UPDATE NO ACTION;
+  ADD CONSTRAINT `journeypassengers_ibfk_1` FOREIGN KEY (`tripID`) REFERENCES `journeys` (`tripID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `journeypassengers_ibfk_2` FOREIGN KEY (`journeyID`) REFERENCES `journeys` (`journeyID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `journeypassengers_ibfk_3` FOREIGN KEY (`username`) REFERENCES `passengers` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `journeys`
