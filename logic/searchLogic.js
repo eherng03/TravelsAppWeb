@@ -1,8 +1,8 @@
 var userLog;
 
 $(document).ready(function() {
-    userLog = $("#hdnSession").val(); //Username del conductor
-
+	userLog = $("#hdnSession").val(); //Username del conductor
+	
     //Rellena el select de origenes
     $.get("../operations/selectJourneySearch.php", function(data) {
         var comboBox = document.getElementById("origin");
@@ -49,11 +49,8 @@ $(document).ready(function() {
                 $(containerSearchResult).append(data);
             }
         });
-    });
-
-    
         
-/*
+		/*
         $.ajax({
             url: 'templateJourney.php',
             type: 'POST',
@@ -62,8 +59,9 @@ $(document).ready(function() {
                 data.appendTo('#searchResult');
             }
         });*/
+    });
 });
 
 function bookClicked(){
-    alert("hola");
+	alert("hola");
 }
