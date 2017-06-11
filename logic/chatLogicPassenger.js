@@ -7,7 +7,7 @@ $(document).ready( function() {
 	$("#sidebar_secondary").hide(); //Ocultamos el chat
 	userLog = $("#hdnSession").val();
 	getLogInfo();
-	getJourneys();
+	getJourneyAndTripID();
 
 	
 	//getTrayectos();
@@ -32,7 +32,7 @@ function getLogInfo(){
 
 }
 
-function getJourneys(){
+function getJourneyAndTripID(){
 	
 	var formData = {
 			'userLog'    : userLog,
@@ -47,19 +47,20 @@ function getJourneys(){
 		}).done(function(data) {
 			var journeys = (data); //obtenemos los datos 
 			journeys.forEach((journeys) => {
-				getTripId(journeys.journeyID,usersInfo);
+				getDestination(journeys.tripID,journeys.journeyID,usersInfo);
 			});
 		});
 }
 
-function getTripId(journeyID,usersInfo){
+function getDestination(tripID,journeyID,usersInfo){
 	var formData = {
 			'journeyID'    : journeyID,
+			'tripID'       : tripID,
 		};
 
 		$.ajax({
 			type        : 'GET', 
-			url         : '../operations/getTrip.php', //archivo que procesa los datos 
+			url         : '../operations/getDestination.php', //archivo que procesa los datos 
 			data        : formData, 
 			dataType    : 'json', 
 			encode          : true
@@ -67,22 +68,22 @@ function getTripId(journeyID,usersInfo){
 			var tripInfo = (data); //obtenemos los datos 
 			tripInfo.forEach((tripInfo) => {
 				var destination = tripInfo.destination;
-				var tripID = tripInfo.tripID;
 				var html = '<ul class="nav navbar-nav navbar-right"><li class="dropdown" id="n_chats'+destination+'"><ul class="dropdown-menu dropdown-cart" role="menu" id="chats'+destination+'"></ul></li></ul>';
 				$(html).appendTo("#navBar");
 
-				getPassengers(journeyID, usersInfo, destination);
+				getPassengers(tripID,journeyID, usersInfo, destination);
 				getDriverUsername(tripID, usersInfo, destination);
 			});
 		});
 }
 
 
-function getPassengers(journey,usersInfo,destination) {
+function getPassengers(tripID,journey,usersInfo,destination) {
 var html1 = '<a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="true"><span class="glyphicon glyphicon-comment"></span>Chats - '+destination+'<span class="caret"></span></a>';
 $(html1).appendTo('#n_chats'+destination+'');
  var arrayPasajeros = [];
 	var formData = {
+			'tripID'     : tripID,
 			'journey'    : journey,
 			'userLog'    : userLog,
 		};
@@ -295,7 +296,7 @@ $(document).on ("click", "#enviarMensaje", function () {
 	var msg = $('#submit_message').val();
 	var dt = new Date();
 	var mlsecond = dt.getTime();
-	console.log(mlsecond);
+
 	//var dt = dt.getDate();
 	//var dt = date.getFullYear() + ":" + date.getMonth() + ":" + date.getDate() + ":" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 	hour = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();

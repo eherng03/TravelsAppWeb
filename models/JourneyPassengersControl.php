@@ -15,18 +15,18 @@
 			return self::$instance;
 		}
 
-		function getPassengers($journey,$userLog){
+		function getPassengers($tripID,$journey,$userLog){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-			$query = $connection->query("SELECT username FROM journeypassengers WHERE journeyID = '$journey' AND NOT username = '$userLog'");
+			$query = $connection->query("SELECT username FROM journeypassengers WHERE (journeyID = '$journey') AND (tripID = '$tripID') AND (NOT username = '$userLog')");
 			return $query;
 		}
 
 
-		function getJourneysByUser($userLog){
+		function getJourneysAndTripIDByUser($userLog){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-			$query = $connection->query("SELECT journeyID FROM journeypassengers WHERE username = '$userLog'");
+			$query = $connection->query("SELECT tripID, journeyID FROM journeypassengers WHERE username = '$userLog'");
 			return $query;
 		}
 

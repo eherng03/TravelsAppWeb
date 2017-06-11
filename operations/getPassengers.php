@@ -1,13 +1,13 @@
 <?php
     include '../models/JourneyPassengersControl.php';
 
-
+    $tripID = $_REQUEST['tripID'];
     $journey = $_REQUEST['journey'];
     $userLog = $_REQUEST['userLog'];
 
     //acceso a la BBDD
     $journeyPassengersControl = JourneyPassengersControl::getInstance();
-    $result = $journeyPassengersControl -> getPassengers($journey,$userLog);
+    $result = $journeyPassengersControl -> getPassengers($tripID,$journey,$userLog);
 
     $passengers = array();
 

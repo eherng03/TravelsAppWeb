@@ -30,6 +30,13 @@
 			return $query;
 		}
 
+		function getDestinationByJourneyIDandTripID($journeyID,$tripID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT destination FROM journeys WHERE journeyID = '$journeyID' and tripID = '$tripID'");
+			return $query;
+		}
+
 		function getJourneysByOrigin($origin){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();

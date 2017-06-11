@@ -99,16 +99,19 @@ function getPassengers(journey, destination) {
 			encode          : true
 		}).done(function(data) {
 			var passengers = (data); //obtenemos los datos
+			if (!$.trim(data)){  
+				var html2 = '<li><span class="item"><span class="item-left"><span id="nombreUserChat">Aun no tiene pasajeros para este viaje.</span></span></li>';
+				$(html2).appendTo('#chats'+destination+'');
+			}
 			passengers.forEach((passengers) => {
 				arrayPasajeros.push(passengers.username);
-				console.log("fsdfds"+passengers.username);
 				getUsersInfo(passengers.username,destination);
 			});
 	});
 }
 
 function getUsersInfo(username,destination){
-	console.log("sdsa");
+
 var a = destination;
 	var formData = {
 		'username'    : username,
@@ -245,7 +248,7 @@ $(document).on ("click", "#enviarMensaje", function () {
 	var msg = $('#submit_message').val();
 	var dt = new Date();
 	var mlsecond = dt.getTime();
-	console.log(mlsecond);
+	
 	//var dt = dt.getDate();
 	//var dt = date.getFullYear() + ":" + date.getMonth() + ":" + date.getDate() + ":" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 	hour = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
