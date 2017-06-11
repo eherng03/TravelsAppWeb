@@ -32,5 +32,11 @@
 			return $this->connection;
 		}
 		
+		public function isConnectionSet(){
+			if($this->connection == null){
+				return false;
+			}else return true;
+		}
+		
 	}
 ?>
