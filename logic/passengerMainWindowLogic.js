@@ -42,7 +42,7 @@ $(document).on('click', '#verComentarios', function(){
 
 	$("#modalHeader").empty();
 	$("tr[id=fila]").remove();
-
+	
     var driverUsername = $(this).attr('driver');
     var driverName = $(this).attr('driverName');
 
