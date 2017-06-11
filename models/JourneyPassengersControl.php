@@ -21,7 +21,16 @@
 			$query = $connection->query("SELECT username FROM journeypassengers WHERE (journeyID = '$journey') AND (tripID = '$tripID') AND (NOT username = '$userLog')");
 			return $query;
 		}
-
+		
+		function getNumPassengersByTripAndJourneyID($tripID, $journeyID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$rowcount = 0;
+			if ($result=mysqli_query($connection,"SELECT username FROM journeypassengers WHERE (journeyID = '$journeyID') AND (tripID = '$tripID')")){
+  				$rowcount=mysqli_num_rows($result);
+  			}
+			return $rowcount;
+		}
 
 		function getJourneysAndTripIDByUser($userLog){
 			$dbManager = DBManager::getInstance();
