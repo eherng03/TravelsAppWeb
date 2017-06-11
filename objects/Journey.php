@@ -7,9 +7,9 @@
 		public $destination;
 		private $departureDate;
 		private $arrivalDate;
-		private $seats;
+		public $seats;
 		private $passengers;
-		private $price;
+		public $price;
 
 		public function __construct($tripID, $journeyID, $departureDate, $arrivalDate, $origin, $destination, $seats, $price){
 			$this->tripID = $tripID;

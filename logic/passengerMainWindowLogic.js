@@ -38,7 +38,6 @@ $(document).ready(function() {
 	});
 });
 
-
 $(document).on('click', '#verComentarios', function(){ 
 
     var driverUsername = $(this).attr('driver');

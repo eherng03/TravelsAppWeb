@@ -1,7 +1,7 @@
 <?php
     include '../models/JourneyPassengersControl.php';
 
-    $tripID = $_REQUEST['tripID'];
+	$tripID = $_REQUEST['tripID'];
     $journey = $_REQUEST['journey'];
     $userLog = $_REQUEST['userLog'];
 

@@ -68,6 +68,7 @@ function getDestination(tripID,journeyID,usersInfo){
 			var tripInfo = (data); //obtenemos los datos 
 			tripInfo.forEach((tripInfo) => {
 				var destination = tripInfo.destination;
+
 				var html = '<ul class="nav navbar-nav navbar-right"><li class="dropdown" id="n_chats'+destination+'"><ul class="dropdown-menu dropdown-cart" role="menu" id="chats'+destination+'"></ul></li></ul>';
 				$(html).appendTo("#navBar");
 
@@ -96,7 +97,7 @@ $(html1).appendTo('#n_chats'+destination+'');
 			encode          : true
 		}).done(function(data) {
 			var passengers = (data); //obtenemos los datos 
-			//console.log(passengers);
+
 			passengers.forEach((passengers) => {
 				arrayPasajeros.push(passengers.username);
 				getUsersInfo(passengers.username,usersInfo,destination);

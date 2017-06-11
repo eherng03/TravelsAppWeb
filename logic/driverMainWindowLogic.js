@@ -24,47 +24,41 @@ $(document).ready(function($) {
 			$(".journeys-container").slideUp();
 			$(".create-container").slideUp();
 		}
-
-		var formData = {
-			'userLog'    : userLog,
-		};
-
-		$.ajax({
-			type        : 'POST', 
-			url         : '../operations/getScore.php', //archivo que procesa los datos del user
-			data        : formData,
-			success: function(data){	
-				var containerComments = document.getElementById("divComments");
-				while(containerComments.firstChild){
-            		containerComments.removeChild(containerComments.firstChild);
-            	}
-           		$(containerComments).append(data);
-			}
-		});
-
-
-		$.ajax({
-			type        : 'POST', 
-			url         : '../operations/getScoreAverage.php', //archivo que procesa los datos del user
-			data        : formData,
-			dataType    : 'json', 
-			encode          : true,
-			success: function(data){	
-				var average = data.score;
-				var containerScore = document.getElementById("divAverage");
-				while(containerScore.firstChild){
-            		containerScore.removeChild(containerScore.firstChild);
-            	}
-           		$(containerScore).append(average);
-			}
-		});	
-
-
-
-
-
-
 	});
+	
+	var formData = {		
+		'userLog'    : userLog,		
+	};		
+		
+	$.ajax({		
+		type        : 'POST', 		
+		url         : '../operations/getScore.php', //archivo que procesa los datos del user		
+		data        : formData,		
+		success: function(data){			
+			var containerComments = document.getElementById("divComments");		
+			while(containerComments.firstChild){		
+			containerComments.removeChild(containerComments.firstChild);		
+		}		
+			$(containerComments).append(data);		
+		}		
+	});		
+	
+	
+	$.ajax({		
+		type        : 'POST', 		
+		url         : '../operations/getScoreAverage.php', //archivo que procesa los datos del user		
+		data        : formData,		
+		dataType    : 'json', 		
+		encode          : true,		
+		success: function(data){			
+			var average = data.score;		
+			var containerScore = document.getElementById("divAverage");		
+			while(containerScore.firstChild){		
+				containerScore.removeChild(containerScore.firstChild);		
+			}		
+			$(containerScore).append(average);		
+		}		
+	});	
 
 	$(".create-button").click(function(event) {
 		if ($(".create-container").is(":hidden")){
@@ -127,24 +121,71 @@ $(document).ready(function($) {
         var trips = JSON.parse(data);
 
         trips.forEach((trip) =>{
-            var opt = document.createElement('option');
-            //TODO funciona porque origen es privado
-            opt.innerHTML = trip.origin +"-"+ trip.destination;
-            comboBox.appendChild(opt);
+			$('#cancel').append("<option value="+trip.tripID+">"+trip.origin +"-"+ trip.destination+"</option>");
         });
     });
 	
-	//Viajes que se pueden borrar
+	//Cancelar viaje seleccionado	
+	$("#cancelButton").click(function(event) {
+		if($("#cancel option:selected").text() == "---"){
+			return;
+		}
+		
+		var tripID = $('#cancel option:selected').val();
+		$.get("../operations/cancelTrip.php", {"tripID": tripID}).done(function(data) {
+			alert(data);
+			window.location.replace("../graphic/driverMainWindow.php");
+		});
+	});
+	
+	
+	//Viajes que se pueden borrar o modificar
 	$.get("../operations/selectTripsDelete.php", {"username": $('#hdnSession').val()}).done(function(data) {
         var comboBox = document.getElementById("delete");
 		var trips = JSON.parse(data);
 
         trips.forEach((trip) =>{
-            var opt = document.createElement('option');
-            //TODO funciona porque origen es privado
-            opt.innerHTML = trip.origin +"-"+ trip.destination;
-            comboBox.appendChild(opt);
+			$('#delete').append("<option value="+trip.tripID+">"+trip.origin +"-"+ trip.destination+"</option>");
         });
     });
+	
+	//Borrar viaje seleccionado
+	$("#deleteButton").click(function(event) {
+		if($("#delete option:selected").text() == "---"){
+			return;
+		}
+		
+		var tripID = $('#delete option:selected').val();
+		$.get("../operations/deleteTrip.php", {"tripID": tripID}).done(function(data) {
+			alert(data);
+			window.location.replace("../graphic/driverMainWindow.php");
+		});
+	});
+	
+	//Mostrar opciones modificar viaje seleccionado
+	$("#modifyButton").click(function(event) {
+		if($("#delete option:selected").text() == "---"){
+			return;
+		}		
+		
+		var tripID = $('#delete option:selected').val();
+
+		$('#hdnTrip').val(tripID);
+
+		$.get("../operations/getJourneysTrip.php", {"tripID": tripID}).done(function(data) {
+			var journeys = JSON.parse(data);
+			
+			var i = 1;
+			journeys.forEach((journey) =>{
+				$("#modifySection").append("<br><label>Trayecto "+journey.origin+"-"+journey.destination+"</label>"+
+											"<br><label'>Precio</label><input class='form-control' value='"+journey.price+"' name='price"+i+"' type='text' id='price"+i+"' required/>"+
+											"<br><label'>Numero de asientos</label><input class='form-control' value='"+journey.nSeats+"' name='seats"+i+"' type='text' id='seats"+i+"' required/></div>");
+				i++;
+			});
+			$('#hdnNJourneys').val(i-1);
+			$("#modifySection").append("<br><input type='submit' id = 'makeChangesBtn' value='Realizar Cambios'/>");
+		});
+	});
 
 });
+

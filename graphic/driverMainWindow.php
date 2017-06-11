@@ -32,6 +32,9 @@
         <?php if(isset($_GET['create']) && $_GET['create'] === "yes"){?>
                 <script>alert("VIAJE CREADO CORRECTAMENTE.");</script>
         <?php }?>
+		<?php if(isset($_GET['modify']) && $_GET['modify'] === "yes"){?>
+                <script>alert("VIAJE MODIFICADO CORRECTAMENTE.");</script>
+        <?php }?>
         <header class = "Header">
             <nav class="navbar navbar-default navbar-fixed-top">
   				<div class="container-fluid">
@@ -132,7 +135,7 @@
 				<!--CANCELAR/BORRAR-->
                 <div class="journeys-container">
                     <div class = "journeys-content">
-                        <h1 class = "section-title">Cancelar / Borrar Viajes</h1>
+                        <h1 class = "section-title">Cancelar / Borrar / Modificar Viajes</h1>
 						<div class = "journeys-content" id="select-container">
 							
 							Cancelar (tiene pasajeros apuntados)
@@ -142,18 +145,23 @@
 							<input type="button" value="Cancelar" id="cancelButton"/>
 							
 							<br>
-							Borrar (no tiene pasajeros apuntados)
+							<br>
+							Borrar o Modificar (no tiene pasajeros apuntados)
 							<select class="form-control" id="delete">
 								<option>---</option>
                             </select>
 							<input type="button" value="Borrar" id="deleteButton"/>
-						
+							<input type="button" value="Modificar" id="modifyButton"/>
+							<form id="modifySection" action="../operations/modifyTrip.php" method="post">
+								<input type="hidden" name="hdnTrip" id="hdnTrip" value=""/>
+								<input type="hidden" name="hdnNJourneys" id="hdnNJourneys" value=""/>
+							</form>
                        	</div>
                     </div>
                 </div>
 				
 				
-                 <!--VALORACIONES-->
+				 <!--VALORACIONES-->
                 <div class="score-container">
               
                     <div class = "scores-content">
@@ -161,9 +169,9 @@
                             <div class = "average" id="divAverage">
 
                             </div>
-                            <div class = "comments" id="divComments">
-                                
-                            </div>
+							<div class = "comments" id="divComments">
+								
+							</div>
                     </div>
                 </div>
            

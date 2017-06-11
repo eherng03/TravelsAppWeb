@@ -15,7 +15,7 @@
         array_push($passengers, $row);
     }
     
-   //echo '<pre>'; print_r($passengers); echo '</pre>';
+    //echo '<pre>'; print_r($chats); echo '</pre>';
     // return de datos via AJAX
     echo json_encode($passengers);
 ?>

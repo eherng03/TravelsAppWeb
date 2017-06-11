@@ -1,5 +1,6 @@
 <?php
 	class Trip{ 
+		public $tripID;
 		public $origin;
 		public $destination;
 		private $driverUsername; 
@@ -66,6 +67,10 @@
 
 		public function getJourneys(){
 			return $this->journeys;
+		}
+		
+		public function setTripID($tripID){
+			$this->tripID = $tripID;
 		}
 	}
 ?>

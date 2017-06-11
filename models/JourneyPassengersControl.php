@@ -42,11 +42,11 @@
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("INSERT INTO journeypassengers(tripID, journeyID, username) VALUES ('$idTrip','$idJourney','$username')");
 		}
-
-		function cancelJourney($idTrip, $idJourney, $username){
-			$dbManager = DBManager::getInstance();
-			$connection = $dbManager->getConnection();
-			$query = $connection->query("DELETE FROM journeypassengers WHERE (tripID = '$idTrip') AND (journeyID = '$idJourney') AND (username = '$username')");
+		
+		function cancelJourney($idTrip, $idJourney, $username){		
+			$dbManager = DBManager::getInstance();		
+			$connection = $dbManager->getConnection();		
+			$query = $connection->query("DELETE FROM journeypassengers WHERE (tripID = '$idTrip') AND (journeyID = '$idJourney') AND (username = '$username')");		
 		}
 	}
 ?>

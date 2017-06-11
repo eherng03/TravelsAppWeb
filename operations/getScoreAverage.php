@@ -12,7 +12,7 @@
         ($scoreAverage = $row);
     }
     
-    //echo '<pre>'; print_r($comments); echo '</pre>';
+   // echo '<pre>'; print_r($comments); echo '</pre>';
     // return de datos via AJAX
     echo json_encode($scoreAverage);
 ?>

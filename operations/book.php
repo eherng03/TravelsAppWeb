@@ -3,7 +3,7 @@
 
 	$idTrip = $_POST['idTrip'];
 	$idsJourneyString = $_POST['idsJourney'];
-	$idsJourney = split("[ ]+", $idsJourneyString);
+	$idsJourney = preg_split("[ ]", $idsJourneyString);
 	array_pop($idsJourney);
 	$username = $_POST['username'];
 	$journeyPassengersControl = JourneyPassengersControl::getInstance();

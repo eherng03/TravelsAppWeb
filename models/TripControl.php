@@ -49,6 +49,13 @@
 			$query = $connection->query("SELECT * FROM trips WHERE driverUsername = '$driverID'");
 			return $query;
 		}
+		
+		function getTripInfoByDriverToCancel($driverID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("SELECT * FROM trips WHERE driverUsername = '$driverID' AND cancelled = 0");
+			return $query;
+		}
 
 //EVA
 		function insertTrip($driverID, $origin, $destination){
@@ -59,6 +66,22 @@
 			$result = $connection->query("SELECT tripID FROM trips WHERE (driverUsername = '$driverID') AND (origin = '$origin') AND  (destination = '$destination')");
 
 			return $result;		//Devuelve el ultimo elemento (creo)
+		}
+		
+		function cancelTripByID($tripID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("UPDATE trips SET cancelled= 1 WHERE tripID = '$tripID'");
+			
+			return $query;
+		}
+		
+		function deleteTripByID($tripID){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("DELETE FROM trips  WHERE tripID = '$tripID'");
+			
+			return $query;
 		}
 
 	}
