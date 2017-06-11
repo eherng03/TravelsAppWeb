@@ -10,6 +10,10 @@
 	
 	$origin = $_POST['origin'];
 	$dateOrigin = strtotime($_POST['dateOrigin']);
+	$hourOrigin = $_POST['hourOrigin'];
+	sscanf($hourOrigin, "%d:%d", $hours, $minutes);
+	$seg = ($hours * 60 * 60) + ($minutes * 60);
+	$dateOrigin = $dateOrigin + $seg;
 	$nDests = $_POST['nDests'];
 	$driver = $_POST['driver'];
 
@@ -23,8 +27,15 @@
     	$journeyDest = $_POST[$destString];		//Destino i
     	$nSeatsString = "nSeats".$i; 
     	$nSeats = $_POST[$nSeatsString];		//numero de asientos del journey i
+    	//Fecha y hora de llegada
     	$arrivalDateString = "date".$i; 
     	$arrivalDate = strtotime($_POST[$arrivalDateString]);		//numero de asientos del journey i
+    	$hourString = "hour".$i;
+    	$hour = $_POST[$hourString];
+		sscanf($hour, "%d:%d", $hours, $minutes);
+		$seg = ($hours * 60 * 60) + ($minutes * 60);
+		$arrivalDate = $arrivalDate + $seg;
+		//Precio
     	$priceString = "price".$i;
     	$price = $_POST[$priceString];
 
@@ -45,7 +56,7 @@
 		$journeyControl = JourneyControl::getInstance();
 		$resultJourney = $journeyControl->insertJourney($tripID, $jour->getID() , $jour->getDepartureDate(), $jour->getArrivalDate(), $jour->getPrice(), $jour->getSeats(), $jour->getOrigin(), $jour->getDestination());	
 	}
-
+	
 	if($resultJourney == 0){
 		header("Location: ../graphic/driverMainWindow.php?create=yes");
 		exit();
