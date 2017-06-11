@@ -165,3 +165,77 @@
         </main>
     
     </body>
+	
+	<!-- Modal content-->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header" id="modalHeader">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		  </div>
+		  <div class="modal-body">
+
+            <table class="table table-bordered table-hover" id="tab_infoDriver">
+            <thead>
+              <tr id="">
+              <th class="text-center" id="photoDriver">Foto</th>
+              <th class="text-center" id="nameDriver">Nombre</th>
+              <th class="text-center" id="emailDriver">Email</th>
+              <th class="text-center" id="phoneDriver">Telefono</th>
+              <th class="text-center" id="averageScore">Puntuacion media</th>
+              
+            </tr>
+            </thead>
+            <tbody></tbody>
+            </table>
+
+			<table class="table table-bordered table-hover" id="tab_comentarios">
+			<thead>
+			<tr id="">
+			  <th class="text-center">Comentario</th>
+			  <th class="text-center">Puntuacion</th>
+			</tr>
+			</thead>
+			<tbody></tbody>
+			</table>
+
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+
+	  </div>
+	</div>
+	
+		<!-- Modal content-->
+	<div id="myModal2" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header" id="modalHeader2">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		  </div>
+		  <div class="modal-body">
+
+            <table class="table table-bordered table-hover" id="tab_infoPassenger">
+            <thead>
+				<tr id="">
+				  <th class="text-center" id="namePass">Foto</th>
+				  <th class="text-center" id="namePass">Nombre</th>
+				</tr>
+            </thead>
+            <tbody></tbody>
+            </table>
+
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+
+	  </div>
+	</div>

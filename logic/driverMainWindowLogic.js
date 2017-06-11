@@ -189,3 +189,41 @@ $(document).ready(function($) {
 
 });
 
+$(document).on('click', '#verPasajerosTrayecto', function(){ 
+
+	$("#modalHeader2").empty();
+	$("tr[id=fila]").remove();
+	
+    var tripID = $(this).attr('tripID');
+	var journeyID = $(this).attr('journeyID');
+	
+	var passengers = [];
+	
+    var html2 = '<h4 class="modal-title">Pasajeros del viaje</h4>';
+    $(html2).appendTo("#modalHeader2");
+	
+	$.ajax({
+		type        : 'GET', 
+		url         : '../operations/getPassengersTripJourney.php', //archivo que procesa los datos del user
+		data        : {'tripID':tripID, 'journeyID':journeyID}, 
+		dataType    : 'json', 
+		encode          : true
+	}).done(function(data) {
+		data.forEach((data) => {
+			passengers.push(data);
+		});
+
+
+		for (var i=0; i < passengers.length; i++){
+
+			var photo = passengers[i].photo;
+			var name = passengers[i].name;
+
+			row = $('<tr id="fila"><th><img id="userPhoto" src="../resources/userImages/'+photo+'" alt=""/></th><th>'+name+'</th></tr>'); //create row
+			$('#tab_infoPassenger').append(row);
+		}
+		
+	});
+
+});
+

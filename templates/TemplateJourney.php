@@ -42,7 +42,16 @@
 
 			$html .= "</table>"; 
 			
-			$html .= "<div> <input class='book-button' type='button' value='Ver comentarios' data-toggle='modal' data-target='#myModal' id ='verComentarios' driver ='".$driver->user."'' driverName ='".$driver->name."' ></div> ";
+			$tripID;			
+			try {
+				$tripID = $trip->getJourneys()[0]->getTripID();
+			} catch (Exception $e) {
+				$tripID = $trip->getTripID();
+			}
+			
+			$html .= "<div> <input class='book-button' type='button' value='Ver info conductor' data-toggle='modal' data-target='#myModal' id ='verComentarios' driver ='".$driver->user."'' driverName ='".$driver->name."' ></div> ";
+			$html .= "<div> <input class='book-button' type='button' value='Ver pasajeros viaje' data-toggle='modal' data-target='#myModal2' id ='verPasajeros' tripID ='".$tripID."'></div> ";
+			
 			
 			if($userNameLogged != '-' && $userNameLogged != "reserved"){
 				$journeysID = array();
@@ -80,6 +89,9 @@
 							<tr>
 												
 							  <td>Día y hora de salida: ".date('D, d M Y H:i', $journey->getInitDate())." Día y hora de llegada: ".date('D, d M Y H:i', $journey->getArrivalDate())."</td>
+							</tr>
+							<tr>
+								<input class='book-button' type='button' value='Ver pasajeros trayecto' data-toggle='modal' data-target='#myModal2' id ='verPasajerosTrayecto' tripID ='".$journey->getTripID()."' journeyID ='".$journey->getID()."'>
 							</tr>";
 			if($cancelled == 1){
 				$html .= "<tr>				

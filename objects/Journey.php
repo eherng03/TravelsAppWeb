@@ -58,6 +58,11 @@
 		public function getTripID(){
 			return $this->tripID;
 		}
+		
+		//Lanza excepcion para la plantilla
+		public function getJourneys(){
+			throw new Exception('Soy un journey.');
+		}
 
 	}
 ?>

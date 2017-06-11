@@ -69,6 +69,10 @@
 			return $this->journeys;
 		}
 		
+		public function getTripID(){
+			return $this->tripID;
+		}
+		
 		public function setTripID($tripID){
 			$this->tripID = $tripID;
 		}

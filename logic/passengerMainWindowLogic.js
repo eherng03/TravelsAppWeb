@@ -122,3 +122,39 @@ function getComments(driverUsername){
 			});
 
 }
+
+$(document).on('click', '#verPasajeros', function(){ 
+
+	$("#modalHeader2").empty();
+	$("tr[id=fila]").remove();
+	
+    var tripID = $(this).attr('tripID');
+	var passengers = [];
+	
+    var html2 = '<h4 class="modal-title">Pasajeros del viaje</h4>';
+    $(html2).appendTo("#modalHeader2");
+	
+	$.ajax({
+		type        : 'GET', 
+		url         : '../operations/getPassengersTrip.php', //archivo que procesa los datos del user
+	data        : {'tripID':tripID}, 
+		dataType    : 'json', 
+		encode          : true
+	}).done(function(data) {
+		data.forEach((data) => {
+			passengers.push(data);
+		});
+
+
+		for (var i=0; i < passengers.length; i++){
+
+			var photo = passengers[i].photo;
+			var name = passengers[i].name;
+
+			row = $('<tr id="fila"><th><img id="userPhoto" src="../resources/userImages/'+photo+'" alt=""/></th><th>'+name+'</th></tr>'); //create row
+			$('#tab_infoPassenger').append(row);
+		}
+		
+	});
+
+});
