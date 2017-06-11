@@ -1,11 +1,11 @@
-var userLog = "EvaHergar";
+var userLog;
 var logInfo = [];
 var usersInfo = [];
 
 /** Document ready **/
 $(document).ready( function() {
 	$("#sidebar_secondary").hide(); //Ocultamos el chat
-	//userLog = $("#hdnSession").val();		//Username del conductor
+	userLog = $("#hdnSession").val();		//Username del conductor
 	getLogInfo();
 	getTripId();
 
@@ -101,12 +101,14 @@ function getPassengers(journey, destination) {
 			var passengers = (data); //obtenemos los datos
 			passengers.forEach((passengers) => {
 				arrayPasajeros.push(passengers.username);
+				console.log("fsdfds"+passengers.username);
 				getUsersInfo(passengers.username,destination);
 			});
 	});
 }
 
 function getUsersInfo(username,destination){
+	console.log("sdsa");
 var a = destination;
 	var formData = {
 		'username'    : username,

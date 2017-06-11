@@ -33,7 +33,7 @@
 		function getUsersByJourneys($journey){
 			$dbManager = DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-			$query = $connection->query("SELECT username FROM journeypassengers WHERE journeyID = '$journey'");
+			$query = $connection->query("SELECT DISTINCT  username FROM journeypassengers WHERE tripID = '$journey'");
 			return $query;
 		}
 			
