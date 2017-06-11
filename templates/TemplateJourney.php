@@ -37,6 +37,12 @@
 			}
 
 			$html .= "</table>"; 
+
+			$html .= "<div> <input class='book-button' type='button' value='Ver comentarios' data-toggle='modal' data-target='#myModal' id ='verComentarios' driver ='".$driver->user."'' driverName ='".$driver->name."' ></div> ";
+
+
+
+
 			if($userNameLogged != '-' && $userNameLogged != "reserved"){
 				$journeysID = array();
 				$journeys = $trip->getJourneys();
@@ -50,6 +56,9 @@
 					$journeysIDString .= " ";
 				}
 				$html .= "<input class='book-button' type='button' value='Reservar' id = 'bookBtn' idTrip = '".$trip->getJourneys()[0]->getTripID()."' idsJourneys = '".$journeysIDString."'>";
+
+				
+
 			}elseif($userNameLogged == "reserved"){
 				$html .= "<input class='cancel-button' type='button' value='Anular' id = 'cancelBtn' idTrip = '".$trip->getTripID()."' idJourney = '".$trip->getID()."'>";
 			}

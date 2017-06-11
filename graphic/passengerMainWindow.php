@@ -133,4 +133,34 @@
   </div>
 </aside>
 
-    </body>
+</body>
+ <!-- Modal content-->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" id="modalHeader">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+
+
+        <table class="table table-bordered table-hover" id="tab_comentarios">
+        <thead>
+          <tr>
+          <th class="text-center">Comentario</th>
+          <th class="text-center">Puntuacion</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

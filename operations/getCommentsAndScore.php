@@ -5,7 +5,7 @@
 
     //acceso a la BBDD
     $commentControl = CommentControl::getInstance();
-    $result = $commentControl -> getCommentsByUsername($driverUsername);
+    $result = $commentControl -> getComments($driverUsername);
 
 
     $comments = array();
