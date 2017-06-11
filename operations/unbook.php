@@ -12,7 +12,7 @@
 	}
 	$currentDate = $milliseconds = round(microtime(true));
 
-	if(($date - $currentDate) > 216000){ //se puede cancelar hasta 6 horas antes del viaje
+	if(($date - $currentDate) > 21600){ //se puede cancelar hasta 6 horas antes del viaje
 		$journeyPassengersControl = JourneyPassengersControl::getInstance();
 		$journeyPassengersControl->cancelJourney($idTrip, $idJourney, $username);
 		echo "Ha cancelado su trayecto";
