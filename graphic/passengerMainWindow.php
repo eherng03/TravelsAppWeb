@@ -146,10 +146,23 @@
 		  </div>
 		  <div class="modal-body">
 
+            <table class="table table-bordered table-hover" id="tab_infoDriver">
+            <thead>
+              <tr id="fila">
+              <th class="text-center" id="photoDriver">Foto</th>
+              <th class="text-center" id="nameDriver">Nombre</th>
+              <th class="text-center" id="emailDriver">Email</th>
+              <th class="text-center" id="phoneDriver">Telefono</th>
+              <th class="text-center" id="averageScore">Puntuacion media</th>
+              
+            </tr>
+            </thead>
+            <tbody></tbody>
+            </table>
 
 			<table class="table table-bordered table-hover" id="tab_comentarios">
 			<thead>
-			  <tr>
+			<tr id="fila">
 			  <th class="text-center">Comentario</th>
 			  <th class="text-center">Puntuacion</th>
 			</tr>

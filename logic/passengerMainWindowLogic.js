@@ -41,13 +41,17 @@ $(document).ready(function() {
 $(document).on('click', '#verComentarios', function(){ 
 
 	$("#modalHeader").empty();
-	$("#tab_comentarios").empty(); 
+	$("tr[id=fila]").remove();
 
     var driverUsername = $(this).attr('driver');
     var driverName = $(this).attr('driverName');
-    var comments = [];
+
+
+    var html2 = '<h4 class="modal-title">Comentarios de '+driverName+'</h4>';
+    $(html2).appendTo("#modalHeader");
 
     var formData = {
+
 			'userLog'    : driverUsername,
 		};
 
@@ -62,15 +66,39 @@ $(document).on('click', '#verComentarios', function(){
 		}).done(function(data) {
 			var ScoreAverage = data.score;
 
-			var html2 = '<h4 class="modal-title">Comentarios de '+driverName+' - Puntuacion media: '+ScoreAverage+'</h4>';
-			$(html2).appendTo("#modalHeader");
-
+			getDriverInfo(driverUsername,ScoreAverage);
+			getComments(driverUsername);
 		});
+});
 
-   		 var formData = {
+function getDriverInfo(driverUsername,ScoreAverage){
+
+	var formData = {
+			'username'    : driverUsername,
+	};
+	$.ajax({
+				type        : 'GET', 
+				url         : '../operations/getPassengersInfo.php', //archivo que procesa los datos del user
+				data        : formData, 
+				dataType    : 'json', 
+				encode          : true
+			}).done(function(data) {
+				var name = data[0].name;
+				var phone = data[0].phone;
+				var email = data[0].email;
+				var photo = data[0].photo;
+				row = $('<tr id="fila"><th><img id="userPhoto" src="../resources/userImages/'+photo+'" alt=""/></th><th>'+name+'</th><th>'+email+'</th><th>'+phone+'</th><th>'+ScoreAverage+'</th></tr>'); //create row
+				$('#tab_infoDriver').append(row);
+			});
+
+}
+
+function getComments(driverUsername){
+	var comments = [];
+	var formData = {
 			'driverUsername'    : driverUsername,
-		};
-		$.ajax({
+	};
+	$.ajax({
 				type        : 'GET', 
 				url         : '../operations/getCommentsAndScore.php', //archivo que procesa los datos del user
 				data        : formData, 
@@ -87,12 +115,10 @@ $(document).on('click', '#verComentarios', function(){
 					var comment = comments[i].comment;
 					var score = comments[i].score;
 
-					
 					row = $('<tr id="fila"><th>'+comment+'</th><th>'+score+'</th></tr>'); //create row
 					$('#tab_comentarios').append(row);
-
 				}
 				
 			});
-    
-});
+
+}
