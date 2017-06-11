@@ -153,17 +153,17 @@
                 </div>
 				
 				
-				 <!--VALORACIONES-->
+                 <!--VALORACIONES-->
                 <div class="score-container">
               
                     <div class = "scores-content">
                         <h1 class = "section-title">Mis valoraciones</h1>
-                            <div class = "average">
+                            <div class = "average" id="divAverage">
 
                             </div>
-							<div class = "comments">
-								
-							</div>
+                            <div class = "comments" id="divComments">
+                                
+                            </div>
                     </div>
                 </div>
            

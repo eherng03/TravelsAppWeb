@@ -24,6 +24,46 @@ $(document).ready(function($) {
 			$(".journeys-container").slideUp();
 			$(".create-container").slideUp();
 		}
+
+		var formData = {
+			'userLog'    : userLog,
+		};
+
+		$.ajax({
+			type        : 'POST', 
+			url         : '../operations/getScore.php', //archivo que procesa los datos del user
+			data        : formData,
+			success: function(data){	
+				var containerComments = document.getElementById("divComments");
+				while(containerComments.firstChild){
+            		containerComments.removeChild(containerComments.firstChild);
+            	}
+           		$(containerComments).append(data);
+			}
+		});
+
+
+		$.ajax({
+			type        : 'POST', 
+			url         : '../operations/getScoreAverage.php', //archivo que procesa los datos del user
+			data        : formData,
+			dataType    : 'json', 
+			encode          : true,
+			success: function(data){	
+				var average = data.score;
+				var containerScore = document.getElementById("divAverage");
+				while(containerScore.firstChild){
+            		containerScore.removeChild(containerScore.firstChild);
+            	}
+           		$(containerScore).append(average);
+			}
+		});	
+
+
+
+
+
+
 	});
 
 	$(".create-button").click(function(event) {
