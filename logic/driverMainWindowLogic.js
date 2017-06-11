@@ -68,13 +68,19 @@ $(document).ready(function($) {
 		}
 	});
 
-	$('.input-group').datepicker({
+	$('.date').datepicker({
 	    format: "mm/dd/yyyy",
 	    todayBtn: "linked",
 	    language: "es",
 	    daysOfWeekHighlighted: "0,6",
 	    autoclose: true,
 	    todayHighlight: true
+	});
+
+	$('.clockpicker').clockpicker({
+	    placement: 'bottom',
+	    align: 'left',
+	    autoclose: true
 	});
 
 
@@ -97,9 +103,18 @@ $(document).ready(function($) {
 			"<div class='input-group date'  data-provide = 'datepicker' id = 'datepicker'>"+
 				"<input type='text' class='form-control' placeholder='Fecha' name='date"+nDests+"' id='date"+nDests+"' required>"+
 				"<span class='input-group-addon'><i class='glyphicon glyphicon-th'></i></span>"+
-			"</div> <hr>");
+			"</div>"+
+			 "<div class='input-group clockpicker' data-provide = 'clockpicker' id = 'clockpicker'>"+
+                   "<input type='text' class='form-control' placeholder='Hora' name='hour"+nDests+"' id='hour"+nDests+"' required/>"+
+                    "<span class='input-group-addon'>"+
+                         "<span class='glyphicon glyphicon-time'></span>"+
+                    "</span>"+
+              "</div>"+
+             "<hr>");
 		
 		$("#nDests").val(nDests);
+
+		refreshPickers();
 	});
 	
 	//Cargar trayectos pasajero
@@ -189,6 +204,8 @@ $(document).ready(function($) {
 
 });
 
+
+
 $(document).on('click', '#verPasajerosTrayecto', function(){ 
 
 	$("#modalHeader2").empty();
@@ -225,5 +242,22 @@ $(document).on('click', '#verPasajerosTrayecto', function(){
 		
 	});
 
+
 });
 
+function refreshPickers(){
+	$('.date').datepicker({
+	    format: "mm/dd/yyyy",
+	    todayBtn: "linked",
+	    language: "es",
+	    daysOfWeekHighlighted: "0,6",
+	    autoclose: true,
+	    todayHighlight: true
+	});
+
+	$('.clockpicker').clockpicker({
+	    placement: 'bottom',
+	    align: 'left',
+	    autoclose: true
+	});
+}
