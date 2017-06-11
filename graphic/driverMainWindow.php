@@ -14,16 +14,18 @@
         <script type='text/javascript' src='../logic/driverMainWindowLogic.js'></script>
 
         <script src="../logic/chatLogicDriver.js"></script>
-		 <link rel="stylesheet" type="text/css" href="../resources/theme/css/chat.css">
+		<link rel="stylesheet" type="text/css" href="../resources/theme/css/chat.css">
 		
 		<script src='../resources/bootstrap/js/bootstrap.js'></script>
         <script src='../resources/bootstrap/js/bootstrap-datepicker.js'></script>
         <script src='../resources/bootstrap/locales/bootstrap-datepicker.es.min.js'></script>
+        <script src='../resources/bootstrap/bootstrap-clockpicker.min.js'></script>
 
         <link rel="stylesheet"  href="../resources/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet"  href="../resources/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet"  href="../resources/bootstrap/css/bootstrap-datepicker.css">
+        <link rel="stylesheet"  href="../resources/bootstrap/bootstrap-clockpicker.min.css">
         <link rel="stylesheet"  href="../resources/bootstrap/css/custom.css">
-		
     </head>
     <body>
 	<?php if(isset($_GET['create']) && $_GET['create'] === "no"){?>
@@ -94,6 +96,12 @@
                                         <input type="text" class="form-control" placeholder="Fecha" name="dateOrigin" id="dateOrigin" required>
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                                 </div>
+                                <div class="input-group clockpicker" data-provide = "clockpicker" id = "clockpicker">
+                                    <input type="text" class="form-control" placeholder="Hora" name="hourOrigin" id="hourOrigin" required>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                    </span>
+                                </div>
                                 <hr>
 
                                 <div id="destinations">
@@ -107,6 +115,12 @@
                                     <div class="input-group date"  data-provide = "datepicker" id = "datepicker">
                                         <input type="text" class="form-control" placeholder="Fecha" name="date1" id="date1" required>
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                    </div>
+                                    <div class="input-group clockpicker" data-provide = "clockpicker" id = "clockpicker">
+                                        <input type="text" class="form-control" placeholder="Hora" name="hour1" id="hour1" required>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-time"></span>
+                                        </span>
                                     </div>
                                     <hr>
                                 </div>
