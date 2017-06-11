@@ -65,8 +65,21 @@
 					$journeysIDString .= $journeyID;
 					$journeysIDString .= " ";
 				}
-				$html .= "<input class='book-button' type='button' value='Reservar' id = 'bookBtn' idTrip = '".$trip->getJourneys()[0]->getTripID()."' idsJourneys = '".$journeysIDString."'>";
+
+				$html .= "<div><input class='book-button' type='button' value='Reservar' id = 'bookBtn' idTrip = '".$trip->getJourneys()[0]->getTripID()."' idsJourneys = '".$journeysIDString."'></div>";
 			}elseif($userNameLogged == "reserved"){
+
+				$currentDate = $milliseconds = round(microtime(true));
+				$initDate = $trip->getInitDate();
+				$resta = $currentDate - $initDate;
+
+				$dia = "86400";
+				$semana = "604800";
+
+				//Si ha transcurrido mas de un dia y menos de una semana dejamos puntuar al usuario el conductor
+				if(($resta > $dia) && ($resta<$semana)){
+					$html .= "<input driverName ='".$driver->user."' class='score-button' type='button' value='Puntuar conductor' id = 'scoreBtn' driver = '".$driver->name."' data-toggle='modal' data-target='#modalScore' '>";
+				}
 				$html .= "<input class='cancel-button' type='button' value='Anular' id = 'cancelBtn' idTrip = '".$trip->getTripID()."' idJourney = '".$trip->getID()."'>";
 			}
 			$html .= "</div>";

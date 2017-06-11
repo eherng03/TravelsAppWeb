@@ -26,6 +26,15 @@
 			$query = $connection->query("SELECT driverUsername, passUsername, comment, score, commentID FROM drivercomments WHERE driverUsername = '$userLog' ");
 			 return $query;
 		}
+
+
+		//Saca toda la fila
+		function setScore($driverUsername,$passUsername,$comment,$score){
+			$dbManager = DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$query = $connection->query("INSERT INTO drivercomments (driverUsername, passUsername, comment, score) VALUES ('$driverUsername','$passUsername','$comment','$score') ");
+			 return $query;
+		}
 	}
 	
 ?>

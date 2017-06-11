@@ -133,3 +133,7 @@ h1{
 .well-searchbox label {
     color: #fff;
 }
+
+textarea {
+  resize: none; 
+}

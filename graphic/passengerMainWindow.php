@@ -179,7 +179,7 @@
 	  </div>
 	</div>
 	
-		<!-- Modal content-->
+	<!-- Modal content-->
 	<div id="myModal2" class="modal fade" role="dialog">
 	  <div class="modal-dialog">
 
@@ -208,3 +208,43 @@
 
 	  </div>
 	</div>
+
+
+     <!-- Modal content-->
+    <div id="modalScore" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" id="modalHeader3">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+
+             <div class="form-group">
+              <label for="sel1">Puntua</label>
+              <select name="selector" class="form-control" id="sel1">
+                <option val="1">1</option>
+                <option val="2">2</option>
+                <option val="3">3</option>
+                <option val="4">4</option>
+                <option val="5">5</option>
+              </select>
+            </div>
+
+        <div class="form-group">
+            <label for="comment">Deja un comentario:</label>
+            <textarea class="form-control" rows="5" id="comment"></textarea>
+        </div>
+
+          </div>
+          <div class="modal-footer">
+            <div class="btn-group">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" id="enviarComentario">Enviar</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
