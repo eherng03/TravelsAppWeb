@@ -11,7 +11,7 @@
 			return self::$instance;
 		}
 		
-		public function getTemplate($driver, $trip, $userNameLogged, $cancelled){
+		public function getTemplate($driver, $trip, $userNameLogged){
 		   	$html = "<div class = 'Journey'> 
 						<table>
 							<tr>
@@ -29,15 +29,9 @@
 							<tr>
 												
 							  <td>Día y hora de salida: ".date('D, d M Y H:i', $trip->getInitDate())." Día y hora de llegada: ".date('D, d M Y H:i', $trip->getArrivalDate())."</td>
-							</tr>";
-			if($cancelled == 1){
-				$html .= "<tr>				
-							<td>Cancelado</td>
-						</tr>";
-			}
-
-			$html .= "</table>"; 
-			if($userNameLogged != '-' && $userNameLogged != "reserved"){
+							</tr>	
+						</table>";
+			if($userNameLogged != '-'){
 				$journeysID = array();
 				$journeys = $trip->getJourneys();
 				foreach ($journeys as $journey) {
@@ -50,15 +44,14 @@
 					$journeysIDString .= " ";
 				}
 				$html .= "<input class='book-button' type='button' value='Reservar' id = 'bookBtn' idTrip = '".$trip->getJourneys()[0]->getTripID()."' idsJourneys = '".$journeysIDString."'>";
-			}elseif($userNameLogged == "reserved"){
-				$html .= "<input class='cancel-button' type='button' value='Anular' id = 'cancelBtn' idTrip = '".$trip->getTripID()."' idJourney = '".$trip->getID()."'>";
 			}
 			$html .= "</div>";
 		   	return $html;	
 		}
 
-		public function getTemplateForDriver($journey, $trip, $cancelled){
-		   	$html = "<div class = 'Journey'> 
+		public function getTemplateForDriver($journey, $trip){
+			
+		   	return "<div class = 'Journey'> 
 						<table>
 							<tr>
 								<td>Viaje: ".$trip->getOrigin()."-".$trip->getDestination()."</td>
@@ -73,16 +66,9 @@
 							<tr>
 												
 							  <td>Día y hora de salida: ".date('D, d M Y H:i', $journey->getInitDate())." Día y hora de llegada: ".date('D, d M Y H:i', $journey->getArrivalDate())."</td>
-							</tr>";
-			if($cancelled == 1){
-				$html .= "<tr>				
-							<td>Cancelado</td>
-						</tr>";
-			}
-			$html .= "</table>
+							</tr>	
+						</table>
 					</div>";
-
-			return $html;
 		}
 	}
 	

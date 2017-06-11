@@ -11,10 +11,12 @@
 	
 	$trips = array();
 	$cancel = array();
-	$tripQuery = $tripControl->getTripInfoByDriver($_GET['username']);	
+	$tripQuery = $tripControl->getTripInfoByDriverToCancel($_GET['username']);	
 	while ($row = $tripQuery->fetch_array()){
 		$tripID = $row['tripID'];
-        array_push($trips, new Trip($row['origin'], $row['destination'], $row['driverUsername']));
+		$t = new Trip($row['origin'], $row['destination'], $row['driverUsername']);
+		$t->setTripID($tripID);
+        array_push($trips, $t);
 		
 		$journeysQuery = $journeyControl->getJourneysByTrip($tripID);		
 		while ($row2 = $journeysQuery->fetch_array()){

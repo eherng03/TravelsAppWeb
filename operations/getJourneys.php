@@ -6,7 +6,7 @@
 
     //acceso a la BBDD
     $journeyPassengersControl = JourneyPassengersControl::getInstance();
-    $result = $journeyPassengersControl -> getJourneysAndTripIDByUser($userLog);
+    $result = $journeyPassengersControl -> getJourneysByUser($userLog);
 
     $journeys = array();
 

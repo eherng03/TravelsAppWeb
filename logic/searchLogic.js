@@ -11,34 +11,21 @@ $(document).ready(function() {
         journeys.forEach((journey) =>{
             var opt = document.createElement('option');
             //TODO funciona porque origen es privado
-            opt.value = journey.tripID;
             opt.innerHTML = journey.origin;
             comboBox.appendChild(opt);
         });
     });
 
-    $('#origin').change(function(event) {
-        var selectedOrigin = $(this).find(":selected");
-        var trip = selectedOrigin.val();
-        var origin = selectedOrigin.text();
+    //Rellena el select de destinos
+    $.get("../operations/selectJourneySearch.php", function(data) {
+        var comboBox = document.getElementById("destination");
+        var journeys = JSON.parse(data);
 
-        $.ajax({
-                type: 'POST',
-                url: '../operations/getSelectDestinations.php',
-                data: {'origin': origin, "trip": trip},
-                success: function(data){
-                     $("#destination").empty();
-                    var comboBox = document.getElementById("destination");
-                    var opt = document.createElement('option');
-                    opt.innerHTML = "- - -";
-                    comboBox.appendChild(opt);
-                    var journeys = JSON.parse(data);
-                    journeys.forEach((journey) =>{
-                        var opt = document.createElement('option');
-                        opt.innerHTML = journey.destination;
-                        comboBox.appendChild(opt);
-                    });
-                }
+        journeys.forEach((journey) =>{
+            var opt = document.createElement('option');
+            //TODO funciona porque origen es privado
+            opt.innerHTML = journey.destination;
+            comboBox.appendChild(opt);
         });
     });
 
@@ -70,29 +57,4 @@ $(document).ready(function() {
 $(document).on('click', '#bookBtn', function(){ 
     var idTrip = $(this).attr('idTrip');
     var idsJourney = $(this).attr('idsJourneys');
-     $.ajax({
-            url: "../operations/book.php",
-            type: 'POST',
-            data: {"idTrip": idTrip, "idsJourney": idsJourney, "username": userLog},
-            
-            success: function(data){
-                alert("Ha reservado su viaje");
-                location.reload();
-            }
-        });
-});
-
-$(document).on('click', '#cancelBtn', function(){ 
-    var idTrip = $(this).attr('idTrip');
-    var idJourney = $(this).attr('idJourney');
-     $.ajax({
-            url: "../operations/unbook.php",
-            type: 'POST',
-            data: {"idTrip": idTrip, "idJourney": idJourney, "username": userLog},
-            
-            success: function(data){
-                alert(data);
-                location.reload();
-            }
-        });
 });
