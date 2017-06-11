@@ -12,6 +12,10 @@
 		}
 		
 		public function getTemplate($driver, $trip, $userNameLogged, $cancelled){
+			$textSeats = "";
+			if($userNameLogged != "reserved"){
+				$textSeats = "disponibles";
+			}
 		   	$html = "<div class = 'Journey'> 
 						<table>
 							<tr>
@@ -23,7 +27,7 @@
 							<tr>
 							 
 							<td>Precio: ".$trip->getPrice()."€</td>
-							<td>Nº plazas disponibles: ".$trip->getSeats()."</td>
+							<td>Nº plazas ".$textSeats.": ".$trip->getSeats()."</td>
 							</tr>
 							
 							<tr>
