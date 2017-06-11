@@ -40,6 +40,9 @@ $(document).ready(function() {
 
 $(document).on('click', '#verComentarios', function(){ 
 
+	$("#modalHeader").empty();
+	$("#tab_comentarios").empty(); 
+
     var driverUsername = $(this).attr('driver');
     var driverName = $(this).attr('driverName');
     var comments = [];
