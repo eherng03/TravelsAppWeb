@@ -2,6 +2,7 @@
 	include "../models/JourneyControl.php";
 	include "../models/TripControl.php";
 	include "../models/UserControl.php";
+	include "../models/JourneyPassengersControl.php";
     include "../objects/Journey.php";
     include "../objects/Trip.php";
     include "../objects/Driver.php";
@@ -38,7 +39,7 @@
 					$driverUsername = $rowDriverUsername['driverUsername'];
 				}
 				$trip = new Trip($origin, $destination, $driverUsername);
-				$minNumberSeats = 1000000;
+				$minNumberSeats = 1000000000000;
 				//Recorro todos los journeys y meto en el trip por los que pasa el cliente
 				
 				$idJourneyOrigin = -1;
@@ -51,12 +52,16 @@
 					}
 
 					if($idJourneyOrigin != -1 && $idJourneyOrigin <= $rowJourneys['journeyID']){
-						$trip->addPrice($rowJourneys['price']);
-					
-						if($minNumberSeats > $rowJourneys['nSeats']){
-							$minNumberSeats = $rowJourneys['nSeats'];
-						}
 
+						$trip->addPrice($rowJourneys['price']);
+
+						$journeyPassengersControl = JourneyPassengersControl::getInstance();
+						$numberPassengersJourney = $journeyPassengersControl->getNumPassengersByTripAndJourneyID($tripID, $rowJourneys['journeyID']);
+						
+						if($minNumberSeats > $rowJourneys['nSeats'] - $numberPassengersJourney){
+							$minNumberSeats = $rowJourneys['nSeats'] - $numberPassengersJourney;
+						}
+					
 						$trip->addJourney(new Journey($tripID, $rowJourneys['journeyID'], $rowJourneys['departureDate'], $rowJourneys['arrivalDate'], $rowJourneys['origin'], $rowJourneys['destination'], $rowJourneys['nSeats'], $rowJourneys['price']));
 					}
 
@@ -65,17 +70,20 @@
 						break;
 					}
 				}
-				$trip->setSeats($minNumberSeats);
-				$userControl = UserControl::getInstance();
-				$driverData = $userControl->getUserByUserName($driverUsername);
-				$driver = null;
-				while($rowDriverData = $driverData->fetch_array()){
-					$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
+
+				if($minNumberSeats > 0){
+					$trip->setSeats($minNumberSeats);
+					$userControl = UserControl::getInstance();
+					$driverData = $userControl->getUserByUserName($driverUsername);
+					$driver = null;
+					while($rowDriverData = $driverData->fetch_array()){
+						$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
+					}
+					$templateJourney = TemplateJourney::getInstance();
+					$templateshtml .= $templateJourney->getTemplate($driver, $trip, $userNameLogged, $cancelled);
+					echo $templateshtml;
 				}
-				$templateJourney = TemplateJourney::getInstance();
-				$templateshtml .= $templateJourney->getTemplate($driver, $trip, $userNameLogged, $cancelled);
 			}
-			echo $templateshtml;
 	    } 
 	}
 ?>
