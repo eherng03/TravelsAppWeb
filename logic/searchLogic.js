@@ -46,8 +46,12 @@ $(document).ready(function() {
         var origin = $('#origin').find(":selected").text();
         var destination = $('#destination').find(":selected").text();
         var date = $("#datepicker").datepicker( "getDate" );
-        var milsStart = date.getTime();
-        var milsEnd = date.setDate(date.getDate() + 1);       //Dia siguiente en milisegundos
+        var milsStart = "";
+        var milsEnd = "";
+        if(date != null){
+            var milsStart = date.getTime();
+            var milsEnd = date.setDate(date.getDate() + 1);       //Dia siguiente en milisegundos
+        }
         var price = $('#price').find(":selected").val();
         var score = $('#score').find(":selected").val();
         //Enviamos en la peticion origen, destino y fecha en milisegundos (el dia entero, inicio y fin)
