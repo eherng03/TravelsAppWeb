@@ -12,11 +12,11 @@
 		}
 		
 		public function getTemplate($driver){
-		   	return "<div class = 'comentarios'> 
+		   	return "<div class = 'driver'> 
 						<table>
 							<tr>
 								<td>
-									<img src= '".$driver->getPhoto()."' alt=''/>
+									<img id = 'userPhoto' src= '".$driver->getPhoto()."' alt=''/>
 								</td>
 							</tr>
 							

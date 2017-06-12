@@ -16,7 +16,7 @@
 					<table>
 						<tr>
 							<td>
-								<img src= '".$passenger->getPhoto()."' alt=''/>
+								<img id = 'userPhoto' src= '".$passenger->getPhoto()."' alt=''/>
 							</td>
 						</tr>
 						

@@ -16,10 +16,10 @@
 			if($userNameLogged != "reserved"){
 				$textSeats = "disponibles";
 			}
-		   	$html = "<div class = 'Journey'> 
+		   	$html = "<div class = 'journey'> 
 						<table>
 							<tr>
-							  <td> <img src= '../resources/userImages/".$driver->photo."'/>
+							  <td> <img id = 'userPhoto' src= '../resources/userImages/".$driver->photo."'/>
 								Nombre: ".$driver->name."	
 								</td>
 								 <td>Trayecto: ".$trip->getOrigin()."-".$trip->getDestination()."</td>
@@ -36,7 +36,7 @@
 							</tr>";
 			if($cancelled == 1){
 				$html .= "<tr>				
-							<td>Cancelado</td>
+							<td id = 'cancelado'>Cancelado</td>
 						</tr>";
 			}
 
@@ -49,8 +49,8 @@
 				$tripID = $trip->getTripID();
 			}
 			
-			$html .= "<div> <input class='book-button' type='button' value='Ver info conductor' data-toggle='modal' data-target='#myModal' id ='verComentarios' driver ='".$driver->user."'' driverName ='".$driver->name."' ></div> ";
-			$html .= "<div> <input class='book-button' type='button' value='Ver pasajeros viaje' data-toggle='modal' data-target='#myModal2' id ='verPasajeros' tripID ='".$tripID."'></div> ";
+			$html .= "<div> <input class='book-button' type='button' value='Ver información del conductor' data-toggle='modal' data-target='#myModal' id ='verComentarios' driver ='".$driver->user."'' driverName ='".$driver->name."' ></div> ";
+			$html .= "<div> <input class='book-button' type='button' value='Ver pasajeros del viaje' data-toggle='modal' data-target='#myModal2' id ='verPasajeros' tripID ='".$tripID."'></div> ";
 			
 			
 			if($userNameLogged != '-' && $userNameLogged != "reserved"){
@@ -87,7 +87,7 @@
 		}
 
 		public function getTemplateForDriver($journey, $trip, $cancelled){
-		   	$html = "<div class = 'Journey'> 
+		   	$html = "<div class = 'journey'> 
 						<table>
 							<tr>
 								<td>Viaje: ".$trip->getOrigin()."-".$trip->getDestination()."</td>
