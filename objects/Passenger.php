@@ -1,4 +1,5 @@
 <?php
+	namespace travels\objects;
 	class Passenger{
 		public $name;
 		public $email;

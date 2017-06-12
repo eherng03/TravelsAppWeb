@@ -1,4 +1,5 @@
 <?php
+	namespace travels\objects;
 	class Admin{
 		private static $instance;
 		private $user;

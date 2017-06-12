@@ -1,5 +1,5 @@
 <?php
-//TRAYECTO
+	namespace travels\objects;
 	class Journey{ 
 		public $tripID;
 		private $journeyID;

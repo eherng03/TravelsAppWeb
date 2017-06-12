@@ -1,4 +1,5 @@
 <?php
+	namespace travels\objects;
 	class Chat{
 		public $user1;
 		public $user2;

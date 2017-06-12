@@ -1,4 +1,5 @@
 <?php
+	namespace travels\objects;
 	class Trip{ 
 		public $tripID;
 		public $origin;

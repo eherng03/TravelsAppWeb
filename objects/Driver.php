@@ -1,4 +1,5 @@
 <?php
+	namespace travels\objects;
 	class Driver{
 		public $name;
 		public $email;

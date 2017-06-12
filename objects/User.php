@@ -1,4 +1,5 @@
 <?php
+	namespace travels\objects;
 	class User{
 		public $name;
 		public $email;
@@ -19,10 +20,5 @@
 			$this->scoreAverage = 0;
 			$this->coments = array();
 		}
-
-		//TODO here needed getters and setters
-
-		//TODO other public functions
-
 	}
 ?>

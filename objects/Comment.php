@@ -1,4 +1,5 @@
 <?php
+	namespace travels\objects;
 	class Comment{
 		private $commentID;
 		private $driverUserName;
