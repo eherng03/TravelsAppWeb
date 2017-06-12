@@ -1,7 +1,11 @@
 <?php
-    $userControl = models\UserControl::getInstance();
+    namespace travels\operations;
+    use travels\models as models;
     include '../models/UserControl.php';
 
+
+    $userControl = models\UserControl::getInstance();
+   
     $username = $_REQUEST['username'];
 
 
