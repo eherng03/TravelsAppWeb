@@ -48,12 +48,13 @@ $(document).ready(function() {
         var date = $("#datepicker").datepicker( "getDate" );
         var milsStart = date.getTime();
         var milsEnd = date.setDate(date.getDate() + 1);       //Dia siguiente en milisegundos
-
+        var price = $('#price').find(":selected").val();
+        var score = $('#score').find(":selected").val();
         //Enviamos en la peticion origen, destino y fecha en milisegundos (el dia entero, inicio y fin)
         $.ajax({
             url: "../operations/getSearchResults.php",
             type: 'POST',
-            data: {"origin": origin, "destination": destination, "dateStart": milsStart, "dateEnd": milsEnd, userNameLogged: userLog},
+            data: {"origin": origin, "destination": destination, "dateStart": milsStart, "dateEnd": milsEnd, "userNameLogged": userLog, "price": price, "score": score},
             
             success: function(data){
                 var containerSearchResult = document.getElementById("searchResult");
