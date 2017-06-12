@@ -100,7 +100,31 @@
 								<input type="text" class="form-control">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 							</div>
-							<!-- TODO AQUI VA LA FECHA -->
+							<label>Precio</label>
+							<select class="form-control" id="price">
+								<option value="">- - -</option>
+								<option value="10">10€</option>
+								<option value="20">20€</option>
+								<option value="30">30€</option>
+								<option value="40">40€</option>
+								<option value="50">50€</option>
+								<option value="60">60€</option>
+								<option value="70">70€</option>
+								<option value="80">80€</option>
+								<option value="90">90€</option>
+								<option value="100">100€</option>
+								<option value="150">150€</option>
+								<option value="200">200€</option>
+							</select>
+							<label>Puntuación</label>
+							<select class="form-control" id="score">
+								<option value="">- - -</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
 							<br>
 							<input class="btn" type="submit" value="Buscar" id = "searchBtn"/>
 						</form>
