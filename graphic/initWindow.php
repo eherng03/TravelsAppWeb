@@ -192,7 +192,7 @@
 	
 	<!-- Modal content-->
 	<div id="myModal" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
+	  <div class="modal-dialog modal-lg">
 
 		<!-- Modal content-->
 		<div class="modal-content">
@@ -236,7 +236,7 @@
 	
 		<!-- Modal content-->
 	<div id="myModal2" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
+	  <div class="modal-dialog modal-lg">
 
 		<!-- Modal content-->
 		<div class="modal-content">
