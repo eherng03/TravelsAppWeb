@@ -171,7 +171,6 @@ $(document).on('click', '#scoreBtn', function(){
 	var driverName = $(this).attr('driverName');
 	var html2 = '<h4 class="modal-title" driver="'+driverName+'">Puntuar a '+driver+'</h4>';
     $(html2).appendTo("#modalHeader3");
-
 });
 
 

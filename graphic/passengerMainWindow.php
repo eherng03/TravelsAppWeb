@@ -71,7 +71,7 @@
 			 <!--TRAYECTOS-->
 			<div class="journeys-container">
 				<div class = "journeys" id="journeys">
-						<h1>Mis trayectos</h1>
+						<h1 class = "search-title">Mis trayectos</h1>
 						
 				</div>
 			</div>

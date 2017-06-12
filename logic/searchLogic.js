@@ -72,6 +72,7 @@ $(document).ready(function() {
 
 });
 
+
 $(document).on('click', '#bookBtn', function(){ 
     var idTrip = $(this).attr('idTrip');
     var idsJourney = $(this).attr('idsJourneys');
