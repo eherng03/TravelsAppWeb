@@ -1,4 +1,5 @@
 <?php
+	use travels\dataBase as dataBase;
 	require "../dataBase/DBManager.php";
 	session_start();		//Con esto deja escribir en el array $_SESSION
 	
@@ -6,7 +7,7 @@
 	//usertype 1 = DRIVER
 	//usertype 2 = ADMIN
 
-	$singleton = DBManager::getInstance();
+	$singleton = dataBase\DBManager::getInstance();
 	$conn = $singleton->getConnection();
 	
 	$user = $_POST['username'];
