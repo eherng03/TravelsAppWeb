@@ -3,6 +3,7 @@
 	include "../models/TripControl.php";
 	include "../models/UserControl.php";
 	include "../models/JourneyPassengersControl.php";
+	include "../models/CommentControl.php";
     include "../objects/Journey.php";
     include "../objects/Trip.php";
     include "../objects/Driver.php";
@@ -13,11 +14,19 @@
    	$userNameLogged = $_POST['userNameLogged'];
    	$dateStart = $_POST['dateStart']/1000;
    	$dateEnd = $_POST['dateEnd']/1000;
+   	$price = $_POST['price'];
+   	$score = $_POST['score'];
+
    	$templateshtml = "";
     //acceso a la BBDD
     $journeyControl = JourneyControl::getInstance();
     //Tenemos todos los journeys con el mismo origen almacenados
-    $result = $journeyControl->getJourneysByOriginAndDate($origin, $dateStart, $dateEnd);
+    if($dateStart == ""){
+    	$result = $journeyControl->getJourneysByOrigin($origin);
+    }else{
+    	$result = $journeyControl->getJourneysByOriginAndDate($origin, $dateStart, $dateEnd);
+    }
+
     //Miramos a ver si en el trip al que pertenece el  journey existe el destino de la busqueda
     while ($row = $result->fetch_array()){
     	$tripID = $row['tripID'];
@@ -76,11 +85,35 @@
 					$userControl = UserControl::getInstance();
 					$driverData = $userControl->getUserByUserName($driverUsername);
 					$driver = null;
+
 					while($rowDriverData = $driverData->fetch_array()){
 						$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
 					}
+
 					$templateJourney = TemplateJourney::getInstance();
 					$templateshtml .= $templateJourney->getTemplate($driver, $trip, $userNameLogged, $cancelled);
+					if($score != ""){
+						$commentControl = CommentControl::getInstance();
+						$commentsData = $commentControl->getComments($driverUsername);
+						
+						$scores = array();
+						while($rowComments = $commentsData->fetch_array()){
+							array_push($scores, $rowComments['score']);
+						}
+
+						$totalScores = 0;
+						foreach ($scores as $scoreVal) {
+							$totalScores += $scoreVal;
+						}
+
+						$average = $totalScores/count($scores);
+						if($score > $average){
+							$templateshtml = "";
+						}
+					}
+					if($price != "" && $trip->getPrice() > $price){
+						$templateshtml = "";
+					}
 					echo $templateshtml;
 				}
 			}
