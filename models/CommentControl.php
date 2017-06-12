@@ -27,7 +27,6 @@
 			 return $query;
 		}
 
-
 		//Saca toda la fila
 		function setScore($driverUsername,$passUsername,$comment,$score){
 			$dbManager = DBManager::getInstance();
