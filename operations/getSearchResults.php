@@ -127,6 +127,8 @@
 		    } 
 		}
 
+   	}else{
+   		echo "Seleccione un destino y un origen.";
    	}
 
     
