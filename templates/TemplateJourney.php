@@ -1,5 +1,5 @@
 <?php
-
+	namespace travels\templates;
 	class TemplateJourney{
 		private static $instance;
 		private function __construct(){}

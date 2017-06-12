@@ -1,4 +1,5 @@
 <?php
+	namespace travels\templates;
 	class TemplateDriver{
 
 		private static $instance;

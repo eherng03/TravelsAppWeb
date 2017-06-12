@@ -1,4 +1,5 @@
 <?php
+	namespace travels\templates;
 	class TemplatePassenger{
 
 		private static $instance;
