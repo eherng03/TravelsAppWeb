@@ -1,6 +1,7 @@
 <?php
-	require "../dataBase/DBManager.php";
+ 	use travels\dataBase as database;
 	use PHPUnit\Framework\TestCase;
+	include "../dataBase/DBManager.php";
 
 	class DBManagerTest extends TestCase
 	{
@@ -8,7 +9,7 @@
 		{
 			$singleton;
 			try{
-				$singleton = DBManager::getInstance();
+				$singleton = database\DBManager::getInstance();
 			}catch(Exception $e){
 				print_r("Inicia la base de datos");
 			}

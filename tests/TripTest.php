@@ -1,12 +1,13 @@
 <?php
-	require "../objects/Trip.php";
-	use PHPUnit\Framework\TestCase;
+ 	use travels\objects as objects;
+ 	use PHPUnit\Framework\TestCase;
+	include "../objects/Trip.php";
 
 	class TripTest extends TestCase
 	{
 		public function testTrip()
 		{
-			$trip = new Trip("Leon", "Madrid", "Luis");
+			$trip = new objects\Trip("Leon", "Madrid", "Luis");
 			$this->assertEquals("Leon", $trip->origin);
 			$this->assertEquals("Madrid", $trip->destination);
 		}
