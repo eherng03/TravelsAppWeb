@@ -107,7 +107,7 @@ h1{
 }
 
 .search-title{
-  font-size: 20px;
+  font-size: 30px;;
     font-weight: bold;
     margin: 5px;
     margin-top: 10px;
@@ -143,5 +143,32 @@ h1{
 	margin: 10px;
 }
 
+#userPhoto{
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+}
 
+.journey{
+    padding: 12px 12px 12px 12px;
+    border: 2px solid #8A4040;
+    border-radius: 4px;
+    margin: 10px;
+    background: #FFFFFF;
+}
 
+#cancelado{
+  color: red;
+}
+
+#verPasajeros, #verComentarios, #bookBtn, #scoreBtn, #cancelBtn{
+  margin: 5px
+}
+
+.driver{
+    padding: 12px 12px 12px 12px;
+    border: 2px solid #8A4040;
+    border-radius: 4px;
+    margin: 10px;
+    background: #FFFFFF;
+}
