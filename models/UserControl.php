@@ -1,4 +1,5 @@
 <?php
+	use travels\dataBase as dataBase;
 	include_once "../dataBase/DBManager.php";
 
 
@@ -15,14 +16,14 @@
 		}
 		
 		function getUserByUserName($username){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();	
 			$query = $connection->query("SELECT username, name, dni, email, phone, photo FROM users WHERE username = '$username'");
 			return $query;
 		}
 
 		function getUsersDriver(){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT username,name,dni,email,phone,photo FROM users WHERE rol = '1' ");
 		    return $query;
@@ -30,28 +31,28 @@
 
 
 		function getUsersPassenger(){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT username,name,dni,email,phone,photo FROM users WHERE rol = '0' ");
 		    return $query;
 		}
 		
 		function getUsersTrip($tripID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT name,photo FROM users WHERE username = (SELECT username FROM journeypassengers WHERE tripID = '$tripID') ");
 		    return $query;
 		}
 		
 		function getUsersTripJourney($tripID, $journeyID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT name,photo FROM users WHERE username = (SELECT username FROM journeypassengers WHERE tripID = '$tripID' AND journeyID = '$journeyID') ");
 		    return $query;
 		}
 
 		function deleteUserDyUsername($username){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("DELETE FROM users  WHERE username = '$username'");
 		}

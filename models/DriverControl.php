@@ -1,4 +1,5 @@
 <?php
+use travels\dataBase as dataBase;
 	include_once "../dataBase/DBManager.php";
 
 

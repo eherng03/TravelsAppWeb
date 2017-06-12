@@ -1,4 +1,5 @@
 <?php
+	use travels\dataBase as dataBase;
 	include_once "../dataBase/DBManager.php";
 
 
@@ -16,42 +17,42 @@
 		}
 
 		function getDriverUsername($tripID){
-		   $dbManager = DBManager::getInstance();
+		   $dbManager = dataBase\DBManager::getInstance();
 		   $connection = $dbManager->getConnection();
 		   $query = $connection->query("SELECT driverUsername FROM trips WHERE tripID = '$tripID'");
 		   return $query;
 	  	}
 
 		public function getDriverByID($trip){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT driverUsername FROM trips WHERE tripID = '$trip'");
 			return $query;
 		}
 	  
 		function getTripInfoByID($tripID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT * FROM trips WHERE tripID = '$tripID'");
 			return $query;
 		}
 
 		function getTripByDriver($driverID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT tripID, destination FROM trips WHERE driverUsername = '$driverID'");
 			return $query;
 		}
 	  
 		function getTripInfoByDriver($driverID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT * FROM trips WHERE driverUsername = '$driverID'");
 			return $query;
 		}
 		
 		function getTripInfoByDriverToCancel($driverID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT * FROM trips WHERE driverUsername = '$driverID' AND cancelled = 0");
 			return $query;
@@ -59,7 +60,7 @@
 
 //EVA
 		function insertTrip($driverID, $origin, $destination){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("INSERT INTO trips(driverUsername, origin, destination) VALUES ('$driverID' ,'$origin','$destination')");
 
@@ -69,7 +70,7 @@
 		}
 		
 		function cancelTripByID($tripID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("UPDATE trips SET cancelled= 1 WHERE tripID = '$tripID'");
 			
@@ -77,7 +78,7 @@
 		}
 		
 		function deleteTripByID($tripID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("DELETE FROM trips  WHERE tripID = '$tripID'");
 			

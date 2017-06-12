@@ -1,4 +1,6 @@
 <?php
+namespace travels\dataBase;
+
 	class DBManager{
 		private static $instance;
 		private $connection;
@@ -21,7 +23,7 @@
 		}
 		
 		function openConnectionDB(){
-			$this->connection = new mysqli($this->host,$this->user,$this->pass);
+			$this->connection = new \mysqli($this->host,$this->user,$this->pass);
 			if($this->connection->connect_errno){
 			  die('Connection error' . $this->connection->connect_error);
 			}
@@ -39,4 +41,5 @@
 		}
 		
 	}
+
 ?>

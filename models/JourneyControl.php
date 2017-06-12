@@ -1,6 +1,8 @@
 <?php
-	include_once "../dataBase/DBManager.php";
 
+
+	use travels\dataBase as dataBase;
+	include_once "../dataBase/DBManager.php";
 
 	class JourneyControl{
 		private static $instance;
@@ -15,7 +17,7 @@
 		}
 
 		function getJourneys(){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM journeys WHERE 1");
@@ -24,21 +26,21 @@
 		}
 
 		function getTripByJourneyID($journeyID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT tripID, destination FROM journeys WHERE journeyID = '$journeyID'");
 			return $query;
 		}
 		
 		function getDestinationByJourneyIDandTripID($journeyID,$tripID){		
-			$dbManager = DBManager::getInstance();		
+			$dbManager = dataBase\DBManager::getInstance();		
 			$connection = $dbManager->getConnection();		
 			$query = $connection->query("SELECT destination FROM journeys WHERE journeyID = '$journeyID' and tripID = '$tripID'");		
 			return $query;		
 		}
 
 		function getJourneysByOrigin($origin){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM journeys WHERE origin = '$origin'");
@@ -47,7 +49,7 @@
 		}
 
 		function getJourneysByOriginAndDate($origin, $dateStart, $dateEnd){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM journeys WHERE origin = '$origin' AND departureDate >= '$dateStart' AND departureDate < '$dateEnd'");
@@ -56,7 +58,7 @@
 		}
 
 		function getJourneysByTripAndDest($tripID, $destination){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM journeys WHERE (tripID = '$tripID') AND (destination = '$destination')");
@@ -65,7 +67,7 @@
 		}
 
 		function getJourneysByTrip($tripID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM journeys WHERE tripID = '$tripID'");
@@ -74,7 +76,7 @@
 		}
 		
 		function getJourneyInfoByTripIDandJourneyID($tripID,$journeyID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM Journeys WHERE tripID = '$tripID' AND journeyID = '$journeyID'");
@@ -83,7 +85,7 @@
 		}
 		
 		function getJourneysByPassenger($username){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM JourneyPassengers WHERE username = '$username'");
@@ -92,7 +94,7 @@
 		}
 		
 		function getJourneysByDriver($username){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM journeys WHERE tripID IN (SELECT tripID FROM trips WHERE driverUsername = '$username')");
@@ -101,14 +103,14 @@
 		}
 
 		function insertJourney($tripID, $journeyID, $departureDate, $arrivalDate, $price, $nSeats, $origin, $destination){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			
 			$result = $connection->query("INSERT INTO journeys(tripID, journeyID, departureDate, arrivalDate, price, nSeats, origin, destination) VALUES ('$tripID', '$journeyID', '$departureDate', '$arrivalDate', '$price', '$nSeats', '$origin', '$destination')");
 		}
 		
 		function getJourneysIDbyOriginAndTrip($origin, $tripID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT journeyID FROM journeys WHERE (origin = '$origin') AND (tripID = '$tripID')");
@@ -117,7 +119,7 @@
 		}
 
 		function getJourneysDatabyJourneyAndTrip($journeyID, $tripID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM journeys WHERE (journeyID >= '$journeyID') AND (tripID = '$tripID')");
@@ -126,7 +128,7 @@
 		}
 		
 		function getJourneyDatabyJourneyAndTrip($journeyID, $tripID){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("SELECT * FROM journeys WHERE (journeyID = '$journeyID') AND (tripID = '$tripID')");
@@ -136,7 +138,7 @@
 
 		
 		function updateJourney($tripID, $journeyID, $price, $nSeats){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 
 			$query = $connection->query("UPDATE journeys SET price = '$price', nSeats = '$nSeats' WHERE tripID = '$tripID' AND journeyID = '$journeyID'");
