@@ -1,7 +1,7 @@
 <?php
 	namespace travels\operations;
 	use travels\models as models;
-	use travels\template as template;
+	use travels\templates as templates;
 	use travels\objects as objects;
     include "../models/JourneyControl.php";
     include "../objects/Journey.php";
@@ -12,7 +12,7 @@
 	include "../objects/Trip.php";
 
 	$journeyControl = models\JourneyControl::getInstance();
-	$templateJourney = template\TemplateJourney::getInstance();
+	$templateJourney = templates\TemplateJourney::getInstance();
 	$userControl = models\UserControl::getInstance();
 	$tripControl = models\TripControl::getInstance();	
 

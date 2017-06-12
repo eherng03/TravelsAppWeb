@@ -1,7 +1,7 @@
 <?php
     namespace travels\operations;
     use travels\models as models;
-    use travels\template as template;
+    use travels\templates as templates;
     use travels\objects as objects;
 
     include '../models/CommentControl.php';

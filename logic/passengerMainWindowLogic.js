@@ -194,7 +194,7 @@ $(document).on('click', '#enviarComentario', function(){
 		dataType    : 'json', 
 		encode          : true
 	})
-	
+	alert("Acaba de puntuar al conductor.");
 	$('select[name=selector]').val("1");
 	$('textarea').val('');
 	 
