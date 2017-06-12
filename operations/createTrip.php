@@ -1,12 +1,10 @@
 <?php
-    include_once '../dataBase/DBManager.php';
+	namespace travels\operations;
+	use travels\models as models;
+	use travels\objects as objects;
     include_once "../objects/Journey.php";
     include_once "../models/TripControl.php";
     include_once "../models/JourneyControl.php";
-	
-    //acceso a la BBDD
-    $singleton = DBManager::getInstance();
-    $conn = $singleton -> getConnection();
 	
 	$origin = $_POST['origin'];
 	$dateOrigin = strtotime($_POST['dateOrigin']);
@@ -39,13 +37,13 @@
     	$priceString = "price".$i;
     	$price = $_POST[$priceString];
 
-    	array_push($journeys, new Journey('0', $i, $departureDate, $arrivalDate, $journeyOrigin, $journeyDest, $nSeats, $price));
+    	array_push($journeys, new objects\Journey('0', $i, $departureDate, $arrivalDate, $journeyOrigin, $journeyDest, $nSeats, $price));
     	$departureDate = $arrivalDate;
     	$journeyOrigin = $journeyDest;
 	}
+
 	//En la ultima vuelta del bucle se queda guardado en $journeyDest, el ultimo destino
-	
-	$tripControl = TripControl::getInstance();	
+	$tripControl = models\TripControl::getInstance();	
 	$resultTrip = $tripControl->insertTrip($driver, $origin, $journeyDest);		//Trip insertado
 	$tripID = "";
 	while ($row = $resultTrip->fetch_array()){
@@ -53,7 +51,7 @@
     }
 
 	foreach ($journeys as $jour) {
-		$journeyControl = JourneyControl::getInstance();
+		$journeyControl = models\JourneyControl::getInstance();
 		$resultJourney = $journeyControl->insertJourney($tripID, $jour->getID() , $jour->getDepartureDate(), $jour->getArrivalDate(), $jour->getPrice(), $jour->getSeats(), $jour->getOrigin(), $jour->getDestination());	
 	}
 	

@@ -1,4 +1,8 @@
 <?php
+	namespace travels\operations;
+    use travels\models as models;
+    use travels\objects as objects;
+    use travels\templates as templates;
 	include "../models/JourneyControl.php";
 	include "../models/TripControl.php";
 	include "../models/UserControl.php";
@@ -19,7 +23,7 @@
 
    	$templateshtml = "";
     //acceso a la BBDD
-    $journeyControl = JourneyControl::getInstance();
+    $journeyControl = models\JourneyControl::getInstance();
     //Tenemos todos los journeys con el mismo origen almacenados
     if($dateStart == ""){
     	$result = $journeyControl->getJourneysByOrigin($origin);
@@ -31,7 +35,7 @@
     while ($row = $result->fetch_array()){
     	$tripID = $row['tripID'];
     	$journeysWithTripIDandDest = $journeyControl->getJourneysByTripAndDest($tripID, $destination);
-    	$tripControl = TripControl::getInstance();
+    	$tripControl = models\TripControl::getInstance();
     	$tripInfo = $tripControl->getTripInfoByID($tripID);
     	while($rowTripInfo = $tripInfo->fetch_array()){
     		$cancelled = $rowTripInfo['cancelled'];
@@ -47,7 +51,7 @@
 				while($rowDriverUsername = $driverUsernameQuery->fetch_array()){
 					$driverUsername = $rowDriverUsername['driverUsername'];
 				}
-				$trip = new Trip($origin, $destination, $driverUsername);
+				$trip = new objects\Trip($origin, $destination, $driverUsername);
 				$minNumberSeats = 1000000000000;
 				//Recorro todos los journeys y meto en el trip por los que pasa el cliente
 				
@@ -64,14 +68,14 @@
 
 						$trip->addPrice($rowJourneys['price']);
 
-						$journeyPassengersControl = JourneyPassengersControl::getInstance();
+						$journeyPassengersControl = models\JourneyPassengersControl::getInstance();
 						$numberPassengersJourney = $journeyPassengersControl->getNumPassengersByTripAndJourneyID($tripID, $rowJourneys['journeyID']);
 						
 						if($minNumberSeats > $rowJourneys['nSeats'] - $numberPassengersJourney){
 							$minNumberSeats = $rowJourneys['nSeats'] - $numberPassengersJourney;
 						}
 					
-						$trip->addJourney(new Journey($tripID, $rowJourneys['journeyID'], $rowJourneys['departureDate'], $rowJourneys['arrivalDate'], $rowJourneys['origin'], $rowJourneys['destination'], $rowJourneys['nSeats'], $rowJourneys['price']));
+						$trip->addJourney(new objects\Journey($tripID, $rowJourneys['journeyID'], $rowJourneys['departureDate'], $rowJourneys['arrivalDate'], $rowJourneys['origin'], $rowJourneys['destination'], $rowJourneys['nSeats'], $rowJourneys['price']));
 					}
 
 					if($rowJourneys['destination'] == $trip->getDestination()){
@@ -82,18 +86,18 @@
 
 				if($minNumberSeats > 0){
 					$trip->setSeats($minNumberSeats);
-					$userControl = UserControl::getInstance();
+					$userControl = models\UserControl::getInstance();
 					$driverData = $userControl->getUserByUserName($driverUsername);
 					$driver = null;
 
 					while($rowDriverData = $driverData->fetch_array()){
-						$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
+						$driver = new objects\Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
 					}
 
-					$templateJourney = TemplateJourney::getInstance();
+					$templateJourney = templates\TemplateJourney::getInstance();
 					$templateshtml .= $templateJourney->getTemplate($driver, $trip, $userNameLogged, $cancelled);
 					if($score != ""){
-						$commentControl = CommentControl::getInstance();
+						$commentControl = models\CommentControl::getInstance();
 						$commentsData = $commentControl->getComments($driverUsername);
 						
 						$scores = array();

@@ -1,20 +1,23 @@
 <?php
+	namespace travels\operations;
+    use travels\models as models;
+    use travels\objects as objects;
     include "../models/TripControl.php";
     include "../objects/Trip.php";
 	include "../models/JourneyControl.php";
 	include "../models/JourneyPassengersControl.php";
     
     //acceso a la BBDD
-    $tripControl = TripControl::getInstance();
-	$journeyControl = JourneyControl::getInstance();
-	$journeyPassControl = JourneyPassengersControl::getInstance();
+    $tripControl = models\TripControl::getInstance();
+	$journeyControl = models\JourneyControl::getInstance();
+	$journeyPassControl = models\JourneyPassengersControl::getInstance();
 	
 	$trips = array();
 	$cancel = array();
 	$tripQuery = $tripControl->getTripInfoByDriverToCancel($_GET['username']);	
 	while ($row = $tripQuery->fetch_array()){
 		$tripID = $row['tripID'];
-        $t = new Trip($row['origin'], $row['destination'], $row['driverUsername']);
+        $t = new objects\Trip($row['origin'], $row['destination'], $row['driverUsername']);
 		$t->setTripID($tripID);
         array_push($trips, $t);
 		

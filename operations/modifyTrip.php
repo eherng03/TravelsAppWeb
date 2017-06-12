@@ -1,4 +1,6 @@
 <?php
+    namespace travels\operations;
+    use travels\models as models;
     include "../models/JourneyControl.php";
 
     $tripID = current($_POST);
@@ -8,7 +10,7 @@
 	print_r($nJourneys);
 
     //acceso a la BBDD
-    $journeyControl = JourneyControl::getInstance();
+    $journeyControl = models\JourneyControl::getInstance();
     
 	for($i = 1; $i <= $nJourneys; $i++){
 		$price = next($_POST);

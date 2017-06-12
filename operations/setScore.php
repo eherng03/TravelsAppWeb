@@ -1,4 +1,6 @@
 <?php
+	namespace travels\operations;
+	use travels\models as models;
     include '../models/CommentControl.php';
 
     $driverUsername = $_REQUEST['driverUsername'];
@@ -7,7 +9,7 @@
     $score = $_REQUEST['score'];
 
     //acceso a la BBDD
-    $commentControl = CommentControl::getInstance();
+    $commentControl = models\CommentControl::getInstance();
     $result = $commentControl -> setScore($driverUsername,$passUsername,$comment,$score);
 
 ?>

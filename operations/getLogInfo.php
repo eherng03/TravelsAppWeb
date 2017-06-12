@@ -1,11 +1,13 @@
 <?php
+    namespace travels\operations;
+    use travels\models as models;
     include '../models/UserControl.php';
 
 
     $userLog = $_REQUEST['userLog'];
 
     //acceso a la BBDD
-    $userControl = UserControl::getInstance();
+    $userControl = models\UserControl::getInstance();
     $result = $userControl->getUserByUserName($userLog);
 
     $logInfo = array();

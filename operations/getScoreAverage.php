@@ -1,10 +1,11 @@
 <?php
+    namespace travels\models;
     include '../models/DriverControl.php';
 
     $userLog = $_REQUEST['userLog'];
 
     //acceso a la BBDD
-    $driverControl = DriverControl::getInstance();
+    $driverControl = models\DriverControl::getInstance();
     $result = $driverControl -> getScoreAverage($userLog);
 
     //guardados todos los datos como object destino

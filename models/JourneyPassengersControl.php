@@ -1,5 +1,5 @@
-
 <?php
+	namespace travels\models;
 	use travels\dataBase as dataBase;
 	include_once "../dataBase/DBManager.php";
 

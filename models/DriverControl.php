@@ -1,5 +1,6 @@
 <?php
-use travels\dataBase as dataBase;
+	namespace travels\models;
+	use travels\dataBase as dataBase;
 	include_once "../dataBase/DBManager.php";
 
 
@@ -17,7 +18,7 @@ use travels\dataBase as dataBase;
 
 
 		function getScoreAverage($userLog){
-			$dbManager = DBManager::getInstance();
+			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
 			$query = $connection->query("SELECT score FROM drivers WHERE username = '$userLog' ");
 			 return $query;

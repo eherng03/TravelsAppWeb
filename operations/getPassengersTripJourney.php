@@ -1,11 +1,13 @@
 <?php
+    namespace travels\operations;
+    use travels\models as models;
     include '../models/UserControl.php';
 
 	$tripID = $_REQUEST['tripID'];
 	$journeyID = $_REQUEST['journeyID'];
 
     //acceso a la BBDD
-    $userControl = UserControl::getInstance();
+    $userControl = models\UserControl::getInstance();
     $result = $userControl -> getUsersTripJourney($tripID,$journeyID);
 
     $passengers = array();

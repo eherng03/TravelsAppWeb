@@ -1,7 +1,9 @@
 <?php
-	require "../dataBase/DBManager.php";
+    namespace travels\operations;
+    use travels\dataBase;
+	include "../dataBase/DBManager.php";
 
-	$singleton = DBManager::getInstance();
+	$singleton = dataBase\DBManager::getInstance();
 	$conn = $singleton->getConnection();
 
 	$userType = 0;

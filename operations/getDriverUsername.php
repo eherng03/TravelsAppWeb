@@ -1,11 +1,13 @@
 <?php
+    namespace travels\operations;
+    use travels\models as models;
     include '../models/TripControl.php';
 
 
     $tripID = $_REQUEST['tripID'];
 
     //acceso a la BBDD
-    $tripControl = TripControl::getInstance();
+    $tripControl = models\TripControl::getInstance();
     $result = $tripControl -> getDriverUsername($tripID);
 
     $driver = array();

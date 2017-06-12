@@ -1,4 +1,8 @@
 <?php
+	namespace travels\operations;
+	use travels\models as models;
+	use travels\template as template;
+	use travels\objects as objects;
     include "../models/JourneyControl.php";
     include "../objects/Journey.php";
 	include "../templates/TemplateJourney.php";
@@ -7,10 +11,10 @@
 	include "../objects/Driver.php";
     
     //acceso a la BBDD
-    $journeyControl = JourneyControl::getInstance();
-	$templateJourney = TemplateJourney::getInstance();
-	$userControl = UserControl::getInstance();
-	$tripControl = TripControl::getInstance();
+    $journeyControl = models\JourneyControl::getInstance();
+	$templateJourney = template\TemplateJourney::getInstance();
+	$userControl = models\UserControl::getInstance();
+	$tripControl = models\TripControl::getInstance();
 	
 	$templateshtml = "";
     $journeysQuery = $journeyControl->getJourneysByPassenger($_POST['username']);      
@@ -18,7 +22,7 @@
 		$tripID = $row['tripID'];
 		$jID = $row['journeyID'];
 
-		$tripControl = TripControl::getInstance();
+		$tripControl = models\TripControl::getInstance();
     	$tripInfo = $tripControl->getTripInfoByID($tripID);
     	while($rowTripInfo = $tripInfo->fetch_array()){
     		$cancelled = $rowTripInfo['cancelled'];
@@ -26,7 +30,7 @@
 		
 		$journeyQuery2 = $journeyControl->getJourneyInfoByTripIDandJourneyID($tripID,$jID);
         while ($row2 = $journeyQuery2->fetch_array()){
-			$j = new Journey($row2['tripID'], $row2['journeyID'], $row2['departureDate'], $row2['arrivalDate'], $row2['origin'], $row2['destination'], $row2['nSeats'], $row2['price']);
+			$j = new objects\Journey($row2['tripID'], $row2['journeyID'], $row2['departureDate'], $row2['arrivalDate'], $row2['origin'], $row2['destination'], $row2['nSeats'], $row2['price']);
 			
 			//Obtener driverUsername 
 			$driverUsernameQuery = $tripControl->getDriverUsername($row['tripID']);
@@ -38,7 +42,7 @@
 		
 			$driver = null;		
 			while($rowDriverData = $driverData->fetch_array()){
-				$driver = new Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
+				$driver = new objects\Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
 			}
 		
 			$templateshtml .= $templateJourney->getTemplate($driver, $j, "reserved", $cancelled);

@@ -1,11 +1,11 @@
 <?php
+    namespace travels\operations;
+    use travels\models as models;
     include '../models/JourneyPassengersControl.php';
-
 
     $userLog = $_REQUEST['userLog'];
 
-    //acceso a la BBDD
-    $journeyPassengersControl = JourneyPassengersControl::getInstance();
+    $journeyPassengersControl = models\JourneyPassengersControl::getInstance();
     $result = $journeyPassengersControl -> getJourneysAndTripIDByUser($userLog);
 
     $journeys = array();

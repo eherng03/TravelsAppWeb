@@ -1,11 +1,9 @@
 <?php
+    namespace travels\operations;
+    use travels\models as models;
     include '../models/UserControl.php';
 
-
-
-
-    //acceso a la BBDD
-    $userControl = UserControl::getInstance();
+    $userControl = models\UserControl::getInstance();
     $result = $userControl -> getUsersDriver();
     $driver = array();
 

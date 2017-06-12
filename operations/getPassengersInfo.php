@@ -1,12 +1,12 @@
 <?php
+    $userControl = models\UserControl::getInstance();
     include '../models/UserControl.php';
-
 
     $username = $_REQUEST['username'];
 
 
     //acceso a la BBDD
-    $userControl = UserControl::getInstance();
+    $userControl = models\UserControl::getInstance();
     $result = $userControl->getUserByUserName($username);
 
     $userInfo = array();

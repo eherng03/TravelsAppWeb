@@ -1,10 +1,12 @@
 <?php
+    namespace travels\operations;
+    use travels\models as models;
     include '../models/CommentControl.php';
 
     $driverUsername = $_REQUEST['driverUsername'];
 
     //acceso a la BBDD
-    $commentControl = CommentControl::getInstance();
+    $commentControl = models\CommentControl::getInstance();
     $result = $commentControl -> getCommentsByUsername($driverUsername);
 
 
