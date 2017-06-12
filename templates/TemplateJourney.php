@@ -1,5 +1,6 @@
 <?php
 	namespace travels\templates;
+	use Exception;
 	class TemplateJourney{
 		private static $instance;
 		private function __construct(){}

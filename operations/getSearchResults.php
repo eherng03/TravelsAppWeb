@@ -22,105 +22,112 @@
    	$score = $_POST['score'];
 
    	$templateshtml = "";
-    //acceso a la BBDD
-    $journeyControl = models\JourneyControl::getInstance();
-    //Tenemos todos los journeys con el mismo origen almacenados
-    if($dateStart == ""){
-    	$result = $journeyControl->getJourneysByOrigin($origin);
-    }else{
-    	$result = $journeyControl->getJourneysByOriginAndDate($origin, $dateStart, $dateEnd);
-    }
 
-    //Miramos a ver si en el trip al que pertenece el  journey existe el destino de la busqueda
-    while ($row = $result->fetch_array()){
-    	$tripID = $row['tripID'];
-    	$journeysWithTripIDandDest = $journeyControl->getJourneysByTripAndDest($tripID, $destination);
-    	$tripControl = models\TripControl::getInstance();
-    	$tripInfo = $tripControl->getTripInfoByID($tripID);
-    	while($rowTripInfo = $tripInfo->fetch_array()){
-    		$cancelled = $rowTripInfo['cancelled'];
-    	}
-    	if($cancelled == 0){
-    		if (empty($journeysWithTripIDandDest)) {
-     		// No hay viajes que coincida origen y destino dentro del trip seleccionado
-			}else{
-				//Hay viajes con origen y destino que coinciden con la busqueda
-				$journeysWithTripID = $journeyControl->getJourneysByTrip($tripID);
-				//Saco el conductor de ese viaje
-				$driverUsernameQuery = $tripControl->getDriverUsername($tripID);
-				while($rowDriverUsername = $driverUsernameQuery->fetch_array()){
-					$driverUsername = $rowDriverUsername['driverUsername'];
-				}
-				$trip = new objects\Trip($origin, $destination, $driverUsername);
-				$minNumberSeats = 1000000000000;
-				//Recorro todos los journeys y meto en el trip por los que pasa el cliente
-				
-				$idJourneyOrigin = -1;
-				$idJourneyDestination = -1;
+   	if($origin !=  "- - -" && $destination !=  "- - -"){
 
-				while($rowJourneys = $journeysWithTripID->fetch_array()){
-					if($rowJourneys['origin'] == $trip->getOrigin()){
-						$idJourneyOrigin = $rowJourneys['journeyID'];
-						$trip->setInitDate($rowJourneys['departureDate']);
+		//acceso a la BBDD
+	    $journeyControl = models\JourneyControl::getInstance();
+	    //Tenemos todos los journeys con el mismo origen almacenados
+	    if($dateStart == ""){
+	    	$result = $journeyControl->getJourneysByOrigin($origin);
+	    }else{
+	    	$result = $journeyControl->getJourneysByOriginAndDate($origin, $dateStart, $dateEnd);
+	    }
+
+	    //Miramos a ver si en el trip al que pertenece el  journey existe el destino de la busqueda
+	    while ($row = $result->fetch_array()){
+	    	$tripID = $row['tripID'];
+	    	$journeysWithTripIDandDest = $journeyControl->getJourneysByTripAndDest($tripID, $destination);
+	    	$tripControl = models\TripControl::getInstance();
+	    	$tripInfo = $tripControl->getTripInfoByID($tripID);
+	    	while($rowTripInfo = $tripInfo->fetch_array()){
+	    		$cancelled = $rowTripInfo['cancelled'];
+	    	}
+	    	if($cancelled == 0){
+	    		if (empty($journeysWithTripIDandDest)) {
+	     		// No hay viajes que coincida origen y destino dentro del trip seleccionado
+				}else{
+					//Hay viajes con origen y destino que coinciden con la busqueda
+					$journeysWithTripID = $journeyControl->getJourneysByTrip($tripID);
+					//Saco el conductor de ese viaje
+					$driverUsernameQuery = $tripControl->getDriverUsername($tripID);
+					while($rowDriverUsername = $driverUsernameQuery->fetch_array()){
+						$driverUsername = $rowDriverUsername['driverUsername'];
 					}
-
-					if($idJourneyOrigin != -1 && $idJourneyOrigin <= $rowJourneys['journeyID']){
-
-						$trip->addPrice($rowJourneys['price']);
-
-						$journeyPassengersControl = models\JourneyPassengersControl::getInstance();
-						$numberPassengersJourney = $journeyPassengersControl->getNumPassengersByTripAndJourneyID($tripID, $rowJourneys['journeyID']);
-						
-						if($minNumberSeats > $rowJourneys['nSeats'] - $numberPassengersJourney){
-							$minNumberSeats = $rowJourneys['nSeats'] - $numberPassengersJourney;
-						}
+					$trip = new objects\Trip($origin, $destination, $driverUsername);
+					$minNumberSeats = 1000000000000;
+					//Recorro todos los journeys y meto en el trip por los que pasa el cliente
 					
-						$trip->addJourney(new objects\Journey($tripID, $rowJourneys['journeyID'], $rowJourneys['departureDate'], $rowJourneys['arrivalDate'], $rowJourneys['origin'], $rowJourneys['destination'], $rowJourneys['nSeats'], $rowJourneys['price']));
-					}
+					$idJourneyOrigin = -1;
+					$idJourneyDestination = -1;
 
-					if($rowJourneys['destination'] == $trip->getDestination()){
-						$trip->setArrivalDate($rowJourneys['arrivalDate']);
-						break;
-					}
-				}
+					while($rowJourneys = $journeysWithTripID->fetch_array()){
+						if($rowJourneys['origin'] == $trip->getOrigin()){
+							$idJourneyOrigin = $rowJourneys['journeyID'];
+							$trip->setInitDate($rowJourneys['departureDate']);
+						}
 
-				if($minNumberSeats > 0){
-					$trip->setSeats($minNumberSeats);
-					$userControl = models\UserControl::getInstance();
-					$driverData = $userControl->getUserByUserName($driverUsername);
-					$driver = null;
+						if($idJourneyOrigin != -1 && $idJourneyOrigin <= $rowJourneys['journeyID']){
 
-					while($rowDriverData = $driverData->fetch_array()){
-						$driver = new objects\Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
-					}
+							$trip->addPrice($rowJourneys['price']);
 
-					$templateJourney = templates\TemplateJourney::getInstance();
-					$templateshtml .= $templateJourney->getTemplate($driver, $trip, $userNameLogged, $cancelled);
-					if($score != ""){
-						$commentControl = models\CommentControl::getInstance();
-						$commentsData = $commentControl->getComments($driverUsername);
+							$journeyPassengersControl = models\JourneyPassengersControl::getInstance();
+							$numberPassengersJourney = $journeyPassengersControl->getNumPassengersByTripAndJourneyID($tripID, $rowJourneys['journeyID']);
+							
+							if($minNumberSeats > $rowJourneys['nSeats'] - $numberPassengersJourney){
+								$minNumberSeats = $rowJourneys['nSeats'] - $numberPassengersJourney;
+							}
 						
-						$scores = array();
-						while($rowComments = $commentsData->fetch_array()){
-							array_push($scores, $rowComments['score']);
+							$trip->addJourney(new objects\Journey($tripID, $rowJourneys['journeyID'], $rowJourneys['departureDate'], $rowJourneys['arrivalDate'], $rowJourneys['origin'], $rowJourneys['destination'], $rowJourneys['nSeats'], $rowJourneys['price']));
 						}
 
-						$totalScores = 0;
-						foreach ($scores as $scoreVal) {
-							$totalScores += $scoreVal;
+						if($rowJourneys['destination'] == $trip->getDestination()){
+							$trip->setArrivalDate($rowJourneys['arrivalDate']);
+							break;
+						}
+					}
+
+					if($minNumberSeats > 0){
+						$trip->setSeats($minNumberSeats);
+						$userControl = models\UserControl::getInstance();
+						$driverData = $userControl->getUserByUserName($driverUsername);
+						$driver = null;
+
+						while($rowDriverData = $driverData->fetch_array()){
+							$driver = new objects\Driver($rowDriverData['name'], $rowDriverData['email'], $rowDriverData['username'], $rowDriverData['phone'], $rowDriverData['dni'], $rowDriverData['photo']);
 						}
 
-						$average = $totalScores/count($scores);
-						if($score > $average){
+						$templateJourney = templates\TemplateJourney::getInstance();
+						$templateshtml .= $templateJourney->getTemplate($driver, $trip, $userNameLogged, $cancelled);
+						if($score != ""){
+							$commentControl = models\CommentControl::getInstance();
+							$commentsData = $commentControl->getComments($driverUsername);
+							
+							$scores = array();
+							while($rowComments = $commentsData->fetch_array()){
+								array_push($scores, $rowComments['score']);
+							}
+
+							$totalScores = 0;
+							foreach ($scores as $scoreVal) {
+								$totalScores += $scoreVal;
+							}
+
+							$average = $totalScores/count($scores);
+							if($score > $average){
+								$templateshtml = "";
+							}
+						}
+						if($price != "" && $trip->getPrice() > $price){
 							$templateshtml = "";
 						}
+						echo $templateshtml;
 					}
-					if($price != "" && $trip->getPrice() > $price){
-						$templateshtml = "";
-					}
-					echo $templateshtml;
 				}
-			}
-	    } 
-	}
+		    } 
+		}
+
+   	}
+
+    
 ?>

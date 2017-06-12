@@ -1,5 +1,6 @@
 <?php
 	namespace travels\objects;
+	use Exception;
 	class Journey{ 
 		public $tripID;
 		private $journeyID;

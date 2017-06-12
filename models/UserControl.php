@@ -41,14 +41,14 @@
 		function getUsersTrip($tripID){
 			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-			$query = $connection->query("SELECT name,photo FROM users WHERE username = (SELECT username FROM journeypassengers WHERE tripID = '$tripID') ");
+			$query = $connection->query("SELECT name,photo FROM users WHERE username IN (SELECT username FROM journeypassengers WHERE tripID = '$tripID') ");
 		    return $query;
 		}
 		
 		function getUsersTripJourney($tripID, $journeyID){
 			$dbManager = dataBase\DBManager::getInstance();
 			$connection = $dbManager->getConnection();
-			$query = $connection->query("SELECT name,photo FROM users WHERE username = (SELECT username FROM journeypassengers WHERE tripID = '$tripID' AND journeyID = '$journeyID') ");
+			$query = $connection->query("SELECT name,photo FROM users WHERE username IN (SELECT username FROM journeypassengers WHERE tripID = '$tripID' AND journeyID = '$journeyID') ");
 		    return $query;
 		}
 
