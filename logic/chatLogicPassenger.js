@@ -119,7 +119,7 @@ function getDriverUsername(tripID,usersInfo,destination){
 		}).done(function(data) {
 			var driverUsername = data.driverUsername;
 			if(driverUsername != userLog){
-				getDriverInfo(driverUsername,usersInfo,destination);
+				getDriverInfo2(driverUsername,usersInfo,destination);
 			}
 	
 		});
@@ -159,7 +159,7 @@ var a = destination;
 }
 
 /** Funcion que devuelve la informacion participantes **/
-function getDriverInfo(username,usersInfo,destination){
+function getDriverInfo2(username,usersInfo,destination){
 var a = destination;
 	var formData = {
 		'username'    : username,
@@ -172,7 +172,7 @@ var a = destination;
 		dataType    : 'json', 
 		encode          : true
 	}).done(function(data) {
-		
+		console.log("aaa");
 		usersInfo.push(data);
 
 		var username = data[0].username;
