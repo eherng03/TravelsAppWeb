@@ -20,16 +20,13 @@
 		$t = new objects\Trip($row['origin'], $row['destination'], $row['driverUsername']);
 		$t->setTripID($tripID);
         array_push($trips, $t);
-		
-		$journeysQuery = $journeyControl->getJourneysByTrip($tripID);		
-		while ($row2 = $journeysQuery->fetch_array()){
-			$journeyID = $row2['journeyID'];
+
+		$numPass = $journeyPassControl->getNumPassengersByTrip($tripID); 
 			
-			$journeyPassQuery = $journeyPassControl->getUsersByJourneys($journeyID);			
-			if($journeyPassQuery->num_rows > 0)
-				array_push($cancel, true);
-			else array_push($cancel, false);
-		}
+		if($numPass > 0)
+			array_push($cancel, true);
+		else array_push($cancel, false);
+		
 	}
 	
     $result = array();
@@ -38,6 +35,6 @@
 		if($cancel[$i])
 			array_push($result, $trips[$i]);
 	}
-    
+	
     echo json_encode($result);
 ?>
