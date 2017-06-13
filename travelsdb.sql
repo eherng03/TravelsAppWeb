@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2017 a las 18:08:41
+-- Tiempo de generación: 13-06-2017 a las 10:14:05
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -30,21 +30,8 @@ CREATE TABLE `chats` (
   `user1` varchar(30) CHARACTER SET utf8 NOT NULL,
   `user2` varchar(30) CHARACTER SET utf8 NOT NULL,
   `hour` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `msg` varchar(200) CHARACTER SET utf8 NOT NULL COMMENT '200 char max'
+  `msg` varchar(200) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `chats`
---
-
-INSERT INTO `chats` (`user1`, `user2`, `hour`, `msg`) VALUES
-('abanod', 'EvaHergar', '1496932986625', 'eres subnormal'),
-('EvaHergar', 'abanod', '1496932980513', 'jamon'),
-('EvaHergar', 'abanod', '1496932986621', 'pepe'),
-('EvaHergar', 'abanod', '1496933139508', 'hola'),
-('EvaHergar', 'abanod', '1496933145225', 'carapene'),
-('EvaHergar', 'abanod', '1496933151006', 'cusca'),
-('EvaHergar', 'abanod', '1496933158351', 'alberto puto amo');
 
 -- --------------------------------------------------------
 
@@ -57,16 +44,8 @@ CREATE TABLE `drivercomments` (
   `passUsername` varchar(30) CHARACTER SET utf8 NOT NULL,
   `comment` varchar(200) CHARACTER SET utf8 NOT NULL,
   `score` int(11) NOT NULL,
-  `commentID` int(11) NOT NULL DEFAULT '0'
+  `commentID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `drivercomments`
---
-
-INSERT INTO `drivercomments` (`driverUsername`, `passUsername`, `comment`, `score`, `commentID`) VALUES
-('abanod', 'eeeee', 'sdfghjk', 2, 0),
-('abanod', 'EvaHergar', 'Es un falso y venenoso', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -75,18 +54,9 @@ INSERT INTO `drivercomments` (`driverUsername`, `passUsername`, `comment`, `scor
 --
 
 CREATE TABLE `drivers` (
-  `username` varchar(30) CHARACTER SET utf8 NOT NULL COMMENT 'foreign key',
+  `username` varchar(30) CHARACTER SET utf8 NOT NULL,
   `score` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `drivers`
---
-
-INSERT INTO `drivers` (`username`, `score`) VALUES
-('1', 0),
-('abanod', 0),
-('pepeperas', 0);
 
 -- --------------------------------------------------------
 
@@ -107,7 +77,7 @@ CREATE TABLE `journeypassengers` (
 --
 
 CREATE TABLE `journeys` (
-  `tripID` int(11) NOT NULL COMMENT 'foreign key',
+  `tripID` int(11) NOT NULL,
   `journeyID` int(11) NOT NULL,
   `departureDate` varchar(50) NOT NULL,
   `arrivalDate` varchar(50) NOT NULL,
@@ -126,15 +96,6 @@ CREATE TABLE `journeys` (
 CREATE TABLE `passengers` (
   `username` varchar(30) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `passengers`
---
-
-INSERT INTO `passengers` (`username`) VALUES
-('eeeee'),
-('EvaHergar'),
-('pepepepe');
 
 -- --------------------------------------------------------
 
@@ -168,18 +129,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`username`, `pass`, `name`, `dni`, `email`, `phone`, `photo`, `rol`) VALUES
-('1', '1', '1', '1', '1', '1', '1.jpg', 1),
-('abanod', 'caca', 'alberto', '123698547', 'caca@hotmail.es', '123456789', 'abanod.png', 1),
-('eeeee', 'eeeee', 'Eeee', 'eeeeeeeee', 'eeeeeee', 'eeeeeee', 'eeeee.png', 0),
-('EvaHergar', 'olakase', 'Eva', '74175369U', 'evahergar@gmail.com', '123456789', 'EvaHergar.png', 0),
-('pepepepe', 'jamon', 'pepe', '123456789', 'jshsfdjh', '123456789', 'pepepepe.png', 0),
-('pepeperas', 'pepe', 'pepe', 'dfghj', 'sdfgh', 'sdfghjhgf', 'pepeperas.png', 1);
-
---
 -- Índices para tablas volcadas
 --
 
@@ -197,7 +146,8 @@ ALTER TABLE `drivercomments`
   ADD PRIMARY KEY (`commentID`),
   ADD UNIQUE KEY `commentID` (`commentID`),
   ADD KEY `driverUsername` (`driverUsername`),
-  ADD KEY `passUsername` (`passUsername`);
+  ADD KEY `passUsername` (`passUsername`),
+  ADD KEY `commentID_2` (`commentID`);
 
 --
 -- Indices de la tabla `drivers`
@@ -249,10 +199,15 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `drivercomments`
+--
+ALTER TABLE `drivercomments`
+  MODIFY `commentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT de la tabla `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `tripID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `tripID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- Restricciones para tablas volcadas
 --
