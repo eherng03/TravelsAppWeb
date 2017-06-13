@@ -32,6 +32,16 @@
   			}
 			return $rowcount;
 		}
+		
+		function getNumPassengersByTrip($tripID){
+			$dbManager = dataBase\DBManager::getInstance();
+			$connection = $dbManager->getConnection();
+			$rowcount = 0;
+			if ($result=mysqli_query($connection,"SELECT username FROM journeypassengers WHERE (tripID = '$tripID')")){
+				$rowcount=mysqli_num_rows($result);
+			}
+			return $rowcount;
+		}
 
 		function getJourneysAndTripIDByUser($userLog){
 			$dbManager = dataBase\DBManager::getInstance();
