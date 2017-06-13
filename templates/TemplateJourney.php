@@ -109,7 +109,7 @@
 							</tr>";
 			if($cancelled == 1){
 				$html .= "<tr>				
-							<td>Cancelado</td>
+							<td id = 'cancelado'>Cancelado</td>
 						</tr>";
 			}
 			$html .= "</table>
