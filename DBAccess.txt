@@ -1,9 +1,0 @@
-https://www.freemysqlhosting.net/account/
-email: iker.nunrod@gmail.com
-pass: %DJSbBgC$*Vf0$@i
-
-http://www.phpmyadmin.co/
-dbname: sql11176712
-server: sql11.freemysqlhosting.net
-user: sql11176712
-pass: xKr66u4JUh
